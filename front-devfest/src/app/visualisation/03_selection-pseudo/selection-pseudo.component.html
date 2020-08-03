@@ -1,0 +1,12 @@
+<br>
+<form [formGroup]="form" align="center">
+  <h3>Veuillez saisir votre pseudo : </h3>
+  <mat-form-field>
+    <input matInput formControlName="pseudoCtrl" placeholder="Pseudo"
+           required>
+  </mat-form-field>
+  <div>
+    <button mat-button matStepperPrevious>Retour</button>
+    <button mat-button (click)="validerPseudo()">Suivant</button>
+  </div>
+</form>
