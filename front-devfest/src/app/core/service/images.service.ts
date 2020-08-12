@@ -11,6 +11,13 @@ export class ImagesService {
   constructor(private http: HttpClient) {}
 
   /**
+   * Fonction qui permet de récupérer à partir de son id
+   */
+  recupererImage(id : string) : Observable<Image>{
+    return this.http.get<Image>(`${url}/${id}`);
+  }
+
+  /**
    * Fonction de génération de l'image prise avec la caméra
    * @param image Image à générer pour impression
    */
@@ -34,7 +41,7 @@ export class ImagesService {
    * @param image
    */
   recupererMosaic(image:Image) : String{
-    return `http://192.168.1.29:3000/${url}/getmosaic/${image._id}`;
+    return `http://192.168.1.11:3000/${url}/getmosaic/${image._id}`;
   }
 
   /**

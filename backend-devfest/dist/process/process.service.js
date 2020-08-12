@@ -11,19 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProcessService = void 0;
 const common_1 = require("@nestjs/common");
-const child_process_1 = require("child_process");
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const IMPRESSION_REPERTOIRE = './impressions/';
 const REPERTOIRE_SCRIPTS = 'scripts/';
 let ProcessService = class ProcessService {
     constructor() {
     }
-    execCommand(nomCommande, impressionId) {
+    async execCommand(nomCommande, impressionId) {
         const commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
-        console.log(commande);
-        child_process_1.exec(commande, (err, stdout, stderr) => {
-            console.log(stdout);
-            console.log(stderr);
-        });
+        return exec(commande);
     }
 };
 ProcessService = __decorate([

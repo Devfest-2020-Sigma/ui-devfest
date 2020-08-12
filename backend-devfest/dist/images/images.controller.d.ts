@@ -6,10 +6,11 @@ export declare class ImagesController {
     private readonly imagesService;
     private readonly processService;
     constructor(imagesService: ImagesService, processService: ProcessService);
-    genererFichierPourImpression(id: string, file: any): Promise<void>;
+    initialiserWorkflow(): Promise<IImage>;
     recupererImagesSVG(id: string, res: any): Promise<any>;
     recupererImagesMosaic(id: string, res: any): Promise<any>;
+    getImage(id: any): Promise<IImage>;
     imprimerImage(file: any): string;
-    initialiserWorkflow(): Promise<IImage>;
+    genererFichierPourImpression(id: string, file: any): Promise<void>;
     miseAjoutPseudo(image: ImageDto): Promise<IImage>;
 }

@@ -21,16 +21,23 @@ const multer_1 = require("multer");
 const image_dto_1 = require("./image.dto");
 const process_service_1 = require("../process/process.service");
 const process_enum_1 = require("../process/process.enum");
+const image_etat_enum_1 = require("./image.etat.enum");
 const INIT_FILE_NAME = 'initial.jpg';
 let ImagesController = class ImagesController {
     constructor(imagesService, processService) {
         this.imagesService = imagesService;
         this.processService = processService;
     }
-    async genererFichierPourImpression(id, file) {
-        const imageDto = new image_dto_1.ImageDto();
-        imageDto._id = id;
-        imageDto.photoInitiale = file;
+    async initialiserWorkflow() {
+        return this.imagesService.initialiserWorkflow().then(async (image) => {
+            let imageDto = new image_dto_1.ImageDto();
+            imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
+            this.imagesService.editImage(image._id, imageDto, function () { });
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id);
+            imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
+            this.imagesService.editImage(image._id, imageDto, function () { });
+            return image;
+        });
     }
     async recupererImagesSVG(id, res) {
         res.sendFile('chuck.svg', { root: 'impressions' });
@@ -38,23 +45,59 @@ let ImagesController = class ImagesController {
     async recupererImagesMosaic(id, res) {
         res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
     }
+    async getImage(id) {
+        return this.imagesService.getImage(id);
+    }
     imprimerImage(file) {
         console.log(file);
         return null;
     }
-    async initialiserWorkflow() {
-        return this.imagesService.initialiserWorkflow().then(value => {
-            this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, value._id);
-            return value;
-        });
+    async genererFichierPourImpression(id, file) {
+        const imageDto = new image_dto_1.ImageDto();
+        imageDto._id = id;
     }
     async miseAjoutPseudo(image) {
-        return this.imagesService.editImage(image._id, image).then(value => {
+        return this.imagesService.editImage(image._id, image, function (value) { console.log(value); }).then(value => {
             this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, value._id);
             return value;
         });
     }
 };
+__decorate([
+    common_1.Get('/initialiser'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "initialiserWorkflow", null);
+__decorate([
+    common_1.Get('/getsvg/:id'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "recupererImagesSVG", null);
+__decorate([
+    common_1.Get('/getmosaic/:id'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "recupererImagesMosaic", null);
+__decorate([
+    common_1.Get(':id'),
+    __param(0, common_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "getImage", null);
+__decorate([
+    common_1.Post('/imprimer'),
+    common_1.UseInterceptors(platform_express_1.FileInterceptor('file')),
+    __param(0, common_1.UploadedFile()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", String)
+], ImagesController.prototype, "imprimerImage", null);
 __decorate([
     common_1.Post('/test'),
     common_1.UseInterceptors(platform_express_1.FileInterceptor('file', {
@@ -76,34 +119,6 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "genererFichierPourImpression", null);
-__decorate([
-    common_1.Get('/getsvg/:id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], ImagesController.prototype, "recupererImagesSVG", null);
-__decorate([
-    common_1.Get('/getmosaic/:id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], ImagesController.prototype, "recupererImagesMosaic", null);
-__decorate([
-    common_1.Post('/imprimer'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor('file')),
-    __param(0, common_1.UploadedFile()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", String)
-], ImagesController.prototype, "imprimerImage", null);
-__decorate([
-    common_1.Get('/initialiser'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], ImagesController.prototype, "initialiserWorkflow", null);
 __decorate([
     common_1.Put('/pseudo'),
     __param(0, common_1.Body()),

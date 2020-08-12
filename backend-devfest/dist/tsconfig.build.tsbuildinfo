@@ -1497,23 +1497,28 @@
         "affectsGlobalScope": false
       },
       "../src/images/image.dto.ts": {
-        "version": "15b72502eebf836566ffc363c12517bf691c4bbfe91a362678e072e0ae1b24f4",
-        "signature": "5abc2beef752a86cd4d50e420ab95bb8366c9163be84321ad2d055277fedf7db",
+        "version": "b04059b3164f4ab5a12754b75e621ffde9356f635c43a32f82c04a329119f564",
+        "signature": "b44c82f8fbc25ce9b599e08664bc38b4c8ebb131994f46b51b53f1c990200d3f",
+        "affectsGlobalScope": false
+      },
+      "../src/images/image.etat.enum.ts": {
+        "version": "ee53218d338ccccd45b261aa0778a65d8e96ae7de4a8dee92456f023e33513a6",
+        "signature": "250f968a273d95c1ff58f18bf22bcbbc49e878c3fb436ed2bb05c6c59631dd9c",
         "affectsGlobalScope": false
       },
       "../src/images/image.interface.ts": {
-        "version": "fe1a552f311663c1aeaf1d12102303ae90f6458788164b0d7dc28583354b40d6",
-        "signature": "fe21df4a65d5ca77a29898f12a4a5d170eb88c27b41dc1b5bbe3c8d80e41c62f",
+        "version": "ace00ea2e1003264301860595c9d540ca7049e2cae4b35bf8bb02f274a17721d",
+        "signature": "bc219e00ee96282186ae526877b77fc257c63b2054e7c5e046afdd88ba2fa56b",
         "affectsGlobalScope": false
       },
       "../src/schemas/image.schema.ts": {
-        "version": "fe3ebd1f5ec06224754800ba06cf34a3d3cc2a09bd2a8578e13cb9cb84b17ca0",
+        "version": "5fce1606ee293c8215e777af1e99a110dbd538efb78052332b6ed5002455d689",
         "signature": "5e8978ec1d8c762b71ab33834fa9b9d934aeac07f9bad730d0b617a87c0fd990",
         "affectsGlobalScope": false
       },
       "../src/images/images.service.ts": {
-        "version": "d13ff4edf298932f66a6dee4d623ad04f74809f01ce40a2c03b58dcbc1c00d3a",
-        "signature": "649b53d2bbd1d4ce3844773140d3d54e740e2e78285053510dacf519e99ea6d8",
+        "version": "c4d1a90f26a65499b415989e2c152e9cb7ce2317e2e98de982ce317954de305f",
+        "signature": "a9b355a33e9350bc1330c858784531d30ee04396aa051f93ad877d71cc465d1d",
         "affectsGlobalScope": false
       },
       "../src/process/process.enum.ts": {
@@ -1522,13 +1527,13 @@
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "c2bdd14c66eb7c44f7ab7448e8312dfaab34e3540c5cad13258971cb34762b21",
-        "signature": "50399d91d5e9474ecab82f8f50c45eafa57a56fa7c9cd444e528bcaa454fe551",
+        "version": "95f5aec446ff6b8e1bb61b7d9e1f7ecfe8ea9497d3acafa6363889e2d3fd0de6",
+        "signature": "52babcb75e9863db566bd21cecec67704e54959d213e8362f8d596e0755b35b8",
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "8403caa55eb5e99562650157d7485cf175a2b7696e6640650839f0883e295425",
-        "signature": "6beb7f14c3bda1cdaf3c7751f9886cda655cbaac93e03afa687c5c6d3ae0b0a9",
+        "version": "a3ea065c7aed3ff97f399892e09784f4203dcc07555888a36ae6a899d1800dfd",
+        "signature": "a60095ed4c4d65c3fbb285dc270e873cbd5aef44b19fd56597d2b4b0dd140a1c",
         "affectsGlobalScope": false
       },
       "../src/images/images.provider.ts": {
@@ -10663,12 +10668,20 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../src/images/image.interface.ts": [
+      "../src/images/image.etat.enum.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/images/image.interface.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/images/image.etat.enum.ts"
       ],
       "../src/images/images.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -10679,6 +10692,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/images/image.dto.ts",
+        "../src/images/image.etat.enum.ts",
         "../src/images/image.interface.ts",
         "../src/images/images.service.ts",
         "../src/process/process.enum.ts",
@@ -10713,6 +10727,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/images/image.dto.ts",
+        "../src/images/image.etat.enum.ts",
         "../src/images/image.interface.ts",
         "../src/schemas/image.schema.ts"
       ],
@@ -10735,7 +10750,6 @@
       "../src/process/process.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/child_process.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
@@ -17560,6 +17574,9 @@
       ],
       "../src/events/rabbit.event.ts": [
         "../src/images/image.dto.ts"
+      ],
+      "../src/images/image.interface.ts": [
+        "../src/images/image.etat.enum.ts"
       ],
       "../src/images/images.controller.ts": [
         "../src/images/image.dto.ts",

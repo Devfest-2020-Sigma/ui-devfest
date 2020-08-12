@@ -7,6 +7,7 @@ import { ImageDto } from './image.dto';
 import { IImage } from './image.interface';
 import { ProcessService } from 'src/process/process.service';
 import { processEnum } from 'src/process/process.enum';
+import { ImageEtatEnum } from './image.etat.enum';
 
 const INIT_FILE_NAME = 'initial.jpg';
 
@@ -17,6 +18,67 @@ export class ImagesController {
     private readonly imagesService: ImagesService,
     private readonly processService: ProcessService
   ) { }
+
+  /**
+   * Fonction d'initialisation d'une nouvelle image
+   */
+  @Get('/initialiser')
+  async initialiserWorkflow(): Promise<IImage> {
+    return this.imagesService.initialiserWorkflow().then(async image => {
+      let imageDto = new ImageDto();
+      
+      // Mise à jour état de image
+      imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
+      this.imagesService.editImage(image._id, imageDto, function(){});
+      // génération des quatres images de départ
+      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id);
+      imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
+      this.imagesService.editImage(image._id, imageDto, function(){});
+      return image;
+    });
+  }
+
+
+  /**
+   * Fonction qui permet l'ensemble des images générées dans un tableau
+   * @param pseudo Pseudo des images à récupérer
+   * @param res permet de lire le fichier
+   */
+  @Get('/getsvg/:id')
+  async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
+    res.sendFile('chuck.svg', { root: 'impressions' });
+  }
+
+  /**
+   * Fonction qui permet l'ensemble des images générées dans un tableau
+   * @param pseudo Pseudo des images à récupérer
+   * @param res permet de lire le fichier
+   */
+  @Get('/getmosaic/:id')
+  async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<any> {
+    res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+  }
+
+  /**
+   * Controller qui récupère une image en base de donnée
+   * @param id id de l'image a récupérer
+   */
+  @Get(':id')
+  async getImage(@Param('id') id) : Promise<IImage>{
+    return this.imagesService.getImage(id);
+  }
+
+
+  /**
+   * Permet l'impression d'une image selectionnée
+   * @param file Fichier à imprimer
+   */
+  @Post('/imprimer')
+  @UseInterceptors(FileInterceptor('file'))
+  imprimerImage(@UploadedFile() file): string {
+    console.log(file);
+    return null;
+  }
 
   @Post('/test')
   @UseInterceptors(FileInterceptor('file',
@@ -41,59 +103,15 @@ export class ImagesController {
   async genererFichierPourImpression(@Param('id') id: string, @UploadedFile() file): Promise<void> {
     const imageDto = new ImageDto();
     imageDto._id = id;
-    imageDto.photoInitiale = file;
+    //imageDto.photoInitiale = file;
     //  return this.imagesService.rabbitEvent(imageDto);
   }
 
-  /**
-   * Fonction qui permet l'ensemble des images générées dans un tableau
-   * @param pseudo Pseudo des images à récupérer
-   * TODO : Passer en paramètre l'uuid plutôt que le pseudo
-   * @param res permet de lire le fichier
-   */
-  @Get('/getsvg/:id')
-  async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
-    res.sendFile('chuck.svg', { root: 'impressions' });
-  }
-
-  /**
-   * Fonction qui permet l'ensemble des images générées dans un tableau
-   * @param pseudo Pseudo des images à récupérer
-   * TODO : Passer en paramètre l'uuid plutôt que le pseudo
-   * @param res permet de lire le fichier
-   */
-  @Get('/getmosaic/:id')
-  async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<any> {
-    res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
-  }
-
-
-  /**
-   * Permet l'impression d'une image selectionnée
-   * @param file Fichier à imprimer
-   */
-  @Post('/imprimer')
-  @UseInterceptors(FileInterceptor('file'))
-  imprimerImage(@UploadedFile() file): string {
-    console.log(file);
-    return null;
-  }
-
-  /**
-   * Fonction d'initialisation d'une nouvelle image
-   */
-  @Get('/initialiser')
-  async initialiserWorkflow(): Promise<IImage> {
-    return this.imagesService.initialiserWorkflow().then(value => {
-      // génération des quatres images de départ
-      this.processService.execCommand(processEnum.CAPTURE_IMAGES, value._id);
-      return value;
-    });
-  }
-
+  
   @Put('/pseudo')
   async miseAjoutPseudo(@Body() image: ImageDto): Promise<IImage> {
-    return this.imagesService.editImage(image._id, image).then(value => {
+    return this.imagesService.editImage(image._id, image, function(value){console.log(value)} ).then(value => {
+    
       // Génération de la conversion de l'image selectionnée en svg
       this.processService.execCommand(processEnum.JPG2GCODE, value._id);
       return value;

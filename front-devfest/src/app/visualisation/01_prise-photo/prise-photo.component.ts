@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {WebcamImage} from 'ngx-webcam';
+import {WebcamImage, WebcamUtil} from 'ngx-webcam';
 import {MatDialog} from '@angular/material/dialog';
 import {MatStepper} from '@angular/material/stepper';
 import {Image} from '../../core/model/image.model';
@@ -25,7 +25,6 @@ export class PrisePhotoComponent implements OnInit {
               public imagesService: ImagesService) { }
 
   ngOnInit(): void {
-  
   }
 
   public get videoOptions(): MediaTrackConstraints {
