@@ -18,6 +18,8 @@ let ImagesService = class ImagesService {
     }
     async editImage(imageId, createImageDTO, callback) {
         delete createImageDTO._id;
+        console.log(createImageDTO);
+        console.log(imageId);
         return image_schema_1.imageModel
             .findByIdAndUpdate(imageId, createImageDTO, callback);
     }

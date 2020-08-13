@@ -31,7 +31,7 @@ export class ImagesController {
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
       this.imagesService.editImage(image._id, imageDto, function(){});
       // génération des quatres images de départ
-      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id);
+      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id, null);
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
       this.imagesService.editImage(image._id, imageDto, function(){});
       return image;
@@ -55,8 +55,8 @@ export class ImagesController {
    * @param res permet de lire le fichier
    */
   @Get('/getmosaic/:id')
-  async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<any> {
-    res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+  async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<Blob> {
+    return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
   }
 
   /**
@@ -109,13 +109,7 @@ export class ImagesController {
 
   
   @Put('/pseudo')
-  async miseAjoutPseudo(@Body() image: ImageDto): Promise<IImage> {
-    return this.imagesService.editImage(image._id, image, function(value){console.log(value)} ).then(value => {
-    
-      // Génération de la conversion de l'image selectionnée en svg
-      this.processService.execCommand(processEnum.JPG2GCODE, value._id);
-      return value;
-    });
+  miseAjoutPseudo(@Body() image: ImageDto) {
+    this.processService.execCommand(processEnum.JPG2GCODE, image._id, image.pseudo);
   }
-
 }

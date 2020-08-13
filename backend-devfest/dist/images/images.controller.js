@@ -33,7 +33,7 @@ let ImagesController = class ImagesController {
             let imageDto = new image_dto_1.ImageDto();
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imagesService.editImage(image._id, imageDto, function () { });
-            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id);
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id, null);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
             this.imagesService.editImage(image._id, imageDto, function () { });
             return image;
@@ -43,7 +43,7 @@ let ImagesController = class ImagesController {
         res.sendFile('chuck.svg', { root: 'impressions' });
     }
     async recupererImagesMosaic(id, res) {
-        res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+        return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
     }
     async getImage(id) {
         return this.imagesService.getImage(id);
@@ -56,11 +56,8 @@ let ImagesController = class ImagesController {
         const imageDto = new image_dto_1.ImageDto();
         imageDto._id = id;
     }
-    async miseAjoutPseudo(image) {
-        return this.imagesService.editImage(image._id, image, function (value) { console.log(value); }).then(value => {
-            this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, value._id);
-            return value;
-        });
+    miseAjoutPseudo(image) {
+        this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, image._id, image.pseudo);
     }
 };
 __decorate([
@@ -124,7 +121,7 @@ __decorate([
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [image_dto_1.ImageDto]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], ImagesController.prototype, "miseAjoutPseudo", null);
 ImagesController = __decorate([
     common_1.Controller('api/images'),

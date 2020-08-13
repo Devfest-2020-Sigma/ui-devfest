@@ -26,21 +26,30 @@ export class SelectionPhotoMosaicComponent implements OnInit {
   ngOnInit(): void {
     this.stepper.selectionChange.subscribe((event: any) => {
       if (event.selectedStep === this.step) {
-        const fakeRequest = this.imagesService.recupererImage(this.image._id).pipe(delay(3000));
-        //wait for first to complete before next is subscribed
-        const example = this.sampleInterval.pipe(concatMapTo(fakeRequest));
-        example.subscribe(value => {
-          console.log(value);
+        this.imagesService.recupererMosaic(this.image).subscribe(value =>{
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.imageUpload = reader.result as string;
+          }
+          reader.readAsDataURL(value)
         });
-        const imgUrl = this.imagesService.recupererMosaic(this.image)
-        this.imageUpload = imgUrl;
       }
     });
   }
 
-  selectionImage(): void {
+  selectionImage(event: any): void {
     // On indique l'image selectionnée dans la mosaique
-    this.image.imageSelectionnee = 1;
+    var x = event.pageX / window.innerWidth * 100;
+    var y = event.pageY / window.innerHeight * 100;
+    if (x < 50 && y < 50) {
+      this.image.imageSelectionnee = 1;
+    } else if (x > 50 && y < 50) {
+      this.image.imageSelectionnee = 2;
+    } else if (x < 50 && y > 50) {
+      this.image.imageSelectionnee = 3;
+    } else {
+      this.image.imageSelectionnee = 4;
+    }
     this.stepper.next();
   }
 }

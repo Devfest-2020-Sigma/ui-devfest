@@ -1517,7 +1517,7 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.service.ts": {
-        "version": "c4d1a90f26a65499b415989e2c152e9cb7ce2317e2e98de982ce317954de305f",
+        "version": "2f6310fdb0df2865ae7b1b1dd78ded0e174cd311e4da45cc4a05cd7a019cc8ee",
         "signature": "a9b355a33e9350bc1330c858784531d30ee04396aa051f93ad877d71cc465d1d",
         "affectsGlobalScope": false
       },
@@ -1527,13 +1527,13 @@
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "95f5aec446ff6b8e1bb61b7d9e1f7ecfe8ea9497d3acafa6363889e2d3fd0de6",
-        "signature": "52babcb75e9863db566bd21cecec67704e54959d213e8362f8d596e0755b35b8",
+        "version": "16fa739f3a853bb4e6c138277f3fa287a1d65e3df144c0fc080eabdc4c64cdb5",
+        "signature": "57f778d111d6f969797aca91a3a65e80277e9f33723965a2effc714106f2bacb",
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "a3ea065c7aed3ff97f399892e09784f4203dcc07555888a36ae6a899d1800dfd",
-        "signature": "a60095ed4c4d65c3fbb285dc270e873cbd5aef44b19fd56597d2b4b0dd140a1c",
+        "version": "3095f9b34ce745cac6a21575b3bb65fc4b4c93c7825087942a41ba715d341939",
+        "signature": "29a450a30295ab421804ccdddad4c89c280a8d88c8e3aa6448f9b16eabe580c7",
         "affectsGlobalScope": false
       },
       "../src/images/images.provider.ts": {

@@ -8,9 +8,9 @@ export declare class ImagesController {
     constructor(imagesService: ImagesService, processService: ProcessService);
     initialiserWorkflow(): Promise<IImage>;
     recupererImagesSVG(id: string, res: any): Promise<any>;
-    recupererImagesMosaic(id: string, res: any): Promise<any>;
+    recupererImagesMosaic(id: string, res: any): Promise<Blob>;
     getImage(id: any): Promise<IImage>;
     imprimerImage(file: any): string;
     genererFichierPourImpression(id: string, file: any): Promise<void>;
-    miseAjoutPseudo(image: ImageDto): Promise<IImage>;
+    miseAjoutPseudo(image: ImageDto): void;
 }

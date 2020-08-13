@@ -17,7 +17,8 @@ export class ImagesService {
    */
   async editImage(imageId, createImageDTO: ImageDto, callback): Promise<IImage> {
     delete createImageDTO._id;
-//    console.log(createImageDTO);
+    console.log(createImageDTO);
+    console.log(imageId);   
     return imageModel
     .findByIdAndUpdate(imageId, createImageDTO, callback);
   }

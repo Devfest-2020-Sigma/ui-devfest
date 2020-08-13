@@ -40,8 +40,10 @@ export class ImagesService {
    * Fonction de récupération des images générées par le PNG
    * @param image
    */
-  recupererMosaic(image:Image) : String{
-    return `http://192.168.1.11:3000/${url}/getmosaic/${image._id}`;
+  recupererMosaic(image:Image) : Observable<Blob>{
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.get<any>(`${url}/getmosaic/${image._id}`, { headers, responseType: 'blob' as 'json'});
+    //return `http://192.168.1.11:3000/${url}/getmosaic/${image._id}`;
   }
 
   /**
