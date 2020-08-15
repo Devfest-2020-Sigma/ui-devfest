@@ -23,7 +23,7 @@ export class ImagesController {
    * Fonction d'initialisation d'une nouvelle image
    */
   @Get('/initialiser')
-  async initialiserWorkflow(): Promise<IImage> {
+  initialiserWorkflow(): Promise<IImage> {
     return this.imagesService.initialiserWorkflow().then(async image => {
       let imageDto = new ImageDto();
       

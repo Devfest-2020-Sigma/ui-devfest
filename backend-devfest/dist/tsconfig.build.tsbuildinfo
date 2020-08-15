@@ -1532,7 +1532,7 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "3095f9b34ce745cac6a21575b3bb65fc4b4c93c7825087942a41ba715d341939",
+        "version": "c66bcf9d6310a40a2c23575ddd3438932c340830090f06f952e0bb1283249b67",
         "signature": "29a450a30295ab421804ccdddad4c89c280a8d88c8e3aa6448f9b16eabe580c7",
         "affectsGlobalScope": false
       },

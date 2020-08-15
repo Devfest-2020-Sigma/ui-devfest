@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {navbarRoute} from './layouts/navbar/navbar.route';
+import { visualisationRoutes } from './visualisation/visualisation.route';
 
-
-const routes: Routes = [navbarRoute];
+const routes: Routes = [...visualisationRoutes];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

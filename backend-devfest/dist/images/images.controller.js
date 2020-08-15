@@ -28,7 +28,7 @@ let ImagesController = class ImagesController {
         this.imagesService = imagesService;
         this.processService = processService;
     }
-    async initialiserWorkflow() {
+    initialiserWorkflow() {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;

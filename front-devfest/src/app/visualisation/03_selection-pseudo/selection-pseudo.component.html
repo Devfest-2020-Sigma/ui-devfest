@@ -1,3 +1,6 @@
+<mat-toolbar color="primary" class="header">
+  <div>2/4 : Choix du pseudo</div>
+</mat-toolbar>
 <br>
 <form [formGroup]="form" align="center">
   <h3>Veuillez saisir votre pseudo : </h3>
@@ -6,7 +9,6 @@
            required>
   </mat-form-field>
   <div>
-    <button mat-button matStepperPrevious>Retour</button>
-    <button mat-button (click)="validerPseudo()">Suivant</button>
+    <button mat-button (click)="validerPseudo()">Valider</button>
   </div>
 </form>

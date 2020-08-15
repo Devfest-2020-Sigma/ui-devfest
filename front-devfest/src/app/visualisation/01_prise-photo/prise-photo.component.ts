@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {WebcamImage, WebcamUtil} from 'ngx-webcam';
-import {MatDialog} from '@angular/material/dialog';
-import {MatStepper} from '@angular/material/stepper';
-import {Image} from '../../core/model/image.model';
-import {ImagesService} from '../../core/service/images.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { WebcamImage } from 'ngx-webcam';
+import { Observable, Subject } from 'rxjs';
+import { Image } from '../../core/model/image.model';
+import { ImagesService } from '../../core/service/images.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prise-photo',
@@ -12,7 +11,6 @@ import {ImagesService} from '../../core/service/images.service';
 })
 export class PrisePhotoComponent implements OnInit {
 
-  @Input() stepper: MatStepper;
   @Input() image: Image;
   private imageData : string;
 
@@ -21,8 +19,8 @@ export class PrisePhotoComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
   // latest snapshot
 
-  constructor(public dialog: MatDialog,
-              public imagesService: ImagesService) { }
+  constructor(private imagesService: ImagesService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -48,10 +46,9 @@ export class PrisePhotoComponent implements OnInit {
    * Capture de la photo et passage ‡ l'Ècran suivant et affichage de la mosaic
    */
   public onCapturer(): void {
-    this.imagesService.initialiserWorkflow().subscribe(value => {
+    this.imagesService.initialiserWorkflow().subscribe(image => {
       // On met √† jour l'id initilis√© depuis la BDD
-      this.image._id = value._id;
-      this.stepper.next();
+      this.router.navigate(["visualisation/selection-photo", image._id]);
     });
   }
 }

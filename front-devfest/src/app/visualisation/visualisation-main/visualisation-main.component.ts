@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Image} from '../../core/model/image.model';
-import { SelectionPseudoComponent } from '../03_selection-pseudo/selection-pseudo.component';
+import { Component, OnInit } from '@angular/core';
+import { Image } from '../../core/model/image.model';
 
 
 @Component({
@@ -9,15 +8,10 @@ import { SelectionPseudoComponent } from '../03_selection-pseudo/selection-pseud
 })
 export class VisualisationMainComponent implements OnInit {
 
-  @ViewChild(SelectionPseudoComponent) selectionPseudoComponent: SelectionPseudoComponent;
   public image: Image = new Image();
 
   constructor() {}
 
   ngOnInit() {
-  }
-
-  get stepPseudo() {
-    return this.selectionPseudoComponent ? this.selectionPseudoComponent.form : null;
   }
 }

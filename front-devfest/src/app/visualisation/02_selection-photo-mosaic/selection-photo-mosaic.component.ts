@@ -1,55 +1,62 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Image } from '../../core/model/image.model';
-import { MatStep, MatStepper } from '@angular/material/stepper';
-import { ImagesService } from '../../core/service/images.service';
-import { interval, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { interval } from 'rxjs';
 import { concatMapTo, delay, take } from 'rxjs/operators';
+import { ImageEtatEnum } from 'src/app/core/model/image.etat.enum';
+import { ImagesService } from '../../core/service/images.service';
 
 @Component({
   selector: 'app-selection-photo-mosaic',
   templateUrl: './selection-photo-mosaic.component.html'
 })
 export class SelectionPhotoMosaicComponent implements OnInit {
+  public interval = interval(500).pipe(take(15));
+  public imageUpload: any;
 
-  @Input() image: Image;
-  @Input() stepper: MatStepper;
-  @Input() step: MatStep;
+  private id: string;
 
-  public sampleInterval = interval(500).pipe(take(15));
-
-
-  public imageUpload;
-
-  constructor(private imagesService: ImagesService) {
+  constructor(private imagesService: ImagesService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.stepper.selectionChange.subscribe((event: any) => {
-      if (event.selectedStep === this.step) {
-        this.imagesService.recupererMosaic(this.image).subscribe(value =>{
-          const reader = new FileReader();
-          reader.onload = () => {
-            this.imageUpload = reader.result as string;
-          }
-          reader.readAsDataURL(value)
-        });
+    this.route.params.subscribe((params) => {
+      if (!!params.id) {
+        this.id = params.id;
       }
+      const requete = this.imagesService.recupererImage(this.id).pipe(delay(3000));
+      //wait for first to complete before next is subscribed
+      const requetes = this.interval.pipe(concatMapTo(requete));
+      requetes.subscribe(image => {
+        if (image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE) {
+          this.imagesService.recupererMosaic(this.id).subscribe(value => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              this.imageUpload = reader.result as string;
+            }
+            reader.readAsDataURL(value)
+          });
+        }
+      });
+
     });
   }
 
   selectionImage(event: any): void {
     // On indique l'image selectionnée dans la mosaique
-    var x = event.pageX / window.innerWidth * 100;
-    var y = event.pageY / window.innerHeight * 100;
+    const x = event.pageX / window.innerWidth * 100;
+    const y = event.pageY / window.innerHeight * 100;
+    let imageSelectionnee = 0;
     if (x < 50 && y < 50) {
-      this.image.imageSelectionnee = 1;
+      imageSelectionnee = 1;
     } else if (x > 50 && y < 50) {
-      this.image.imageSelectionnee = 2;
+      imageSelectionnee = 2;
     } else if (x < 50 && y > 50) {
-      this.image.imageSelectionnee = 3;
+      imageSelectionnee = 3;
     } else {
-      this.image.imageSelectionnee = 4;
+      imageSelectionnee = 4;
     }
-    this.stepper.next();
+    this.router.navigate(["visualisation/selection-pseudo", this.id, imageSelectionnee]);
   }
 }
