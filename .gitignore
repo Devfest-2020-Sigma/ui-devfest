@@ -10,6 +10,7 @@
 # dependencies
 /front-devfest/node_modules
 /backend-devfest/node_modules
+/websocket/node_modules
 
 /backend-devfest/dist
 /front-devfest/dist

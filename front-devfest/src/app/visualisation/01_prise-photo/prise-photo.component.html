@@ -2,9 +2,8 @@
   <div>1/4 : Prise de la photo</div>
 </mat-toolbar>
 <div align="center">
-  <webcam [height]="500" [width]="500"  [trigger]="triggerObservable" [videoOptions]="videoOptions" [imageQuality]="1"
-          (imageCapture)="handleImage($event)"></webcam>
-</div>
-<div align="center">
+  <br>
+  <canvas id="video-canvas" #streaming width="600" height="400" style="display: block; width: 40%;"></canvas>
+  <br>
   <button mat-button (click)="onCapturer()">Capturer</button>
 </div>

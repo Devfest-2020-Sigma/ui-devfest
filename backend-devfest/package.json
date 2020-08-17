@@ -27,6 +27,8 @@
     "@nestjs/microservices": "^7.3.2",
     "@nestjs/mongoose": "^7.0.1",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/platform-socket.io": "^7.4.2",
+    "@nestjs/websockets": "^7.4.2",
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
     "bluebird": "^3.7.2",

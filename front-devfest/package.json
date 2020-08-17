@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --disableHostCheck",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,9 +23,9 @@
     "@angular/platform-server": "~9.1.2",
     "@angular/router": "~9.1.2",
     "@angular/service-worker": "~9.1.2",
+    "@cycjimmy/jsmpeg-player": "^5.0.1",
     "angular-svg-icon": "^10.0.0",
     "express": "^4.15.2",
-    "ngx-webcam": "^0.3.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

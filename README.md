@@ -2,14 +2,18 @@
 
 RAF
 
-- ajout loader entre prise photo et selection mosaique (gestion status bdd)
-- correction génération url affichage mosaique
-- appel script génération jpeg2svg
+- ajout loader entre prise photo
 - envoi vers file rabbitmq
+- creation websocket nestjs
+- start streaming
+- stop streaming
+- rendre asynchrone la generation de la mosaique
 
 -- Admin
 
+- ajout ngx-datatable
+- referencer les robots dans enum avec ip et créer controler d'actions
+
 - gestion statut robots
 
--- ++
-update projet stack jwt
+Voir pour transformer l'appli en projet ionic avec deploiement sur tablette

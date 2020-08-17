@@ -1,45 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
-import { Image } from '../../core/model/image.model';
-import { ImagesService } from '../../core/service/images.service';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import JSMpeg from '@cycjimmy/jsmpeg-player';
+import { ImagesService } from '../../core/service/images.service';
 
 @Component({
   selector: 'app-prise-photo',
   templateUrl: './prise-photo.component.html'
 })
-export class PrisePhotoComponent implements OnInit {
+export class PrisePhotoComponent implements OnInit, AfterViewInit {
 
-  @Input() image: Image;
-  private imageData : string;
-
-  public facingMode = 'environment';
-  // webcam snapshot trigger
-  private trigger: Subject<void> = new Subject<void>();
-  // latest snapshot
+  @ViewChild('streaming', { static: false }) streamingcanvas: ElementRef;
 
   constructor(private imagesService: ImagesService,
-              private router: Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
+    
   }
-
-  public get videoOptions(): MediaTrackConstraints {
-    const result: MediaTrackConstraints = {};
-    if (this.facingMode && this.facingMode !== '') {
-      result.facingMode = { ideal: this.facingMode };
-    }
-
-    return result;
-  }
-
-  public get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
-  }
-
-  public handleImage(webcamImage: WebcamImage): void {
-    this.imageData = webcamImage.imageAsDataUrl;
+  
+  ngAfterViewInit(): void {
+    var url = 'ws://' + document.location.hostname + ':8082/';
+    let player = new JSMpeg.Player(url, {
+      canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
+    });
   }
 
   /**
