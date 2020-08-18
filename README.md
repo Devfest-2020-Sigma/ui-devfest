@@ -16,4 +16,8 @@ RAF
 
 - gestion statut robots
 
+
+-- NestJs 
+- Voir gestion des logs 
+
 Voir pour transformer l'appli en projet ionic avec deploiement sur tablette

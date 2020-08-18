@@ -5,6 +5,8 @@
 
 FolderToSave=${1:-/tmp/TakePhoto}
 Prefix=${2:-capture-}
+INPUT_VIDEO=/dev/video0
+OUTPUT_VIDEO=/tmp/output.mkv
 
 mkdir -p ${FolderToSave} 
 
@@ -20,6 +22,9 @@ for PhotoNumber in {1..4} ; do
     echo "${FolderToSave}/${Prefix}${PhotoNumber}.png"
     raspistill -o "${FolderToSave}/${Prefix}${PhotoNumber}.png"
 done
+
+ffmpeg -hide_banner -y -f v4l2 -input_format mjpeg -framerate 30 -video_size 1920x1080 -i ${INPUT_VIDEO} -t 00:00:05 -c copy ${OUTPUT_VIDEO}
+ffmpeg -hide_banner -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/output-%3d.jpg
 
 cp "impressions/mosaic.jpg" "${FolderToSave}"
 #LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 /usr/local/autocrop/bin/autocrop -i ${FolderToSave} -o ${FolderToSave}/out

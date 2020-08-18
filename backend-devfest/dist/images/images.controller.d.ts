@@ -9,6 +9,7 @@ export declare class ImagesController {
     initialiserWorkflow(): Promise<IImage>;
     recupererImagesSVG(id: string, res: any): Promise<any>;
     recupererImagesMosaic(id: string, res: any): Promise<Blob>;
+    streamingstart(): void;
     getImage(id: any): Promise<IImage>;
     imprimerImage(file: any): string;
     genererFichierPourImpression(id: string, file: any): Promise<void>;

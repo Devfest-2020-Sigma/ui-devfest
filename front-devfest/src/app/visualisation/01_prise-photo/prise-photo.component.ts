@@ -15,7 +15,7 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.imagesService.demarrerStreaming().subscribe();
   }
   
   ngAfterViewInit(): void {

@@ -20,11 +20,16 @@ let ProcessService = class ProcessService {
     }
     async execCommand(nomCommande, impressionId, pseudo) {
         let commande = "";
-        if (pseudo) {
-            commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + " " + pseudo;
+        if (impressionId) {
+            if (pseudo) {
+                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + " " + pseudo;
+            }
+            else {
+                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
+            }
         }
         else {
-            commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
+            commande = REPERTOIRE_SCRIPTS + nomCommande;
         }
         return exec(commande);
     }

@@ -31,6 +31,8 @@ let ImagesController = class ImagesController {
     initialiserWorkflow() {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
+            console.log('arret du streaming');
+            await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP, null, null);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imagesService.editImage(image._id, imageDto, function () { });
             await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id, null);
@@ -44,6 +46,10 @@ let ImagesController = class ImagesController {
     }
     async recupererImagesMosaic(id, res) {
         return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+    }
+    streamingstart() {
+        console.log('Debut du streaming');
+        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null);
     }
     async getImage(id) {
         return this.imagesService.getImage(id);
@@ -80,6 +86,12 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesMosaic", null);
+__decorate([
+    common_1.Get('/streaming'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ImagesController.prototype, "streamingstart", null);
 __decorate([
     common_1.Get(':id'),
     __param(0, common_1.Param('id')),

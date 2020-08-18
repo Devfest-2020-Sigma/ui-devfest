@@ -8,6 +8,7 @@ import { IImage } from './image.interface';
 import { ProcessService } from 'src/process/process.service';
 import { processEnum } from 'src/process/process.enum';
 import { ImageEtatEnum } from './image.etat.enum';
+import { start } from 'repl';
 
 const INIT_FILE_NAME = 'initial.jpg';
 
@@ -26,7 +27,8 @@ export class ImagesController {
   initialiserWorkflow(): Promise<IImage> {
     return this.imagesService.initialiserWorkflow().then(async image => {
       let imageDto = new ImageDto();
-      
+      console.log('arret du streaming');
+      await this.processService.execCommand(processEnum.STREAMING_STOP, null, null);
       // Mise à jour état de image
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
       this.imagesService.editImage(image._id, imageDto, function(){});
@@ -58,6 +60,15 @@ export class ImagesController {
   async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<Blob> {
     return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
   }
+
+    /**
+   * Controller qui permet de démarrer le streaming de la caméra
+   */
+  @Get('/streaming')
+  streamingstart() {
+    console.log('Debut du streaming');
+    this.processService.execCommand(processEnum.STREAMING_START, null , null);
+  } 
 
   /**
    * Controller qui récupère une image en base de donnée
