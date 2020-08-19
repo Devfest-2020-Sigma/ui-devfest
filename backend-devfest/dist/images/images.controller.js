@@ -15,14 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
-const images_service_1 = require("./images.service");
-const fs_1 = require("fs");
-const multer_1 = require("multer");
-const image_dto_1 = require("./image.dto");
-const process_service_1 = require("../process/process.service");
 const process_enum_1 = require("../process/process.enum");
+const process_service_1 = require("../process/process.service");
+const image_dto_1 = require("./image.dto");
 const image_etat_enum_1 = require("./image.etat.enum");
-const INIT_FILE_NAME = 'initial.jpg';
+const images_service_1 = require("./images.service");
 let ImagesController = class ImagesController {
     constructor(imagesService, processService) {
         this.imagesService = imagesService;
@@ -57,10 +54,6 @@ let ImagesController = class ImagesController {
     imprimerImage(file) {
         console.log(file);
         return null;
-    }
-    async genererFichierPourImpression(id, file) {
-        const imageDto = new image_dto_1.ImageDto();
-        imageDto._id = id;
     }
     miseAjoutPseudo(image) {
         this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, image._id, image.pseudo);
@@ -107,27 +100,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", String)
 ], ImagesController.prototype, "imprimerImage", null);
-__decorate([
-    common_1.Post('/test'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor('file', {
-        storage: multer_1.diskStorage({
-            destination: (req, file, cb) => {
-                const uploadPath = './impressions/' + req.query.id;
-                if (!fs_1.existsSync(uploadPath)) {
-                    fs_1.mkdirSync(uploadPath);
-                }
-                cb(null, uploadPath);
-            },
-            filename: (req, file, cb) => {
-                return cb(null, INIT_FILE_NAME);
-            }
-        })
-    })),
-    __param(0, common_1.Param('id')), __param(1, common_1.UploadedFile()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], ImagesController.prototype, "genererFichierPourImpression", null);
 __decorate([
     common_1.Put('/pseudo'),
     __param(0, common_1.Body()),

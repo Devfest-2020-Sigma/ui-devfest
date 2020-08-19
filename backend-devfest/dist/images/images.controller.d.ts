@@ -1,7 +1,7 @@
-import { ImagesService } from './images.service';
+import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { IImage } from './image.interface';
-import { ProcessService } from 'src/process/process.service';
+import { ImagesService } from './images.service';
 export declare class ImagesController {
     private readonly imagesService;
     private readonly processService;
@@ -12,6 +12,5 @@ export declare class ImagesController {
     streamingstart(): void;
     getImage(id: any): Promise<IImage>;
     imprimerImage(file: any): string;
-    genererFichierPourImpression(id: string, file: any): Promise<void>;
     miseAjoutPseudo(image: ImageDto): void;
 }

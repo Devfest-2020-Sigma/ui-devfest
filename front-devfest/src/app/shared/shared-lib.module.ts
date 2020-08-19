@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MatInputModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    NgxDatatableModule,
     AngularSvgIconModule.forRoot()
   ],
   exports: [
@@ -44,6 +46,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MatInputModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    NgxDatatableModule,
     AngularSvgIconModule
   ],
   providers: [],

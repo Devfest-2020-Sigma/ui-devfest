@@ -1,16 +1,11 @@
 import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ImagesService } from './images.service';
-import { existsSync, mkdirSync } from 'fs';
-import { diskStorage } from 'multer';
-import { ImageDto } from './image.dto';
-import { IImage } from './image.interface';
-import { ProcessService } from 'src/process/process.service';
 import { processEnum } from 'src/process/process.enum';
+import { ProcessService } from 'src/process/process.service';
+import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
-import { start } from 'repl';
-
-const INIT_FILE_NAME = 'initial.jpg';
+import { IImage } from './image.interface';
+import { ImagesService } from './images.service';
 
 @Controller('api/images')
 export class ImagesController {
@@ -90,34 +85,6 @@ export class ImagesController {
     console.log(file);
     return null;
   }
-
-  @Post('/test')
-  @UseInterceptors(FileInterceptor('file',
-    {
-      storage: diskStorage({
-        // Destination storage path details
-        destination: (req: any, file: any, cb: any) => {
-          const uploadPath = './impressions/' + req.query.id;
-          // Create folder if doesn't exist
-          if (!existsSync(uploadPath)) {
-            mkdirSync(uploadPath);
-          }
-          cb(null, uploadPath);
-        },
-        filename: (req, file, cb) => {
-          return cb(null, INIT_FILE_NAME);
-        }
-      })
-    }
-  )
-  )
-  async genererFichierPourImpression(@Param('id') id: string, @UploadedFile() file): Promise<void> {
-    const imageDto = new ImageDto();
-    imageDto._id = id;
-    //imageDto.photoInitiale = file;
-    //  return this.imagesService.rabbitEvent(imageDto);
-  }
-
   
   @Put('/pseudo')
   miseAjoutPseudo(@Body() image: ImageDto) {

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="header">
+  <div>Suivi des robots</div>
+</mat-toolbar>
+<ngx-datatable class="material" [rows]="rows" [columnMode]="ColumnMode.force" [headerHeight]="50" rowHeight="auto"
+  [reorderable]="reorderable">
+
+  <!-- Nom du robot -->
+  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Nom du robot" prop="nom">
+  </ngx-datatable-column>
+  <!-- Ip du robot -->
+  <ngx-datatable-column [draggable]="false" [flexGrow]="2" [sortable]="false" name="Ip du robot" prop="ip">
+  </ngx-datatable-column>
+  <!-- Statut -->
+  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Statut" prop="statut">
+  </ngx-datatable-column>
+  <!-- Actions -->
+  <ngx-datatable-column [draggable]="false" [flexGrow]="2" [sortable]="false" name="Actions" prop="">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div class="form-row align-items-start">
+        <button type="button">Stop</button>
+        <button type="button">Pause</button>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+
+</ngx-datatable>
