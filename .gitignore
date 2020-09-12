@@ -11,9 +11,14 @@
 /front-devfest/node_modules
 /backend-devfest/node_modules
 /websocket/node_modules
+/ms-generation-gcode/node_modules
+/ms-impression-gcode/node_modules
+
 
 /backend-devfest/dist
 /front-devfest/dist
+/ms-generation-gcode/dist
+/ms-impression-gcode/dist
 
 # profiling files
 chrome-profiler-events*.json
