@@ -5,17 +5,16 @@ RAF
 - ajout loader entre prise photo
 - envoi vers file rabbitmq
 - creation websocket nestjs
-- start streaming
-- stop streaming
 - rendre asynchrone la generation de la mosaique
+- creation microservice pour génération des rendus
 
 -- Admin
-
-- ajout ngx-datatable
-- referencer les robots dans enum avec ip et créer controler d'actions
-
 - gestion statut robots
+- reload automatique toutes les 3 sec des données
+- ajout controler pour commander la gestion des robots
 
+-- Front
+  Implemention ondestroy des vues et unsubscribe des requetes
 
 -- NestJs 
 - Voir gestion des logs 

@@ -2932,8 +2932,8 @@
         "affectsGlobalScope": false
       },
       "../src/process/process.enum.ts": {
-        "version": "8d04c8b50a5c40ee11121e19288550c1ed37dd18ce01e23f0a8c60c0458b368a",
-        "signature": "bf35b6c97f541b84f5b8407dca81c5de04331d327db861fb530c52aa55edc165",
+        "version": "b28329a4a34b4e58d805d74c86c29757033269604f2b51483547084e2b656f6e",
+        "signature": "8c7c9650e7b42073585caffb5d425959821957269ab8c23a6e702e07006669c3",
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
@@ -2992,8 +2992,8 @@
         "affectsGlobalScope": false
       },
       "../src/robots/robots.enum.ts": {
-        "version": "3425fedc6b9e6ddc5885e907e5b3bd4ca76b46ab09d0493daa018809ad301914",
-        "signature": "7265066b966a432d304783195d2e994ab511780e19bb676c32376f1d691ca45b",
+        "version": "c81e4b0b3e0b9260b3e2bfd0352f20515ab457a6ce6b81c55ae3478c6ea22e68",
+        "signature": "6a129dc6efaa8c562dd138f999b7aa05c0821de2b7a756d2f096840b607e5407",
         "affectsGlobalScope": false
       },
       "../src/robots/robot.dto.ts": {
