@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RabbitEvent = void 0;
-const nestjs_transport_eventbus_1 = require("nestjs-transport-eventbus");
 const microservices_1 = require("@nestjs/microservices");
-const image_dto_1 = require("../images/image.dto");
+const nestjs_transport_eventbus_1 = require("nestjs-transport-eventbus");
+const image_rabbit_1 = require("../images/image.rabbit");
 let RabbitEvent = class RabbitEvent {
     constructor(message) {
         this.message = message;
@@ -20,7 +20,7 @@ let RabbitEvent = class RabbitEvent {
 };
 RabbitEvent = __decorate([
     nestjs_transport_eventbus_1.TransportType(microservices_1.Transport.RMQ),
-    __metadata("design:paramtypes", [image_dto_1.ImageDto])
+    __metadata("design:paramtypes", [image_rabbit_1.ImageRabbit])
 ], RabbitEvent);
 exports.RabbitEvent = RabbitEvent;
 //# sourceMappingURL=rabbit.event.js.map

@@ -6,4 +6,5 @@ export interface IImage extends Document {
    pseudo: string;
    imageSelectionnee: number;
    etat: ImageEtatEnum;
+   tailleCalculee : number;
 }

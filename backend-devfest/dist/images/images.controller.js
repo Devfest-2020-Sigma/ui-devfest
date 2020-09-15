@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
-const platform_express_1 = require("@nestjs/platform-express");
 const process_enum_1 = require("../process/process.enum");
 const process_service_1 = require("../process/process.service");
 const image_dto_1 = require("./image.dto");
@@ -46,14 +45,13 @@ let ImagesController = class ImagesController {
     }
     streamingstart() {
         console.log('Debut du streaming');
-        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null);
+        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null).catch(error => { console.log('caught', error.message); });
     }
     async getImage(id) {
         return this.imagesService.getImage(id);
     }
-    imprimerImage(file) {
-        console.log(file);
-        return null;
+    async imprimerGcode(id) {
+        return this.imagesService.sendRabbitEvent(id);
     }
     miseAjoutPseudo(image) {
         this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, image._id, image.pseudo);
@@ -93,13 +91,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "getImage", null);
 __decorate([
-    common_1.Post('/imprimer'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor('file')),
-    __param(0, common_1.UploadedFile()),
+    common_1.Get('/imprimer/:id'),
+    __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", String)
-], ImagesController.prototype, "imprimerImage", null);
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "imprimerGcode", null);
 __decorate([
     common_1.Put('/pseudo'),
     __param(0, common_1.Body()),

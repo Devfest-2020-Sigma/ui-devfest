@@ -11,6 +11,6 @@ export declare class ImagesController {
     recupererImagesMosaic(id: string, res: any): Promise<Blob>;
     streamingstart(): void;
     getImage(id: any): Promise<IImage>;
-    imprimerImage(file: any): string;
+    imprimerGcode(id: any): Promise<void>;
     miseAjoutPseudo(image: ImageDto): void;
 }

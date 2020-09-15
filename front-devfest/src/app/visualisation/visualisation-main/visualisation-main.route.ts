@@ -23,12 +23,12 @@ export const visualisationMainRoute: Route[] = [
     canActivate: []
   },
   {
-    path: 'choix-rendu/:id/:numero',
+    path: 'choix-rendu/:id',
     component: ChoixRenduComponent,
     canActivate: []
   },
   {
-    path: 'impression',
+    path: 'impression/:id',
     component: ImpressionPhotoComponent,
     canActivate: []
   }];

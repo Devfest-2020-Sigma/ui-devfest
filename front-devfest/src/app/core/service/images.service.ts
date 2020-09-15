@@ -49,10 +49,8 @@ export class ImagesService {
    * Fonction permettant l'impression de l'image selectionnée
    * @param image Image contenant l'image selectionnée à imprimer
    */
-  impressionImage(image: string, id: string): Observable<string> {
-    const formData = new FormData();
-    formData.append('file', imageToFile(image, id));
-    return this.http.post<string>(`${url}/imprimer`, formData);
+  impressionImage( id: string): Observable<string> {
+    return this.http.get<string>(`${url}/imprimer/${id}`);
   }
 
   /**

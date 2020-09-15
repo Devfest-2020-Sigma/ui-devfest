@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ImagesService } from '../../core/service/images.service';
+import { ImagesService } from 'src/app/core/service/images.service';
 
 @Component({
   selector: 'app-choix-rendu',
@@ -9,12 +8,22 @@ import { ImagesService } from '../../core/service/images.service';
 })
 export class ChoixRenduComponent implements OnInit {
 
-  public form: FormGroup;
+  private id: string;
 
-  constructor() {
+  constructor(private imagesService: ImagesService,
+    private route: ActivatedRoute,
+    private router: Router) {
     }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      if (!!params.id) {
+        this.id = params.id;
+      }
+    });
+  }
   
+  validerChoix() {
+    this.router.navigate(["visualisation/impression", this.id]);
   }
 }

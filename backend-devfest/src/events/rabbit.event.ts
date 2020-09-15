@@ -1,11 +1,11 @@
-import { TransportType, ExcludeDef } from 'nestjs-transport-eventbus';
 import { Transport } from '@nestjs/microservices';
-import {ImageDto} from '../images/image.dto';
+import { TransportType } from 'nestjs-transport-eventbus';
+import { ImageRabbit } from 'src/images/image.rabbit';
 
 @TransportType(Transport.RMQ)
 export class RabbitEvent {
   constructor(
-    readonly message: ImageDto
+    readonly message: ImageRabbit
   ) {
   }
 }

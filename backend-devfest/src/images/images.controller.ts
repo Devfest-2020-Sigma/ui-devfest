@@ -62,7 +62,7 @@ export class ImagesController {
   @Get('/streaming')
   streamingstart() {
     console.log('Debut du streaming');
-    this.processService.execCommand(processEnum.STREAMING_START, null , null);
+    this.processService.execCommand(processEnum.STREAMING_START, null , null).catch(error => { console.log('caught', error.message); });
   } 
 
   /**
@@ -79,11 +79,9 @@ export class ImagesController {
    * Permet l'impression d'une image selectionnée
    * @param file Fichier à imprimer
    */
-  @Post('/imprimer')
-  @UseInterceptors(FileInterceptor('file'))
-  imprimerImage(@UploadedFile() file): string {
-    console.log(file);
-    return null;
+  @Get('/imprimer/:id')
+  async imprimerGcode(@Param('id') id): Promise<void> {
+    return this.imagesService.sendRabbitEvent(id);
   }
   
   @Put('/pseudo')

@@ -1,5 +1,5 @@
-import { ImageDto } from '../images/image.dto';
+import { ImageRabbit } from 'src/images/image.rabbit';
 export declare class RabbitEvent {
-    readonly message: ImageDto;
-    constructor(message: ImageDto);
+    readonly message: ImageRabbit;
+    constructor(message: ImageRabbit);
 }
