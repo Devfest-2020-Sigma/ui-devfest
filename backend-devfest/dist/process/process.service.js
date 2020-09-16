@@ -18,11 +18,11 @@ const REPERTOIRE_SCRIPTS = 'scripts/';
 let ProcessService = class ProcessService {
     constructor() {
     }
-    async execCommand(nomCommande, impressionId, pseudo) {
+    async execCommand(nomCommande, impressionId, imageSelectionne, pseudo) {
         let commande = "";
         if (impressionId) {
             if (pseudo) {
-                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + " " + pseudo;
+                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + "/reject " + imageSelectionne + " " + pseudo;
             }
             else {
                 commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;

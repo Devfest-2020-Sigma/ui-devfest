@@ -31,9 +31,9 @@ export class ImagesService {
    * Fonction permettant la récupération des images générées
    * @param image Image contenant les informations permettant la récupération des images générées par le back
    */
-  recupererImagesSVG(image: Image): Observable<any> {
+  recupererImagesSVG(id :string): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get<any>(`${url}/getsvg/${image._id}`, { headers, responseType: 'text' as 'json' });
+    return this.http.get<any>(`${url}/getsvg/${id}`, { headers, responseType: 'text' as 'json' });
   }
 
   /**
@@ -64,7 +64,7 @@ export class ImagesService {
   /**
    * Mise à jour du pseudo dans la BDD
    */
-  miseAjourPseudo(id: string, numero : number, pseudo : string): Observable<Image> {
+  genererSVG(id: string, numero : number, pseudo : string): Observable<Image> {
     let image = new Image;
     image._id = id;
     image.pseudo = pseudo;

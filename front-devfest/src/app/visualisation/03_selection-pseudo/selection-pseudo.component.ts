@@ -39,7 +39,7 @@ export class SelectionPseudoComponent implements OnInit {
   }
 
   validerPseudo() {
-    this.imagesService.miseAjourPseudo(this.id, this.numero, this.pseudo).subscribe(value => {
+    this.imagesService.genererSVG(this.id, this.numero, this.pseudo).subscribe(value => {
       this.router.navigate(["visualisation/choix-rendu", this.id]);
     });
   }

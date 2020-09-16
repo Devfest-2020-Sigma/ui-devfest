@@ -12,5 +12,5 @@ export declare class ImagesController {
     streamingstart(): void;
     getImage(id: any): Promise<IImage>;
     imprimerGcode(id: any): Promise<void>;
-    miseAjoutPseudo(image: ImageDto): void;
+    miseAjoutPseudo(image: ImageDto): Promise<void>;
 }

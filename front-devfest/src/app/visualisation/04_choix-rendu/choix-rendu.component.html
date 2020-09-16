@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="header">
   <div>4/4 : Choix du rendu</div>
 </mat-toolbar>
-<div align="center">
-  <button mat-button (click)="validerChoix()">Imprimer</button>
+<div class="icon-placeholder" *ngIf="imageSet" (click)="imprimer()">
+  <svg-icon  name="svg"></svg-icon>
 </div>

@@ -23,12 +23,12 @@ export class ImagesController {
     return this.imagesService.initialiserWorkflow().then(async image => {
       let imageDto = new ImageDto();
       console.log('arret du streaming');
-      await this.processService.execCommand(processEnum.STREAMING_STOP, null, null);
+      await this.processService.execCommand(processEnum.STREAMING_STOP, null, null, null);
       // Mise à jour état de image
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
       this.imagesService.editImage(image._id, imageDto, function(){});
       // génération des quatres images de départ
-      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id, null);
+      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id, null, null);
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
       this.imagesService.editImage(image._id, imageDto, function(){});
       return image;
@@ -43,7 +43,8 @@ export class ImagesController {
    */
   @Get('/getsvg/:id')
   async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
-    res.sendFile('chuck.svg', { root: 'impressions' });
+    const dir = 'impressions/' + id + '/crop';
+    res.sendFile('jpg2lite-front.svg', { root: dir });
   }
 
   /**
@@ -62,7 +63,7 @@ export class ImagesController {
   @Get('/streaming')
   streamingstart() {
     console.log('Debut du streaming');
-    this.processService.execCommand(processEnum.STREAMING_START, null , null).catch(error => { console.log('caught', error.message); });
+    this.processService.execCommand(processEnum.STREAMING_START, null , null, null).catch(error => { console.log('caught', error.message); });
   } 
 
   /**
@@ -81,11 +82,12 @@ export class ImagesController {
    */
   @Get('/imprimer/:id')
   async imprimerGcode(@Param('id') id): Promise<void> {
-    return this.imagesService.sendRabbitEvent(id);
+    const path = './impressions/' + id + '/crop/jpeg2lite';
+    await this.processService.execCommand(processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });;
   }
   
   @Put('/pseudo')
-  miseAjoutPseudo(@Body() image: ImageDto) {
-    this.processService.execCommand(processEnum.JPG2GCODE, image._id, image.pseudo);
+  async miseAjoutPseudo(@Body() image: ImageDto) : Promise<void> {
+    await this.processService.execCommand(processEnum.JPG2LITE, image._id, image.imageSelectionnee, image.pseudo).catch(error => { console.log('caught', error.message); });
   }
 }

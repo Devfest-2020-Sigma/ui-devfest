@@ -11,6 +11,13 @@ full-width {
     height: 100vh;
 }
 
+.icon-placeholder {      
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer !important ;
+  }
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;

@@ -28,33 +28,36 @@ let ImagesController = class ImagesController {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             console.log('arret du streaming');
-            await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP, null, null);
+            await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP, null, null, null);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imagesService.editImage(image._id, imageDto, function () { });
-            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id, null);
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id, null, null);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
             this.imagesService.editImage(image._id, imageDto, function () { });
             return image;
         });
     }
     async recupererImagesSVG(id, res) {
-        res.sendFile('chuck.svg', { root: 'impressions' });
+        const dir = 'impressions/' + id + '/reject';
+        res.sendFile('jpg2lite-front.svg', { root: dir });
     }
     async recupererImagesMosaic(id, res) {
         return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
     }
     streamingstart() {
         console.log('Debut du streaming');
-        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null).catch(error => { console.log('caught', error.message); });
+        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null, null).catch(error => { console.log('caught', error.message); });
     }
     async getImage(id) {
         return this.imagesService.getImage(id);
     }
     async imprimerGcode(id) {
-        return this.imagesService.sendRabbitEvent(id);
+        const path = './impressions/' + id + '/reject/jpeg2lite';
+        await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });
+        ;
     }
-    miseAjoutPseudo(image) {
-        this.processService.execCommand(process_enum_1.processEnum.JPG2GCODE, image._id, image.pseudo);
+    async miseAjoutPseudo(image) {
+        await this.processService.execCommand(process_enum_1.processEnum.JPG2LITE, image._id, image.imageSelectionnee, image.pseudo).catch(error => { console.log('caught', error.message); });
     }
 };
 __decorate([
@@ -102,7 +105,7 @@ __decorate([
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [image_dto_1.ImageDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "miseAjoutPseudo", null);
 ImagesController = __decorate([
     common_1.Controller('api/images'),

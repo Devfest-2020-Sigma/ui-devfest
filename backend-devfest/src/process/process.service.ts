@@ -18,12 +18,12 @@ export class ProcessService {
    * @param nomCommande nom de la commande a executer
    * @param impressionId id de l'impressions qui correspond au repertoire dans lequel seront enregistré les photos
    */
-  async execCommand(nomCommande: processEnum, impressionId: string, pseudo: string) {
+  async execCommand(nomCommande: processEnum, impressionId: string, imageSelectionne: number, pseudo: string) {
     let commande = "";
     // TODO : Ajouter une  gestion des paramètres
     if (impressionId){
       if (pseudo) {
-        commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + " " + pseudo;
+        commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + "/crop " + imageSelectionne + " "+ pseudo;
       } else {
         commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
       }

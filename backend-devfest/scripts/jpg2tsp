@@ -1,0 +1,5 @@
+#!/bin/bash
+
+fichier=$(basename $1 .jpg)
+convert $fichier.jpg -noise 5 -resize 300 $fichier.pbm
+python /usr/local/bin/tspart.py --max-segments=5000 --runs=1 $fichier.pbm
