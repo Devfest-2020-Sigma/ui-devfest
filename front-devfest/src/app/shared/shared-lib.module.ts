@@ -13,10 +13,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ChargementComponent } from './loader/loader.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ChargementComponent],
   imports: [
     CommonModule,
     MatSidenavModule,
@@ -47,7 +48,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatDialogModule,
     MatProgressSpinnerModule,
     NgxDatatableModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    ChargementComponent
   ],
   providers: [],
 })

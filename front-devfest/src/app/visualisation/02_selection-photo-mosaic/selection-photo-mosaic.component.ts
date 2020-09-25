@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { concatMapTo, delay, take } from 'rxjs/operators';
 import { ImageEtatEnum } from 'src/app/core/model/image.etat.enum';
 import { ImagesService } from '../../core/service/images.service';
@@ -9,8 +10,9 @@ import { ImagesService } from '../../core/service/images.service';
   selector: 'app-selection-photo-mosaic',
   templateUrl: './selection-photo-mosaic.component.html'
 })
-export class SelectionPhotoMosaicComponent implements OnInit {
+export class SelectionPhotoMosaicComponent implements OnInit, OnDestroy {
   public interval = interval(500).pipe(take(15));
+  private readonly subscriptions: Subscription[] = [];
   public imageUpload: any;
 
   private id: string;
@@ -18,6 +20,13 @@ export class SelectionPhotoMosaicComponent implements OnInit {
   constructor(private imagesService: ImagesService,
     private route: ActivatedRoute,
     private router: Router) {
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -28,18 +37,19 @@ export class SelectionPhotoMosaicComponent implements OnInit {
       const requete = this.imagesService.recupererImage(this.id).pipe(delay(3000));
       //wait for first to complete before next is subscribed
       const requetes = this.interval.pipe(concatMapTo(requete));
-      requetes.subscribe(image => {
-        if (image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE) {
-          this.imagesService.recupererMosaic(this.id).subscribe(value => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              this.imageUpload = reader.result as string;
-            }
-            reader.readAsDataURL(value)
-          });
-        }
-      });
-
+      this.subscriptions.push(
+        requetes.subscribe(image => {
+          if (image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE) {
+            this.imagesService.recupererMosaic(this.id).subscribe(value => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                this.imageUpload = reader.result as string;
+              }
+              reader.readAsDataURL(value)
+            });
+          }
+        })
+      );
     });
   }
 
