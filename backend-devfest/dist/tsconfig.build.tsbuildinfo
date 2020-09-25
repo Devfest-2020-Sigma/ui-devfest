@@ -2932,18 +2932,18 @@
         "affectsGlobalScope": false
       },
       "../src/common/configuration.enum.ts": {
-        "version": "0941d8dc9d5a91d3112b7a0280ed1018d02b55c7d1940801642ba2b3271df906",
-        "signature": "3ab87e850fb68704ed56537d11b5c0d83a35f2d07e3e760ae499654fcb795844",
+        "version": "af6250692427f84f1fccc89dfd96d0246da1f29b0015710b11501c13667f18aa",
+        "signature": "a86c9ea3ee56171e5f0e1b0b15538d47c297c65b4b43829c5484736b8e0ffb0c",
         "affectsGlobalScope": false
       },
       "../src/process/process.enum.ts": {
-        "version": "b821584dd6585288d77b28fe77a8cb59a93c29f8b7b5becb03141488df6ea835",
-        "signature": "847918465eb5ff1a84b7d8c44be884022a6953be83343d0b3e834b0d99f65a67",
+        "version": "351ebcee9705925c90968b4608f3d534ed3d366670bf368888c25b2100dd2822",
+        "signature": "06894952384e398b8a3c14a711be3a2ff69975a37b75ca40b3f134802f857b1c",
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "af569dc0b4c42f61dd3ec2012cabc3e47e190308c00bca3dead91059e01c4612",
-        "signature": "95c7c6fa6453c3731ac125f9be23b9a3566a50960d8358d8d1122ac3549bb63e",
+        "version": "1dd5cad578771e0fd8213bd4861ecbb39d989eeaf103c6ae7a2b9bc789c4b9c0",
+        "signature": "4a0740c0e3ebc1b37a21fde4febeee25720760471724036be75e500d3c5a45bb",
         "affectsGlobalScope": false
       },
       "../src/images/image.dto.ts": {
@@ -3527,7 +3527,7 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "42d360b1924d3437d4eceae224c1622a1d3a37e4b704d7599f72f38bf1502aff",
+        "version": "4791beb958275b33d833cfb4b6292ff8c97ac721876fbefbd9909be84bd0915e",
         "signature": "ea444560f2cb11913b920dd7ae6578295806686a043747e35d8fb573491f187f",
         "affectsGlobalScope": false
       },
@@ -3561,9 +3561,14 @@
         "signature": "2a9bb08ae62a33121059a0b295fe173676de3c1f7ef21033f48707dafa7a5526",
         "affectsGlobalScope": false
       },
+      "../src/robots/robot.command.enum.ts": {
+        "version": "79801e8d9b9facba8ad8de5c7973b1bd057a92f614114b6f898da03b1f5133c9",
+        "signature": "926118797ebd57bfcebaf9248e4d199d0c6b7a9eeaa020c843dc7c912f1dad8c",
+        "affectsGlobalScope": false
+      },
       "../src/robots/robots.controller.ts": {
-        "version": "e008b4686f12a74da0425b2ce7fa9f7507f8daf4208f4455a5eb7ae1d1d86004",
-        "signature": "cfad28d1940f939fa86b7038d4315001dd16292c4f0ec5efc704946040b8843b",
+        "version": "a9dfb15830c98e3dd995899d5309d98a132019b73678d874f168e748387216e9",
+        "signature": "4e70feb4ce9786c898e4689717d2d7808d5d84ed599e403b82c0eee089ad9287",
         "affectsGlobalScope": false
       },
       "../src/robots/robots.service.ts": {
@@ -3572,7 +3577,7 @@
         "affectsGlobalScope": false
       },
       "../src/robots/robots.module.ts": {
-        "version": "8470b7419e21190fcf8eacf21078c7ed4006ec1da8f389c56c8bc132f1a17499",
+        "version": "c44958fb4f8c32b4f7e4b93f44a612fa94effe7cd8a144c64e446a672f41defa",
         "signature": "3637a19921871193983d4cff0ffc490a1459fd5a92affaff3082c10542238308",
         "affectsGlobalScope": false
       },
@@ -10831,6 +10836,7 @@
       "../src/process/process.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/child_process.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
@@ -10848,6 +10854,13 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/nestjs-transport-eventbus/dist/index.d.ts"
       ],
+      "../src/robots/robot.command.enum.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
       "../src/robots/robot.dto.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -10856,12 +10869,16 @@
         "../node_modules/@types/node/util.d.ts"
       ],
       "../src/robots/robots.controller.ts": [
+        "../node_modules/@nestjs/common/decorators/http/route-params.decorator.d.ts",
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/process/process.enum.ts",
+        "../src/process/process.service.ts",
+        "../src/robots/robot.command.enum.ts",
         "../src/robots/robot.dto.ts",
         "../src/robots/robots.enum.ts"
       ],
@@ -10879,6 +10896,7 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/process/process.service.ts",
         "../src/robots/robots.controller.ts",
         "../src/robots/robots.service.ts"
       ],
@@ -17733,6 +17751,9 @@
       ],
       "../src/publisher/rabbit.publisher.ts": [
         "../node_modules/@nestjs/microservices/index.d.ts"
+      ],
+      "../src/robots/robots.controller.ts": [
+        "../src/process/process.service.ts"
       ]
     },
     "semanticDiagnosticsPerFile": []

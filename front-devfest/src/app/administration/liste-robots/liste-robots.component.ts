@@ -10,41 +10,49 @@ import { RobotEtatEnum } from 'src/app/core/model/robot.etat.enum';
   templateUrl: './liste-robots.component.html'
 })
 export class ListeRobotsComponent implements OnInit {
-  rows : Robot[] = [] ;
+  rows: Robot[] = [];
   reorderable = true;
 
-  columns = [{ name: 'Nom du Robot' }, { name: 'Ip du robot' }, { name: 'Statut' }, {name : 'Actions' , sortable: false}];
+  columns = [{ name: 'Nom du Robot' }, { name: 'Ip du robot' }, { name: 'Statut' }, { name: 'Actions', sortable: false }];
 
   ColumnMode = ColumnMode;
 
-  constructor(private robotsService : RobotsService) { }
+  constructor(private robotsService: RobotsService) { }
 
   ngOnInit(): void {
     this.robotsService.recupererListeRobots().subscribe(robots => {
       this.rows = robots;
       robots.forEach(robot => {
-        this.robotsService.recupererEtatRobot(robot).subscribe(etat =>{
-          let row = this.rows.find(row => row.ip === robot.ip);
-          row.etat = RobotEtatEnum[etat.state];
-        })  
+        this.recupererEtat(robot);  
       });
     });
   }
 
 
   annulerImpression(robot: Robot): void {
-    this.robotsService.annulerImpressionRobot(robot).subscribe(value =>{
-        console.log(value);
+    this.robotsService.annulerImpressionRobot(robot).subscribe(value => {
+      this.recupererEtat(robot);
     });
   }
 
   pauseImpression(robot: Robot): void {
-    this.robotsService.mettreSurPauseRobot(robot).subscribe(value =>{
-      console.log(value);
-  });
+    this.robotsService.mettreSurPauseRobot(robot).subscribe(value => {
+      this.recupererEtat(robot);
+    });
   }
 
-  reScheduleImpression(robot: Robot) : void {
-   console.log("reschedule");
+  reScheduleImpression(robot: Robot): void {
+    this.robotsService.rejouerImpressionRobot(robot).subscribe(value => {
+      this.recupererEtat(robot);
+    });
+  }
+
+  recupererEtat(robot: Robot) : void{
+    this.robotsService.recupererEtatRobot(robot).subscribe(etat => {
+      let row = this.rows.find(row => row.ip === robot.ip);
+      if (etat) {
+        row.etat = RobotEtatEnum[etat.state];
+      }
+    })
   }
 }

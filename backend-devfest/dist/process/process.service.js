@@ -17,21 +17,18 @@ const exec = util.promisify(require('child_process').exec);
 let ProcessService = class ProcessService {
     constructor() {
     }
-    async execCommand(nomCommande, impressionId, imageSelectionne, pseudo) {
-        let commande = "";
-        if (impressionId) {
-            if (pseudo) {
-                commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId + "/crop " + imageSelectionne + " " + pseudo;
-            }
-            else {
-                commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId;
-            }
-        }
-        else {
-            commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande;
-        }
+    async execCommand(nomCommande, ...args) {
+        const argument = args.join(" ");
+        const commande = configuration_enum_1.ConfigurationEnum.REPERTOIRE_SCRIPTS + nomCommande + " " + argument;
         console.log(commande);
-        return exec(commande);
+        return new Promise((resolve, reject) => {
+            exec(commande, (error, stdout, stderr) => {
+                if (error) {
+                    console.warn(error.message);
+                }
+                resolve(stdout ? stdout : stderr.message);
+            });
+        });
     }
 };
 ProcessService = __decorate([

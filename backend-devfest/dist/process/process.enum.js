@@ -9,5 +9,6 @@ var processEnum;
     processEnum["SENDSVG2GCODE"] = "sendSvg2Gcode.sh";
     processEnum["STREAMING_START"] = "start-streaming-video.sh";
     processEnum["STREAMING_STOP"] = "stop-streaming-video.sh";
+    processEnum["ROBOT_CONTROLLER"] = "robotControl.sh";
 })(processEnum = exports.processEnum || (exports.processEnum = {}));
 //# sourceMappingURL=process.enum.js.map

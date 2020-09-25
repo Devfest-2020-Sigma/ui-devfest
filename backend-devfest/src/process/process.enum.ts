@@ -5,5 +5,6 @@ export enum processEnum {
   JPG2TSP = 'jpg2tsp',
   SENDSVG2GCODE = 'sendSvg2Gcode.sh',
   STREAMING_START = 'start-streaming-video.sh',
-  STREAMING_STOP = 'stop-streaming-video.sh'
+  STREAMING_STOP = 'stop-streaming-video.sh',
+  ROBOT_CONTROLLER = 'robotControl.sh'
 }

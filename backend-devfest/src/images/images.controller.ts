@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CONFIGURATION } from 'src/common/configuration.enum';
+import { ConfigurationEnum } from 'src/common/configuration.enum';
 import { processEnum } from 'src/process/process.enum';
 import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
@@ -24,12 +24,13 @@ export class ImagesController {
     return this.imagesService.initialiserWorkflow().then(async image => {
       let imageDto = new ImageDto();
       console.log('arret du streaming');
-      await this.processService.execCommand(processEnum.STREAMING_STOP, null, null, null);
+      await this.processService.execCommand(processEnum.STREAMING_STOP);
       // Mise à jour état de image
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
       this.imagesService.editImage(image._id, imageDto, function(){});
       // génération des quatres images de départ
-      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, image._id, null, null);
+      const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id ;
+      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, path);
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
       this.imagesService.editImage(image._id, imageDto, function(){});
       return image;
@@ -44,8 +45,8 @@ export class ImagesController {
    */
   @Get('/getsvg/:id')
   async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
-    const dir = CONFIGURATION.IMPRESSION_REPERTOIRE + id + '/crop';
-    res.sendFile('jpg2lite-front.svg', { root: dir });
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
+    res.sendFile('jpg2lite-front.svg', { root: path });
   }
 
   /**
@@ -55,7 +56,7 @@ export class ImagesController {
    */
   @Get('/getmosaic/:id')
   async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<Blob> {
-    return res.sendFile('mosaic.jpg', { root: CONFIGURATION.IMPRESSION_REPERTOIRE + id });
+    return res.sendFile('mosaic.jpg', { root: ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
   }
 
     /**
@@ -64,7 +65,7 @@ export class ImagesController {
   @Get('/streaming')
   streamingstart() {
     console.log('Debut du streaming');
-    this.processService.execCommand(processEnum.STREAMING_START, null , null, null).catch(error => { console.log('caught', error.message); });
+    this.processService.execCommand(processEnum.STREAMING_START).catch(error => { console.log('caught', error.message); });
   } 
 
   /**
@@ -83,12 +84,13 @@ export class ImagesController {
    */
   @Get('/imprimer/:id')
   async imprimerGcode(@Param('id') id): Promise<void> {
-    const path = id + '/crop/jpg2lite';
-    await this.processService.execCommand(processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });;
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
+    await this.processService.execCommand(processEnum.SENDSVG2GCODE, path).catch(error => { console.log('caught', error.message); });;
   }
   
   @Put('/pseudo')
   async miseAjoutPseudo(@Body() image: ImageDto) : Promise<void> {
-    await this.processService.execCommand(processEnum.JPG2LITE, image._id, image.imageSelectionnee, image.pseudo).catch(error => { console.log('caught', error.message); });
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id + '/crop';
+    await this.processService.execCommand(processEnum.JPG2LITE, path, image.imageSelectionnee, '"'+image.pseudo+'"').catch(error => { console.log('caught', error.message); });
   }
 }

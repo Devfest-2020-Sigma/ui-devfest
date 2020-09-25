@@ -29,36 +29,38 @@ let ImagesController = class ImagesController {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             console.log('arret du streaming');
-            await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP, null, null, null);
+            await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imagesService.editImage(image._id, imageDto, function () { });
-            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, image._id, null, null);
+            const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
             this.imagesService.editImage(image._id, imageDto, function () { });
             return image;
         });
     }
     async recupererImagesSVG(id, res) {
-        const dir = configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + id + '/crop';
-        res.sendFile('jpg2lite-front.svg', { root: dir });
+        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
+        res.sendFile('jpg2lite-front.svg', { root: path });
     }
     async recupererImagesMosaic(id, res) {
-        return res.sendFile('mosaic.jpg', { root: configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + id });
+        return res.sendFile('mosaic.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
     }
     streamingstart() {
         console.log('Debut du streaming');
-        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START, null, null, null).catch(error => { console.log('caught', error.message); });
+        this.processService.execCommand(process_enum_1.processEnum.STREAMING_START).catch(error => { console.log('caught', error.message); });
     }
     async getImage(id) {
         return this.imagesService.getImage(id);
     }
     async imprimerGcode(id) {
-        const path = id + '/crop/jpg2lite';
-        await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });
+        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
+        await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path).catch(error => { console.log('caught', error.message); });
         ;
     }
     async miseAjoutPseudo(image) {
-        await this.processService.execCommand(process_enum_1.processEnum.JPG2LITE, image._id, image.imageSelectionnee, image.pseudo).catch(error => { console.log('caught', error.message); });
+        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id + '/crop';
+        await this.processService.execCommand(process_enum_1.processEnum.JPG2LITE, path, image.imageSelectionnee, '"' + image.pseudo + '"').catch(error => { console.log('caught', error.message); });
     }
 };
 __decorate([
