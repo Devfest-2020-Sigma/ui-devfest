@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
+const configuration_enum_1 = require("../common/configuration.enum");
 const process_enum_1 = require("../process/process.enum");
 const process_service_1 = require("../process/process.service");
 const image_dto_1 = require("./image.dto");
@@ -38,11 +39,11 @@ let ImagesController = class ImagesController {
         });
     }
     async recupererImagesSVG(id, res) {
-        const dir = 'impressions/' + id + '/reject';
+        const dir = configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + id + '/crop';
         res.sendFile('jpg2lite-front.svg', { root: dir });
     }
     async recupererImagesMosaic(id, res) {
-        return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+        return res.sendFile('mosaic.jpg', { root: configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + id });
     }
     streamingstart() {
         console.log('Debut du streaming');
@@ -52,7 +53,7 @@ let ImagesController = class ImagesController {
         return this.imagesService.getImage(id);
     }
     async imprimerGcode(id) {
-        const path = './impressions/' + id + '/reject/jpeg2lite';
+        const path = id + '/crop/jpg2lite';
         await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });
         ;
     }

@@ -2931,13 +2931,18 @@
         "signature": "e3cd60be3c4f95c43420be67eaa21637585b7c1a8129f9b39983bbd294f9513c",
         "affectsGlobalScope": false
       },
+      "../src/common/configuration.enum.ts": {
+        "version": "0941d8dc9d5a91d3112b7a0280ed1018d02b55c7d1940801642ba2b3271df906",
+        "signature": "3ab87e850fb68704ed56537d11b5c0d83a35f2d07e3e760ae499654fcb795844",
+        "affectsGlobalScope": false
+      },
       "../src/process/process.enum.ts": {
         "version": "b821584dd6585288d77b28fe77a8cb59a93c29f8b7b5becb03141488df6ea835",
         "signature": "847918465eb5ff1a84b7d8c44be884022a6953be83343d0b3e834b0d99f65a67",
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "953b74195840f1ca1de819b2f4ffd6dda9833a0129727922651143a6128e132e",
+        "version": "af569dc0b4c42f61dd3ec2012cabc3e47e190308c00bca3dead91059e01c4612",
         "signature": "95c7c6fa6453c3731ac125f9be23b9a3566a50960d8358d8d1122ac3549bb63e",
         "affectsGlobalScope": false
       },
@@ -3522,7 +3527,7 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "9237c56029fd990cc348e10d56fd68f59f666f04fe92463dc3e5f03fa2d9e089",
+        "version": "42d360b1924d3437d4eceae224c1622a1d3a37e4b704d7599f72f38bf1502aff",
         "signature": "ea444560f2cb11913b920dd7ae6578295806686a043747e35d8fb573491f187f",
         "affectsGlobalScope": false
       },
@@ -10691,6 +10696,13 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
+      "../src/common/configuration.enum.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
       "../src/database/database.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -10754,6 +10766,7 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/common/configuration.enum.ts",
         "../src/images/image.dto.ts",
         "../src/images/image.etat.enum.ts",
         "../src/images/image.interface.ts",
@@ -10822,6 +10835,7 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/common/configuration.enum.ts",
         "../src/process/process.enum.ts"
       ],
       "../src/publisher/rabbit.publisher.ts": [
@@ -14156,8 +14170,6 @@
         "../node_modules/reflect-metadata/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/decorators/transport.publisher.event-bus.decorator.d.ts": [
-        "../node_modules/@nestjs/cqrs/index.d.ts",
-        "../node_modules/@nestjs/microservices/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -14167,6 +14179,8 @@
         "../node_modules/nestjs-transport-eventbus/dist/interfaces/transport.data.event-bus.interface.d.ts",
         "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/enums/transport.enum.d.ts",
         "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/services/logger.service.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/cqrs/index.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/microservices/index.d.ts",
         "../node_modules/reflect-metadata/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/decorators/transport.type.event-bus.decorator.d.ts": [
@@ -14198,22 +14212,22 @@
         "../node_modules/reflect-metadata/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/interfaces/transport.data.event-bus.interface.d.ts": [
-        "../node_modules/@nestjs/cqrs/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/util.d.ts"
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/cqrs/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/interfaces/transport.publisher.event-bus.interface.d.ts": [
-        "../node_modules/@nestjs/microservices/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/nestjs-transport-eventbus/dist/constants/transport.event-bus.constants.d.ts",
-        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/enums/transport.enum.d.ts"
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/enums/transport.enum.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/microservices/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/transport.event-bus.module.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -14224,22 +14238,22 @@
         "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/transport.event-bus.publisher.d.ts": [
-        "../node_modules/@nestjs/cqrs/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/util.d.ts"
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/cqrs/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/dist/transport.event-bus.service.d.ts": [
-        "../node_modules/@nestjs/cqrs/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/core/index.d.ts"
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/core/index.d.ts",
+        "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/cqrs/index.d.ts"
       ],
       "../node_modules/nestjs-transport-eventbus/node_modules/@nestjs/common/cache/cache.constants.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",

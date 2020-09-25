@@ -11,10 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProcessService = void 0;
 const common_1 = require("@nestjs/common");
+const configuration_enum_1 = require("../common/configuration.enum");
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const IMPRESSION_REPERTOIRE = './impressions/';
-const REPERTOIRE_SCRIPTS = 'scripts/';
 let ProcessService = class ProcessService {
     constructor() {
     }
@@ -22,15 +21,16 @@ let ProcessService = class ProcessService {
         let commande = "";
         if (impressionId) {
             if (pseudo) {
-                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + "/reject " + imageSelectionne + " " + pseudo;
+                commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId + "/crop " + imageSelectionne + " " + pseudo;
             }
             else {
-                commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
+                commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + configuration_enum_1.CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId;
             }
         }
         else {
-            commande = REPERTOIRE_SCRIPTS + nomCommande;
+            commande = configuration_enum_1.CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande;
         }
+        console.log(commande);
         return exec(commande);
     }
 };

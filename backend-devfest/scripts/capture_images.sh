@@ -14,11 +14,9 @@ CAPTURE_MOSAIC=${FolderToSave}/mosaic.jpg
 mkdir -p ${IMG_CROP} 
 mkdir -p ${IMG_REJECT} 
 
-ffmpeg -hide_banner -y -f v4l2 -input_format mjpeg -framerate 30 -video_size 1920x1080 -i ${INPUT_VIDEO} -t 00:00:05 -c copy ${OUTPUT_VIDEO}
-ffmpeg -hide_banner -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/output-%3d.jpg
 # on prend un video de 5s pour être sur d'avoir assez d'image pour l'autocrop
-ffmpeg -hide_banner -loglevel panic -y -f v4l2 -input_format mjpeg -framerate 30 -video_size 1920x1080 -i ${INPUT_VIDEO} -t 00:00:05 -c copy ${OUTPUT_VIDEO}
-ffmpeg -hide_banner -loglevel panic -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/output-%3d.jpg
+ffmpeg -loglevel quiet -hide_banner -y -f v4l2 -input_format mjpeg -framerate 30 -video_size 1920x1080 -i ${INPUT_VIDEO} -t 00:00:05 -c copy ${OUTPUT_VIDEO}
+ffmpeg -loglevel quiet -hide_banner -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/output-%3d.jpg
 
 LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 /usr/local/autocrop/bin/autocrop --input ${FolderToSave} --output ${IMG_CROP} --reject ${IMG_REJECT} --height 600 --width 500
 

@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CONFIGURATION } from 'src/common/configuration.enum';
 import { processEnum } from 'src/process/process.enum';
 import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
@@ -43,7 +44,7 @@ export class ImagesController {
    */
   @Get('/getsvg/:id')
   async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
-    const dir = 'impressions/' + id + '/crop';
+    const dir = CONFIGURATION.IMPRESSION_REPERTOIRE + id + '/crop';
     res.sendFile('jpg2lite-front.svg', { root: dir });
   }
 
@@ -54,7 +55,7 @@ export class ImagesController {
    */
   @Get('/getmosaic/:id')
   async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<Blob> {
-    return res.sendFile('mosaic.jpg', { root: 'impressions/' + id });
+    return res.sendFile('mosaic.jpg', { root: CONFIGURATION.IMPRESSION_REPERTOIRE + id });
   }
 
     /**
@@ -82,7 +83,7 @@ export class ImagesController {
    */
   @Get('/imprimer/:id')
   async imprimerGcode(@Param('id') id): Promise<void> {
-    const path = './impressions/' + id + '/crop/jpeg2lite';
+    const path = id + '/crop/jpg2lite';
     await this.processService.execCommand(processEnum.SENDSVG2GCODE, path, null, null).catch(error => { console.log('caught', error.message); });;
   }
   

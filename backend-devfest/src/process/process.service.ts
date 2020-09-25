@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { CONFIGURATION } from 'src/common/configuration.enum';
 import { processEnum } from './process.enum';
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-
-const IMPRESSION_REPERTOIRE = './impressions/';
-const REPERTOIRE_SCRIPTS = 'scripts/';
 
 @Injectable()
 export class ProcessService {
@@ -23,14 +21,15 @@ export class ProcessService {
     // TODO : Ajouter une  gestion des paramètres
     if (impressionId){
       if (pseudo) {
-        commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId + "/crop " + imageSelectionne + " "+ pseudo;
+        commande = CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId + "/crop " + imageSelectionne + " "+ pseudo;
       } else {
-        commande = REPERTOIRE_SCRIPTS + nomCommande + " " + IMPRESSION_REPERTOIRE + impressionId;
+        commande = CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande + " " + CONFIGURATION.IMPRESSION_REPERTOIRE + impressionId;
       }
     } else {
-      commande = REPERTOIRE_SCRIPTS + nomCommande
+      commande = CONFIGURATION.REPERTOIRE_SCRIPTS + nomCommande
     }
-    
+    // Log de la commande qui va être executée
+    console.log(commande);
     return exec(commande);
   }
 
