@@ -22,11 +22,7 @@ export class ImpressionPhotoComponent implements OnInit {
         this.id = params.id;
       }
     });
-}
-
-  imprimer(): void {
-    this.imagesService.impressionImage(this.id).subscribe(value => {
-      console.log(value);
-    });
   }
+
+
 }

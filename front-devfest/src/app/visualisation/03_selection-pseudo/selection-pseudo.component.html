@@ -5,10 +5,15 @@
 <form [formGroup]="form" align="center">
   <h3>Veuillez saisir votre pseudo : </h3>
   <mat-form-field>
-    <input matInput formControlName="pseudoCtrl" placeholder="Pseudo"
+    <input matInput formControlName="pseudoCtrl" placeholder="Pseudo" class="input" value={{pseudo}}
            required>
   </mat-form-field>
+  <div class="col-12 form-inline">
+    <div class="simple-keyboard"></div>
+  </div>
+  
   <div>
+    <br>
     <button mat-button (click)="validerPseudo()">Valider</button>
   </div>
 </form>

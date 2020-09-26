@@ -36,13 +36,9 @@ export class ChoixRenduComponent implements OnInit {
     });
   }
   
-  validerChoix() {
-    this.router.navigate(["visualisation/impression", this.id]);
-  }
-
   imprimer(): void {
     this.imagesService.impressionImage(this.id).subscribe(value => {
-      console.log(value);
+      this.router.navigate(["visualisation/impression", this.id]);
     });
   }
 }
