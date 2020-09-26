@@ -1,6 +1,6 @@
-@import '~@swimlane/ngx-datatable/index.css';
-@import '~@swimlane/ngx-datatable/themes/material.scss';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.scss";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
 
 html,
 body {
@@ -11,16 +11,23 @@ full-width {
     height: 100vh;
 }
 
-.icon-placeholder {      
+svg {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.icon-placeholder {
     font-size: 12px;
     display: flex;
     flex-direction: column;
     cursor: pointer !important ;
-  }
+}
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .header {
@@ -43,11 +50,11 @@ body {
 }
 
 .mat-list-item.active {
-    background: rgba(0, 0, 0, .04);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .mat-sidenav {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     width: 250px;
 }
 
@@ -58,14 +65,14 @@ body {
     z-index: 1000;
 }
 
-.mat-toolbar-row, .mat-toolbar-single-row {
+.mat-toolbar-row,
+.mat-toolbar-single-row {
     height: 55px !important;
 }
 
-
 .mat-drawer-container {
     background-color: #3f51b5;
-    color: rgba(0,0,0,.87);
+    color: rgba(0, 0, 0, 0.87);
 }
 
 mat-sidenav mat-icon {
@@ -82,7 +89,7 @@ mat-sidenav mat-icon {
     margin-right: 25px;
 }
 
-.controlers-wrapper>* {
+.controlers-wrapper > * {
     width: 100%;
     padding: 0;
 }
@@ -160,7 +167,7 @@ body .push-right {
 }
 
 .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
     background-size: cover;
 }
 
@@ -190,7 +197,7 @@ mat-grid-tile {
     margin-right: 10px;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
     .inner-wrapper mat-card {
         width: 100%;
     }
@@ -209,7 +216,7 @@ mat-grid-tile {
     }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
     .nav-tool-items {
         margin-right: 0;
     }
@@ -221,5 +228,5 @@ mat-grid-tile {
 
 .mosaic {
     width: 100%;
-    height: auto;      
+    height: auto;
 }

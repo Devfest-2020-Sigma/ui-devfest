@@ -1,6 +1,14 @@
 <mat-toolbar color="primary" class="header">
   <div>4/4 : Choix du rendu</div>
 </mat-toolbar>
-<div class="icon-placeholder" *ngIf="imageSet" (click)="imprimer()">
-  <svg-icon  name="svg"></svg-icon>
+<div class="col-12 form-inline">
+  <div class="col-4" *ngIf="imageSetJpgLite" (click)="imprimer()">
+    <svg-icon name="svgJpgLite"></svg-icon>
+  </div>
+  <div class="col-4" *ngIf="imageSetTsp" (click)="imprimer()">
+    <svg-icon name="svgTsp"></svg-icon>
+  </div>
+  <div class="col-4" *ngIf="imageSetSquiddle" (click)="imprimer()">
+    <svg-icon name="svgSquiddle"></svg-icon>
+  </div>
 </div>

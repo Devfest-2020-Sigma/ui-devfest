@@ -10,7 +10,9 @@ import { ImagesService } from 'src/app/core/service/images.service';
 export class ChoixRenduComponent implements OnInit {
 
   private id: string;
-  public imageSet = false;
+  public imageSetJpgLite = false;
+  public imageSetTsp = false;
+  public imageSetSquiddle = false;
 
   constructor(private imagesService: ImagesService,
     private route: ActivatedRoute,
@@ -25,8 +27,12 @@ export class ChoixRenduComponent implements OnInit {
       }
     });
     this.imagesService.recupererImagesSVG(this.id).subscribe(value => {
-      this.iconReg.addSvg('svg', value);
-      this.imageSet= true;
+      this.iconReg.addSvg('svgJpgLite', value);
+      this.imageSetJpgLite= true;
+      this.iconReg.addSvg('svgTsp', value);
+      this.imageSetTsp= true;
+      this.iconReg.addSvg('svgSquiddle', value);
+      this.imageSetSquiddle= true;
     });
   }
   
