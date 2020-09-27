@@ -5,7 +5,10 @@ const mongoose_1 = require("mongoose");
 exports.ImageSchema = new mongoose_1.Schema({
     pseudo: String,
     imageSelectionnee: Number,
-    etat: String
+    etat: String,
+    renduJpegLite: Boolean,
+    renduJpegTsp: Boolean,
+    renduJpegSquiddle: Boolean
 });
 exports.imageModel = mongoose_1.model('Image', exports.ImageSchema);
 //# sourceMappingURL=image.schema.js.map

@@ -15,6 +15,14 @@ if [ ! -f "${IMAGE}.jpg" ]; then
   exit 3
 fi
 
+if [ -f "${IMAGE_SVG}.svg" ]; then
+  rm "${IMAGE_SVG}.svg"
+fi
+
+if [ -f "${IMAGE_SVG}-front.svg" ]; then
+  rm "${IMAGE_SVG}-front.svg"
+fi
+
 cartoon -p 30 -n 40 -e 6 -m 1 ${IMAGE}.jpg ${IMAGE}.png
 convert ${IMAGE}.png -flatten -colorspace Gray -negate -edge 2 -negate -threshold 50% ${IMAGE}.ppm
 

@@ -1,11 +1,10 @@
-import { ImageDto } from './image.dto';
+import { ClientProxy } from '@nestjs/microservices';
 import { IImage } from './image.interface';
-import { IEventBus } from '@nestjs/cqrs/dist/interfaces/events/event-bus.interface';
 export declare class ImagesService {
-    private readonly event;
-    constructor(event: IEventBus);
-    editImage(imageId: any, createImageDTO: ImageDto, callback: any): Promise<IImage>;
+    private readonly clientGenerationGCode;
+    private readonly clientImpressionGCode;
+    constructor(clientGenerationGCode: ClientProxy, clientImpressionGCode: ClientProxy);
     initialiserWorkflow(): Promise<IImage>;
-    getImage(imageId: any): Promise<IImage>;
-    sendRabbitEvent(id: string): void | PromiseLike<void>;
+    sendGenerationGcodeRabbitEvent(id: string): void | PromiseLike<void>;
+    sendImpressionGcodeRabbitEvent(id: string): void | PromiseLike<void>;
 }

@@ -4,11 +4,36 @@ import { ImagesService } from './images.service';
 import { ProcessService } from 'src/process/process.service';
 import { imagesProviders } from './images.provider';
 import { DatabaseModule } from 'src/database/database.module';
+import { ClientsModule } from '@nestjs/microservices/module/clients.module';
+import { Transport } from '@nestjs/microservices/enums/transport.enum';
+import { DatabaseService } from 'src/database/database.service';
 
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule,
+    ClientsModule.register([
+      {
+        name: 'GENERATION_GCODE', transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://admin:admin@localhost:5672'],
+          queue: 'generation-gcode',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
+      {
+        name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://admin:admin@localhost:5672'],
+          queue: 'impression-gcode',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      }
+    ])],
   controllers: [ImagesController],
-  providers: [ImagesService, ProcessService,...imagesProviders]
+  providers: [ImagesService, ProcessService, DatabaseService,...imagesProviders]
 })
 export class ImagesModule {}

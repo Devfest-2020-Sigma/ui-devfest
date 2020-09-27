@@ -1,32 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ImageDto } from './image.dto';
-import { IImage } from './image.interface';
+import { ClientProxy } from '@nestjs/microservices';
+import { RabbitEvent } from 'src/events/rabbit.event';
 import { imageModel } from '../schemas/image.schema';
 import { ImageEtatEnum } from './image.etat.enum';
-import { IEventBus } from '@nestjs/cqrs/dist/interfaces/events/event-bus.interface';
-import { TRANSPORT_EVENT_BUS_SERVICE } from 'nestjs-transport-eventbus';
-import { RabbitEvent } from 'src/events/rabbit.event';
+import { IImage } from './image.interface';
 import { ImageRabbit } from './image.rabbit';
-import { ClientProxy } from '@nestjs/microservices';
+import { ImageRenduEnum } from './image.rendu.enum';
 
 @Injectable()
 export class ImagesService {
 
   constructor(
-    @Inject(TRANSPORT_EVENT_BUS_SERVICE) private readonly event: IEventBus
+    @Inject('GENERATION_GCODE') private readonly clientGenerationGCode: ClientProxy,
+    @Inject('IMPRESSION_GCODE') private readonly clientImpressionGCode: ClientProxy
   ) {
-  }
-  /**
-  * Mise à jour des informations liées à l'image avec les nouvelles informations
-  * @param imageId id de l'image à mettre à jour
-  * @param createImageDTO Nouveau contenu des données
-  */
-  async editImage(imageId, createImageDTO: ImageDto, callback): Promise<IImage> {
-    delete createImageDTO._id;
-    console.log(createImageDTO);
-    console.log(imageId);
-    return imageModel
-      .findByIdAndUpdate(imageId, createImageDTO, callback);
   }
 
   /**
@@ -37,27 +24,35 @@ export class ImagesService {
     const image = new imageModel({
       pseudo: "",
       imageSelectionnee: "",
-      etat: ImageEtatEnum.DEBUT_WORKFLOW
-
+      etat: ImageEtatEnum.DEBUT_WORKFLOW,
+      renduJpegLite : false,
+      renduJpegTsp : false,
+      renduJpegSquiddle : false
     });
     return image.save();
   }
 
   /**
-   * Fonction qui récupère une image en base
+   * Envoi des demandes de génération des gcodes dans la file rabbit
+   * @param id 
    */
-  getImage(imageId): Promise<IImage> {
-    return imageModel.findById(imageId);
+  sendGenerationGcodeRabbitEvent(id: string): void | PromiseLike<void> {
+    let imageRabbit = new ImageRabbit;
+    imageRabbit.id = id;
+    // On envoi un message dans la file pour chaque type de rendu à générer
+    Object.keys(ImageRenduEnum).forEach(key => {
+      this.clientGenerationGCode.emit<any>(ImageRenduEnum[key], (new RabbitEvent(imageRabbit)));
+    });
   }
 
   /**
-   * Envoi du gcode dans la file d'impression
-   * @param id 
-   */
-  sendRabbitEvent(id: string): void | PromiseLike<void> {
+ * Envoi des demandes de génération des gcodes dans la file rabbit
+ * @param id 
+ */
+  sendImpressionGcodeRabbitEvent(id: string): void | PromiseLike<void> {
     let imageRabbit = new ImageRabbit;
     imageRabbit.id = id;
-
-    this.event.publish(new RabbitEvent(imageRabbit));
+    // On envoi un message dans la file pour lancer la demande d'impression
+    this.clientImpressionGCode.emit<any>('impression-gcode', (new RabbitEvent(imageRabbit)));
   }
 }

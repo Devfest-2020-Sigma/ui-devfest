@@ -15,15 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
 const configuration_enum_1 = require("../common/configuration.enum");
+const database_service_1 = require("../database/database.service");
 const process_enum_1 = require("../process/process.enum");
 const process_service_1 = require("../process/process.service");
 const image_dto_1 = require("./image.dto");
 const image_etat_enum_1 = require("./image.etat.enum");
 const images_service_1 = require("./images.service");
 let ImagesController = class ImagesController {
-    constructor(imagesService, processService) {
+    constructor(imagesService, processService, databaseService) {
         this.imagesService = imagesService;
         this.processService = processService;
+        this.databaseService = databaseService;
     }
     initialiserWorkflow() {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
@@ -31,11 +33,11 @@ let ImagesController = class ImagesController {
             console.log('arret du streaming');
             await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
-            this.imagesService.editImage(image._id, imageDto, function () { });
+            this.databaseService.editImage(image._id, imageDto, function () { });
             const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
             await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
-            this.imagesService.editImage(image._id, imageDto, function () { });
+            this.databaseService.editImage(image._id, imageDto, function () { });
             return image;
         });
     }
@@ -51,16 +53,18 @@ let ImagesController = class ImagesController {
         this.processService.execCommand(process_enum_1.processEnum.STREAMING_START).catch(error => { console.log('caught', error.message); });
     }
     async getImage(id) {
-        return this.imagesService.getImage(id);
+        return this.databaseService.getImage(id);
     }
     async imprimerGcode(id) {
         const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
         await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path).catch(error => { console.log('caught', error.message); });
         ;
     }
-    async miseAjoutPseudo(image) {
-        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id + '/crop';
-        await this.processService.execCommand(process_enum_1.processEnum.JPG2LITE, path, image.imageSelectionnee, '"' + image.pseudo + '"').catch(error => { console.log('caught', error.message); });
+    async generationRendu(image) {
+        const id = image._id;
+        this.databaseService.editImage(id, image, () => {
+            this.imagesService.sendGenerationGcodeRabbitEvent(id);
+        });
     }
 };
 __decorate([
@@ -109,11 +113,12 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [image_dto_1.ImageDto]),
     __metadata("design:returntype", Promise)
-], ImagesController.prototype, "miseAjoutPseudo", null);
+], ImagesController.prototype, "generationRendu", null);
 ImagesController = __decorate([
     common_1.Controller('api/images'),
     __metadata("design:paramtypes", [images_service_1.ImagesService,
-        process_service_1.ProcessService])
+        process_service_1.ProcessService,
+        database_service_1.DatabaseService])
 ], ImagesController);
 exports.ImagesController = ImagesController;
 //# sourceMappingURL=images.controller.js.map

@@ -20,7 +20,7 @@ __decorate([
         transport: microservices_1.Transport.RMQ,
         options: {
             urls: ['amqp://admin:admin@localhost:5672'],
-            queue: 'impression-gcode',
+            queue: 'generation-gcode',
             queueOptions: {
                 durable: true,
             },

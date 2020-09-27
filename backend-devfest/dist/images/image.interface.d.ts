@@ -6,4 +6,7 @@ export interface IImage extends Document {
     imageSelectionnee: number;
     etat: ImageEtatEnum;
     tailleCalculee: number;
+    renduJpegLite: boolean;
+    renduJpegTsp: boolean;
+    renduJpegSquiddle: boolean;
 }

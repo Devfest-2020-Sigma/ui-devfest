@@ -13,13 +13,38 @@ const images_service_1 = require("./images.service");
 const process_service_1 = require("../process/process.service");
 const images_provider_1 = require("./images.provider");
 const database_module_1 = require("../database/database.module");
+const clients_module_1 = require("@nestjs/microservices/module/clients.module");
+const transport_enum_1 = require("@nestjs/microservices/enums/transport.enum");
+const database_service_1 = require("../database/database.service");
 let ImagesModule = class ImagesModule {
 };
 ImagesModule = __decorate([
     common_1.Module({
-        imports: [database_module_1.DatabaseModule],
+        imports: [database_module_1.DatabaseModule,
+            clients_module_1.ClientsModule.register([
+                {
+                    name: 'GENERATION_GCODE', transport: transport_enum_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://admin:admin@localhost:5672'],
+                        queue: 'generation-gcode',
+                        queueOptions: {
+                            durable: true,
+                        },
+                    },
+                },
+                {
+                    name: 'IMPRESSION_GCODE', transport: transport_enum_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://admin:admin@localhost:5672'],
+                        queue: 'impression-gcode',
+                        queueOptions: {
+                            durable: true,
+                        },
+                    },
+                }
+            ])],
         controllers: [images_controller_1.ImagesController],
-        providers: [images_service_1.ImagesService, process_service_1.ProcessService, ...images_provider_1.imagesProviders]
+        providers: [images_service_1.ImagesService, process_service_1.ProcessService, database_service_1.DatabaseService, ...images_provider_1.imagesProviders]
     })
 ], ImagesModule);
 exports.ImagesModule = ImagesModule;
