@@ -20,6 +20,7 @@ const process_enum_1 = require("../process/process.enum");
 const process_service_1 = require("../process/process.service");
 const image_dto_1 = require("./image.dto");
 const image_etat_enum_1 = require("./image.etat.enum");
+const image_rendu_enum_1 = require("./image.rendu.enum");
 const images_service_1 = require("./images.service");
 let ImagesController = class ImagesController {
     constructor(imagesService, processService, databaseService) {
@@ -41,9 +42,21 @@ let ImagesController = class ImagesController {
             return image;
         });
     }
-    async recupererImagesSVG(id, res) {
+    async recupererImagesSVG(id, rendu, res) {
         const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-        res.sendFile('jpg2lite-front.svg', { root: path });
+        switch (rendu) {
+            case image_rendu_enum_1.ImageRenduEnum.JPGLITE:
+                res.sendFile('jpg2lite-front.svg', { root: path });
+                break;
+            case image_rendu_enum_1.ImageRenduEnum.TSP:
+                res.sendFile('jpg2lite-front.svg', { root: path });
+                break;
+            case image_rendu_enum_1.ImageRenduEnum.SQUIDDLE:
+                res.sendFile('jpg2lite-front.svg', { root: path });
+                break;
+            default:
+                console.error("Parametre rendu incorrect : " + rendu);
+        }
     }
     async recupererImagesMosaic(id, res) {
         return res.sendFile('mosaic.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
@@ -74,10 +87,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "initialiserWorkflow", null);
 __decorate([
-    common_1.Get('/getsvg/:id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
+    common_1.Get('/getsvg/:id/:rendu'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Param('rendu')), __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesSVG", null);
 __decorate([

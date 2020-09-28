@@ -1,5 +1,26 @@
-#!/bin/bash
+IMG_OUT=${1:-/tmp/out}
+NUM=$2
+PSEUDO=$3
+IMAGE_SVG="${IMG_OUT}/jpg2tsp"
 
-fichier=$(basename $1 .jpg)
-convert $fichier.jpg -noise 5 -resize 300 $fichier.pbm
-python /usr/local/bin/tspart.py --max-segments=5000 --runs=1 $fichier.pbm
+# getting file name
+IMAGE=$(ls ${IMG_OUT}/output-00*.jpg |tail -n 4|sed "${NUM}q;d")
+IMAGE="${IMG_OUT}/$(basename $IMAGE .jpg)"
+
+if [ ! -f "${IMAGE}.jpg" ]; then
+  echo "$IMAGE does not exist."
+  exit 3
+fi
+
+if [ -f "${IMAGE_SVG}.svg" ]; then
+  rm "${IMAGE_SVG}.svg"
+fi
+
+if [ -f "${IMAGE_SVG}-front.svg" ]; then
+  rm "${IMAGE_SVG}-front.svg"
+fi
+
+cartoon -p 30 -n 40 -e 6 -m 1 ${IMAGE}.jpg ${IMAGE}.png
+
+convert ${IMAGE}.png  -noise 5 -resize 300 ${IMAGE}.pbm
+python /usr/local/bin/tspart.py --max-segments=5000 --runs=1 ${IMAGE}.pbm

@@ -1,6 +1,3 @@
-## install 
-# apt install -y ffmpeg
-
 IMG_OUT=${1:-/tmp/out}
 NUM=$2
 PSEUDO=$3

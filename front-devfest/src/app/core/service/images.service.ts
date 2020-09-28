@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Image } from '../model/image.model';
+import { ImageRenduEnum } from '../model/image.rendu.enum';
 import { imageToFile } from '../../shared/utils/image.util';
 
 const url = 'api/images';
@@ -31,9 +32,9 @@ export class ImagesService {
    * Fonction permettant la récupération des images générées
    * @param image Image contenant les informations permettant la récupération des images générées par le back
    */
-  recupererImagesSVG(id :string): Observable<any> {
+  recupererImagesSVG(id :string, rendu : ImageRenduEnum): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get<any>(`${url}/getsvg/${id}`, { headers, responseType: 'text' as 'json' });
+    return this.http.get<any>(`${url}/getsvg/${id}/${rendu}`, { headers, responseType: 'text' as 'json' });
   }
 
   /**

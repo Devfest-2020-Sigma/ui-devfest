@@ -6,6 +6,7 @@ import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
 import { IImage } from './image.interface';
+import { ImageRenduEnum } from './image.rendu.enum';
 import { ImagesService } from './images.service';
 
 @Controller('api/images')
@@ -44,10 +45,22 @@ export class ImagesController {
    * @param pseudo Pseudo des images à récupérer
    * @param res permet de lire le fichier
    */
-  @Get('/getsvg/:id')
-  async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
+  @Get('/getsvg/:id/:rendu')
+  async recupererImagesSVG(@Param('id') id: string, @Param('rendu') rendu: ImageRenduEnum, @Res() res): Promise<any> {
     const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-    res.sendFile('jpg2lite-front.svg', { root: path });
+    switch (rendu) {
+      case ImageRenduEnum.JPGLITE:
+        res.sendFile('jpg2lite-front.svg', { root: path });
+        break;
+      case ImageRenduEnum.TSP:
+        res.sendFile('jpg2lite-front.svg', { root: path });
+        break;
+      case ImageRenduEnum.SQUIDDLE:
+        res.sendFile('jpg2lite-front.svg', { root: path });
+        break;
+      default:
+        console.error("Parametre rendu incorrect : " + rendu);
+    }
   }
 
   /**

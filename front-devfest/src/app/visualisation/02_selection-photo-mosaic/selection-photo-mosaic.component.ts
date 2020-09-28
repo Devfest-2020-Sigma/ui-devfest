@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { concatMapTo, delay, take } from 'rxjs/operators';
+import { concatMapTo, delay, filter, switchMap, take, takeWhile } from 'rxjs/operators';
 import { ImageEtatEnum } from 'src/app/core/model/image.etat.enum';
 import { ImagesService } from '../../core/service/images.service';
 
@@ -16,6 +16,7 @@ export class SelectionPhotoMosaicComponent implements OnInit, OnDestroy {
   public imageUpload: any;
 
   private id: string;
+  private mosaicChargee = false;
 
   constructor(private imagesService: ImagesService,
     private route: ActivatedRoute,
@@ -38,16 +39,19 @@ export class SelectionPhotoMosaicComponent implements OnInit, OnDestroy {
       //wait for first to complete before next is subscribed
       const requetes = this.interval.pipe(concatMapTo(requete));
       this.subscriptions.push(
-        requetes.subscribe(image => {
-          if (image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE) {
-            this.imagesService.recupererMosaic(this.id).subscribe(value => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                this.imageUpload = reader.result as string;
-              }
-              reader.readAsDataURL(value)
-            });
-          }
+        requetes.pipe(
+          takeWhile(image => this.mosaicChargee === false),
+          filter(image => image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE)
+        ).subscribe(image => {
+          this.imagesService.recupererMosaic(this.id).subscribe(value => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              this.imageUpload = reader.result as string;
+            }
+            reader.readAsDataURL(value);
+            this.mosaicChargee = true;
+            console.log(this.mosaicChargee);
+          });
         })
       );
     });

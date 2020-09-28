@@ -3,4 +3,7 @@ export declare class ImageDto {
     _id: string;
     imageSelectionnee: number;
     etat: string;
+    renduJpegLite: boolean;
+    renduJpegTsp: boolean;
+    renduJpegSquiddle: boolean;
 }
