@@ -1,4 +1,4 @@
-import { DatabaseService } from 'src/database/database.service';
+import { ImageDao } from 'src/images/image.dao';
 import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { IImage } from './image.interface';
@@ -7,8 +7,8 @@ import { ImagesService } from './images.service';
 export declare class ImagesController {
     private readonly imagesService;
     private readonly processService;
-    private readonly databaseService;
-    constructor(imagesService: ImagesService, processService: ProcessService, databaseService: DatabaseService);
+    private readonly imageDao;
+    constructor(imagesService: ImagesService, processService: ProcessService, imageDao: ImageDao);
     initialiserWorkflow(): Promise<IImage>;
     recupererImagesSVG(id: string, rendu: ImageRenduEnum, res: any): Promise<any>;
     recupererImagesMosaic(id: string, res: any): Promise<Blob>;

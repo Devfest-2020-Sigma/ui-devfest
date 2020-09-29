@@ -15,7 +15,7 @@ const images_provider_1 = require("./images.provider");
 const database_module_1 = require("../database/database.module");
 const clients_module_1 = require("@nestjs/microservices/module/clients.module");
 const transport_enum_1 = require("@nestjs/microservices/enums/transport.enum");
-const database_service_1 = require("../database/database.service");
+const image_dao_1 = require("./image.dao");
 let ImagesModule = class ImagesModule {
 };
 ImagesModule = __decorate([
@@ -44,7 +44,7 @@ ImagesModule = __decorate([
                 }
             ])],
         controllers: [images_controller_1.ImagesController],
-        providers: [images_service_1.ImagesService, process_service_1.ProcessService, database_service_1.DatabaseService, ...images_provider_1.imagesProviders]
+        providers: [images_service_1.ImagesService, process_service_1.ProcessService, image_dao_1.ImageDao, ...images_provider_1.imagesProviders]
     })
 ], ImagesModule);
 exports.ImagesModule = ImagesModule;

@@ -3,10 +3,7 @@
 </mat-toolbar>
 <ngx-datatable class="material" [rows]="rows" [columnMode]="ColumnMode.force" [headerHeight]="50" rowHeight="auto"
   [reorderable]="reorderable">
-
-  <!-- Nom du robot -->
-  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Nom du robot" prop="nom">
-  </ngx-datatable-column>
+  
   <!-- Ip du robot -->
   <ngx-datatable-column [draggable]="false" [flexGrow]="2" [sortable]="false" name="Ip du robot" prop="ip">
   </ngx-datatable-column>

@@ -37,7 +37,7 @@ export class AppController {
     this.databaseService.getImage(id).then(async image => {
       // execution de la commande
       const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-      // await this.processService.execCommand(processEnum.JPG2LITE, path, image.imageSelectionnee, '"' + image.pseudo + '"')
+      // await this.processService.execCommand(processEnum.JPG2TSP path, image.imageSelectionnee, '"' + image.pseudo + '"')
       //   .catch(error => { console.log('caught', error.message); });
       // mise à jour de l'etat du rendu
       let imageDto = new ImageDto();
@@ -53,7 +53,7 @@ export class AppController {
     this.databaseService.getImage(id).then(async image => {
       // execution de la commande
       const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-      // await this.processService.execCommand(processEnum.JPG2LITE, path, image.imageSelectionnee, '"' + image.pseudo + '"')
+      // await this.processService.execCommand(processEnum.JPG2SQUIGGLE, path, image.imageSelectionnee, '"' + image.pseudo + '"')
       //  .catch(error => { console.log('caught', error.message); });
       // mise à jour de l'etat du rendu
       let imageDto = new ImageDto();

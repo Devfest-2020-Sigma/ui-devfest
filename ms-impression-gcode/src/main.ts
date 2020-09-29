@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
 
+import { AppService } from './app.service';
+
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.RMQ,
@@ -13,6 +15,10 @@ async function bootstrap() {
       },
     },
   });
-  await app.listen(() => console.log('Microservice is listening'));
+  await app.listen(() => {
+    console.log('Microservice is listening')
+    const appService = app.get(AppService);
+    appService.declarationRobot();
+  });
 }
 bootstrap();

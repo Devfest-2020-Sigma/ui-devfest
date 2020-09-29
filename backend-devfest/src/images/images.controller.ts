@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Put, Res } from '@nestjs/common';
 import { ConfigurationEnum } from 'src/common/configuration.enum';
-import { DatabaseService } from 'src/database/database.service';
+import { ImageDao } from 'src/images/image.dao';
 import { processEnum } from 'src/process/process.enum';
 import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
@@ -15,7 +15,7 @@ export class ImagesController {
   constructor(
     private readonly imagesService: ImagesService,
     private readonly processService: ProcessService,
-    private readonly databaseService: DatabaseService,
+    private readonly imageDao: ImageDao,
   ) { }
 
   /**
@@ -29,12 +29,12 @@ export class ImagesController {
       await this.processService.execCommand(processEnum.STREAMING_STOP);
       // Mise à jour état de image
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EN_COURS;
-      this.databaseService.editImage(image._id, imageDto, function () { });
+      this.imageDao.editImage(image._id, imageDto, function () { });
       // génération des quatres images de départ
       const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
       await this.processService.execCommand(processEnum.CAPTURE_IMAGES, path);
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
-      this.databaseService.editImage(image._id, imageDto, function () { });
+      this.imageDao.editImage(image._id, imageDto, function () { });
       return image;
     });
   }
@@ -88,7 +88,7 @@ export class ImagesController {
    */
   @Get(':id')
   async getImage(@Param('id') id): Promise<IImage> {
-    return this.databaseService.getImage(id);
+    return this.imageDao.getImage(id);
   }
 
 
@@ -99,14 +99,14 @@ export class ImagesController {
   @Get('/imprimer/:id')
   async imprimerGcode(@Param('id') id): Promise<void> {
     const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
-    await this.processService.execCommand(processEnum.SENDSVG2GCODE, path).catch(error => { console.log('caught', error.message); });;
+    this.imagesService.sendImpressionGcodeRabbitEvent(path);
   }
 
   @Put('/pseudo')
   async generationRendu(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
-    this.databaseService.editImage(id, image, () => {
+    this.imageDao.editImage(id, image, () => {
       // envoi de la demande de génération dans les files rabbit
       this.imagesService.sendGenerationGcodeRabbitEvent(id);
     })

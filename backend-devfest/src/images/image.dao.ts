@@ -4,7 +4,7 @@ import { IImage } from "src/images/image.interface";
 import { imageModel } from "src/schemas/image.schema";
 
 @Injectable()
-export class DatabaseService {
+export class ImageDao {
 
      /**
   * Mise à jour des informations liées à l'image avec les nouvelles informations

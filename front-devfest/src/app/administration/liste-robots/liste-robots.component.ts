@@ -13,7 +13,7 @@ export class ListeRobotsComponent implements OnInit {
   rows: Robot[] = [];
   reorderable = true;
 
-  columns = [{ name: 'Nom du Robot' }, { name: 'Ip du robot' }, { name: 'Statut' }, { name: 'Actions', sortable: false }];
+  columns = [{ name: 'Ip du robot' }, { name: 'Statut' }, { name: 'Actions', sortable: false }];
 
   ColumnMode = ColumnMode;
 

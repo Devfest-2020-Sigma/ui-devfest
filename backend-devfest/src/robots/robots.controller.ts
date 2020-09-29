@@ -1,28 +1,22 @@
 import { Controller, Get } from '@nestjs/common';
-import { RobotsEnum } from './robots.enum';
-import { RobotDto } from './robot.dto';
-import { ProcessService } from 'src/process/process.service';
-import { processEnum } from 'src/process/process.enum';
 import { Param } from '@nestjs/common/decorators/http/route-params.decorator';
+import { processEnum } from 'src/process/process.enum';
+import { ProcessService } from 'src/process/process.service';
 import { RobotCommandEnum } from './robot.command.enum';
+import { RobotDao } from './robot.dao';
+import { IRobot } from './robot.interface';
 
 @Controller('api/robots')
 export class RobotsController {
 
   constructor(
-    private readonly processService: ProcessService
+    private readonly processService: ProcessService,
+    private readonly robotDao: RobotDao
   ) { }
 
   @Get()
-  recupererListeRobots() {
-    const robots = [];
-    Object.keys(RobotsEnum).forEach(key => {
-      let robot = new RobotDto();
-      robot.nom = key;
-      robot.ip = RobotsEnum[key];
-      robots.push(robot);
-    });
-    return robots;
+  async recupererListeRobots(): Promise<IRobot[]> {
+    return this.robotDao.getRobots();
   }
 
   @Get('/annuler/:ip')

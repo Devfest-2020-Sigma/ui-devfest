@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
 const configuration_enum_1 = require("../common/configuration.enum");
-const database_service_1 = require("../database/database.service");
+const image_dao_1 = require("./image.dao");
 const process_enum_1 = require("../process/process.enum");
 const process_service_1 = require("../process/process.service");
 const image_dto_1 = require("./image.dto");
@@ -23,10 +23,10 @@ const image_etat_enum_1 = require("./image.etat.enum");
 const image_rendu_enum_1 = require("./image.rendu.enum");
 const images_service_1 = require("./images.service");
 let ImagesController = class ImagesController {
-    constructor(imagesService, processService, databaseService) {
+    constructor(imagesService, processService, imageDao) {
         this.imagesService = imagesService;
         this.processService = processService;
-        this.databaseService = databaseService;
+        this.imageDao = imageDao;
     }
     initialiserWorkflow() {
         return this.imagesService.initialiserWorkflow().then(async (image) => {
@@ -34,11 +34,11 @@ let ImagesController = class ImagesController {
             console.log('arret du streaming');
             await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
-            this.databaseService.editImage(image._id, imageDto, function () { });
+            this.imageDao.editImage(image._id, imageDto, function () { });
             const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
             await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
-            this.databaseService.editImage(image._id, imageDto, function () { });
+            this.imageDao.editImage(image._id, imageDto, function () { });
             return image;
         });
     }
@@ -66,16 +66,15 @@ let ImagesController = class ImagesController {
         this.processService.execCommand(process_enum_1.processEnum.STREAMING_START).catch(error => { console.log('caught', error.message); });
     }
     async getImage(id) {
-        return this.databaseService.getImage(id);
+        return this.imageDao.getImage(id);
     }
     async imprimerGcode(id) {
         const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
-        await this.processService.execCommand(process_enum_1.processEnum.SENDSVG2GCODE, path).catch(error => { console.log('caught', error.message); });
-        ;
+        this.imagesService.sendImpressionGcodeRabbitEvent(path);
     }
     async generationRendu(image) {
         const id = image._id;
-        this.databaseService.editImage(id, image, () => {
+        this.imageDao.editImage(id, image, () => {
             this.imagesService.sendGenerationGcodeRabbitEvent(id);
         });
     }
@@ -131,7 +130,7 @@ ImagesController = __decorate([
     common_1.Controller('api/images'),
     __metadata("design:paramtypes", [images_service_1.ImagesService,
         process_service_1.ProcessService,
-        database_service_1.DatabaseService])
+        image_dao_1.ImageDao])
 ], ImagesController);
 exports.ImagesController = ImagesController;
 //# sourceMappingURL=images.controller.js.map

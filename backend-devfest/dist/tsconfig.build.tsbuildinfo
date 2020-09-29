@@ -1176,9 +1176,9 @@
         "signature": "5e8978ec1d8c762b71ab33834fa9b9d934aeac07f9bad730d0b617a87c0fd990",
         "affectsGlobalScope": false
       },
-      "../src/database/database.service.ts": {
-        "version": "b34b90303a6d22638f46dba7cbb2bc19f96779be974ab827a89a4ba98a2b18d5",
-        "signature": "2f1430af4cd05a4f404d494fbcde486c78a8149e0f7a00b07c487cfe2c41f884",
+      "../src/images/image.dao.ts": {
+        "version": "699c216e85f453c5524edccbf70a81b2be9882b24dd57b2a945d4b303e00dcfc",
+        "signature": "93e4e022a27b802a1b91add9d1f0befc8b54c0dbdacb3beecebffeeaf99e3f40",
         "affectsGlobalScope": false
       },
       "../src/process/process.enum.ts": {
@@ -3422,8 +3422,8 @@
         "affectsGlobalScope": false
       },
       "../src/images/image.rabbit.ts": {
-        "version": "ddc980424724d24a03fd1deb41cdbb6c2b9460bda326041c88beaa31d823d6c9",
-        "signature": "7cc6707d216b7df41e243014b510ff19e84578096f8cbd8133790f5b5d5e1a86",
+        "version": "7ed3807a8882abf2165742c05178c9352208cd22643a2d9bbc33f29e15f818a2",
+        "signature": "3224402816852cfad7fd567641d31c2643c2fbb615f8006f372bc75f3751671b",
         "affectsGlobalScope": false
       },
       "../src/events/rabbit.event.ts": {
@@ -3437,8 +3437,8 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "4b134705e866701e726e685061f5e50926bd3ceef026a67acb7ce35c854c5249",
-        "signature": "46d2aa06cbb10ae9610762179b38d23dc28505db951c27a8aa5636a35e4a5ebc",
+        "version": "8ee20e89286781925e010c3b9829ead2d6785434f65636d554fe40f075578aa4",
+        "signature": "4b7ef7ce898f8084e0e67ba80f781d084fd3c7a642b94e442b67b982494b4d0a",
         "affectsGlobalScope": false
       },
       "../src/images/images.provider.ts": {
@@ -3457,18 +3457,28 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.module.ts": {
-        "version": "87c27ef47aa82597625d4d459d5850ae43cd254f50eec0e0802fae0c6a47717b",
+        "version": "484aa756d685a85dc757203d2d85eb459508585dda57db3eaf8d2cc169bbeb0a",
         "signature": "d5b1681c3cd9715d2f4bc60bbfd7724c3211d24cf5ee42aa83137ab9494f5dfb",
         "affectsGlobalScope": false
       },
-      "../src/robots/robots.enum.ts": {
-        "version": "c81e4b0b3e0b9260b3e2bfd0352f20515ab457a6ce6b81c55ae3478c6ea22e68",
-        "signature": "6a129dc6efaa8c562dd138f999b7aa05c0821de2b7a756d2f096840b607e5407",
+      "../src/robots/robot.dto.ts": {
+        "version": "c711b963cd8c54f58b11b31720444f835738142d49c450963ed7ef966e9648d1",
+        "signature": "49fbff07a06b2911d0ce98c6e24cddb44d68d3619afbca4017beaf408319566c",
         "affectsGlobalScope": false
       },
-      "../src/robots/robot.dto.ts": {
-        "version": "35d91640a12a843223bb2fc2ab35fdaa3734024393e06f2e875bb598f6431e38",
-        "signature": "2a9bb08ae62a33121059a0b295fe173676de3c1f7ef21033f48707dafa7a5526",
+      "../src/robots/robot.interface.ts": {
+        "version": "d6c6d184b03dd857218e867b6567a062ae79ad9b9a94bb7e63a6411130eb325c",
+        "signature": "8ec8f59ef8f8d377fc6a8ea9d004db5079967c56c481581590a2d25a63a48528",
+        "affectsGlobalScope": false
+      },
+      "../src/schemas/robot.schema.ts": {
+        "version": "8a8f71749efeea8c24071e49724a03feda009766115b50e2ba33ebc95a8ab771",
+        "signature": "ac77c58a842582cd1e7d60b4da29ba7da05e0ef62b7080ef1fb76bb11a9ed421",
+        "affectsGlobalScope": false
+      },
+      "../src/robots/robot.dao.ts": {
+        "version": "b2442a7d3be436191eedc16cefa55bfe9c26fa6c14acd3ceb4ba9d5b7a22a7bc",
+        "signature": "17827671d3699427994dc9865acb59b928c3c5b5c2d19ef6aea6dc286aed835f",
         "affectsGlobalScope": false
       },
       "../src/robots/robot.command.enum.ts": {
@@ -3477,8 +3487,13 @@
         "affectsGlobalScope": false
       },
       "../src/robots/robots.controller.ts": {
-        "version": "a9dfb15830c98e3dd995899d5309d98a132019b73678d874f168e748387216e9",
-        "signature": "4e70feb4ce9786c898e4689717d2d7808d5d84ed599e403b82c0eee089ad9287",
+        "version": "d1d2dfb130c892f88b8b81681e9eebd2508595621e032b83891532bfbc89be6c",
+        "signature": "a1c2ff0434e77c4705ebd1a133e94166c4a9e12a6bf401578dc988cb19bb5b94",
+        "affectsGlobalScope": false
+      },
+      "../src/robots/robots.provider.ts": {
+        "version": "d7820832a48a4903fcfc41d74c5c3d71c7d41b1cc8054c60b9fa0d1c326b4a7c",
+        "signature": "18f59589d17ef0137d24a6c14a304619ef826c4e4afb2dbe8be12e5968d9b99f",
         "affectsGlobalScope": false
       },
       "../src/robots/robots.service.ts": {
@@ -3487,7 +3502,7 @@
         "affectsGlobalScope": false
       },
       "../src/robots/robots.module.ts": {
-        "version": "c44958fb4f8c32b4f7e4b93f44a612fa94effe7cd8a144c64e446a672f41defa",
+        "version": "3623e4c2e6c17b2b4459977c0e2a776bdf497db26b2c8d3387b9a2f5c4d70db6",
         "signature": "3637a19921871193983d4cff0ffc490a1459fd5a92affaff3082c10542238308",
         "affectsGlobalScope": false
       },
@@ -3499,6 +3514,11 @@
       "../src/main.ts": {
         "version": "e25d9bd8f80b6ffbcc8826ed1b407e747e4fbe346c5bab62cbe5837da4eeb189",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
+      "../src/robots/robots.enum.ts": {
+        "version": "c81e4b0b3e0b9260b3e2bfd0352f20515ab457a6ce6b81c55ae3478c6ea22e68",
+        "signature": "6a129dc6efaa8c562dd138f999b7aa05c0821de2b7a756d2f096840b607e5407",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
@@ -10447,17 +10467,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../src/database/database.service.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../src/images/image.dto.ts",
-        "../src/images/image.interface.ts",
-        "../src/schemas/image.schema.ts"
-      ],
       "../src/events/rabbit.event.ts": [
         "../node_modules/@nestjs/microservices/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -10467,6 +10476,17 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/nestjs-transport-eventbus/dist/index.d.ts",
         "../src/images/image.rabbit.ts"
+      ],
+      "../src/images/image.dao.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/images/image.dto.ts",
+        "../src/images/image.interface.ts",
+        "../src/schemas/image.schema.ts"
       ],
       "../src/images/image.dto.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -10512,7 +10532,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/common/configuration.enum.ts",
-        "../src/database/database.service.ts",
+        "../src/images/image.dao.ts",
         "../src/images/image.dto.ts",
         "../src/images/image.etat.enum.ts",
         "../src/images/image.interface.ts",
@@ -10531,7 +10551,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/database/database.module.ts",
-        "../src/database/database.service.ts",
+        "../src/images/image.dao.ts",
         "../src/images/images.controller.ts",
         "../src/images/images.provider.ts",
         "../src/images/images.service.ts",
@@ -10594,7 +10614,25 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
+      "../src/robots/robot.dao.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/robots/robot.dto.ts",
+        "../src/robots/robot.interface.ts",
+        "../src/schemas/robot.schema.ts"
+      ],
       "../src/robots/robot.dto.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/robots/robot.interface.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -10612,8 +10650,8 @@
         "../src/process/process.enum.ts",
         "../src/process/process.service.ts",
         "../src/robots/robot.command.enum.ts",
-        "../src/robots/robot.dto.ts",
-        "../src/robots/robots.enum.ts"
+        "../src/robots/robot.dao.ts",
+        "../src/robots/robot.interface.ts"
       ],
       "../src/robots/robots.enum.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -10629,9 +10667,20 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/database/database.module.ts",
         "../src/process/process.service.ts",
+        "../src/robots/robot.dao.ts",
         "../src/robots/robots.controller.ts",
+        "../src/robots/robots.provider.ts",
         "../src/robots/robots.service.ts"
+      ],
+      "../src/robots/robots.provider.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/schemas/robot.schema.ts"
       ],
       "../src/robots/robots.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -10648,6 +10697,14 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/images/image.interface.ts"
+      ],
+      "../src/schemas/robot.schema.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/robots/robot.interface.ts"
       ]
     },
     "exportedModulesMap": {
@@ -17298,18 +17355,18 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../src/database/database.service.ts": [
-        "../src/images/image.dto.ts",
-        "../src/images/image.interface.ts"
-      ],
       "../src/events/rabbit.event.ts": [
         "../src/images/image.rabbit.ts"
+      ],
+      "../src/images/image.dao.ts": [
+        "../src/images/image.dto.ts",
+        "../src/images/image.interface.ts"
       ],
       "../src/images/image.interface.ts": [
         "../src/images/image.etat.enum.ts"
       ],
       "../src/images/images.controller.ts": [
-        "../src/database/database.service.ts",
+        "../src/images/image.dao.ts",
         "../src/images/image.dto.ts",
         "../src/images/image.interface.ts",
         "../src/images/image.rendu.enum.ts",
@@ -17323,8 +17380,14 @@
       "../src/process/process.service.ts": [
         "../src/process/process.enum.ts"
       ],
+      "../src/robots/robot.dao.ts": [
+        "../src/robots/robot.dto.ts",
+        "../src/robots/robot.interface.ts"
+      ],
       "../src/robots/robots.controller.ts": [
-        "../src/process/process.service.ts"
+        "../src/process/process.service.ts",
+        "../src/robots/robot.dao.ts",
+        "../src/robots/robot.interface.ts"
       ]
     },
     "semanticDiagnosticsPerFile": []

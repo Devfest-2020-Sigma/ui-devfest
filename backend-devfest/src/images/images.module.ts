@@ -6,7 +6,7 @@ import { imagesProviders } from './images.provider';
 import { DatabaseModule } from 'src/database/database.module';
 import { ClientsModule } from '@nestjs/microservices/module/clients.module';
 import { Transport } from '@nestjs/microservices/enums/transport.enum';
-import { DatabaseService } from 'src/database/database.service';
+import { ImageDao } from 'src/images/image.dao';
 
 
 @Module({
@@ -34,6 +34,6 @@ import { DatabaseService } from 'src/database/database.service';
       }
     ])],
   controllers: [ImagesController],
-  providers: [ImagesService, ProcessService, DatabaseService,...imagesProviders]
+  providers: [ImagesService, ProcessService, ImageDao,...imagesProviders]
 })
 export class ImagesModule {}
