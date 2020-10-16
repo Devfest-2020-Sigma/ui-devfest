@@ -1,233 +1,258 @@
 @import "~@swimlane/ngx-datatable/index.css";
 @import "~@swimlane/ngx-datatable/themes/material.scss";
 @import "~@swimlane/ngx-datatable/assets/icons.css";
-@import '~simple-keyboard/build/css/index.css';
+@import "~simple-keyboard/build/css/index.css";
 
-html,
 body {
-    height: 100%;
+  background: transparent linear-gradient(330deg, rgba(102, 120, 255, 1) 0%, rgba(214, 0, 255, 1) 100%) 0% 0% no-repeat padding-box;
+  opacity: 1;
+  width: 600px;
+  height: 1024px;
 }
 
-full-width {
-    height: 100vh;
+.bouton-blanc {
+  width: 347px;
+  height: 80px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 18px;
+  transform: translate(1.5rem, 1.5rem);
+  text-align: center;
+  font: normal normal bold 40px/48px Metropolis;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  transform-style: preserve-3d;
+  border: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    width: 357px;
+    height: 80px;
+    background: #00f7f7 0% 0% no-repeat padding-box;
+    border-radius: 18px 0px 18px 18px;
+    transform: translateZ(-1px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 357px;
+    height: 80px;
+    background: #f700f7 0% 0% no-repeat padding-box;
+    border-radius: 18px 18px 18px 0px;
+    transform: translateZ(-1px);
+  }
 }
+
 
 svg {
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 
 .icon-placeholder {
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer !important ;
-}
-
-body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer !important;
 }
 
 .header {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .mat-sidenav-container {
-    height: 100%;
-    display: flex;
-    flex: 1 1 auto;
+  height: 100%;
+  display: flex;
+  flex: 1 1 auto;
 }
 
 .mat-nav-list .mat-list-item {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .nav-tool-items {
-    display: inline-block;
-    margin-right: 13px;
+  display: inline-block;
+  margin-right: 13px;
 }
 
 .mat-list-item.active {
-    background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .mat-sidenav {
-    background-color: #f2f2f2;
-    width: 250px;
+  background-color: #f2f2f2;
+  width: 250px;
 }
 
 .header {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    z-index: 1000;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .mat-toolbar-row,
 .mat-toolbar-single-row {
-    height: 55px !important;
+  height: 55px !important;
 }
 
 .mat-drawer-container {
-    background-color: #3f51b5;
-    color: rgba(0, 0, 0, 0.87);
+  background-color: #3f51b5;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 mat-sidenav mat-icon {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .hamburger {
-    margin-top: 5px;
-    cursor: pointer;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
 .mat-radio-button,
 .mat-radio-group {
-    margin-right: 25px;
+  margin-right: 25px;
 }
 
-.controlers-wrapper > * {
-    width: 100%;
-    padding: 0;
+.controlers-wrapper>* {
+  width: 100%;
+  padding: 0;
 }
 
 .misc-bottom-padding {
-    margin: 8px 0 10px;
+  margin: 8px 0 10px;
 }
 
 .misc-bottom-padding mat-label {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 mat-radio-group mat-radio-button {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .button-wrapper button {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 table.mat-table,
 table {
-    width: 100%;
-}
-
-body .mat-list-item {
-    margin-bottom: 10px;
+  width: 100%;
 }
 
 .inner-wrapper {
-    padding: 15px 0 130px;
-    width: 100%;
+  padding: 15px 0 130px;
+  width: 100%;
 }
 
 .inner-wrapper mat-card {
-    display: inline-block;
-    margin: 0 6% 0 0;
-    vertical-align: top;
-    width: 44%;
+  display: inline-block;
+  margin: 0 6% 0 0;
+  vertical-align: top;
+  width: 44%;
 }
 
 .full-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .multiple-items {
-    position: relative;
+  position: relative;
 }
 
 .multiple-items .tooltip-info {
-    right: 0;
-    top: 7px;
-    cursor: pointer;
-    color: #a1a7c7;
-    position: absolute;
-    font-size: 20px;
-}
-
-body .push-right {
-    margin-right: 10px;
+  right: 0;
+  top: 7px;
+  cursor: pointer;
+  color: #a1a7c7;
+  position: absolute;
+  font-size: 20px;
 }
 
 .no-data {
-    text-align: center;
-    padding-top: 30px;
-    color: #6c75a9;
+  text-align: center;
+  padding-top: 30px;
+  color: #6c75a9;
 }
 
 .button-wrapper {
-    margin: 20px 0 0 0;
+  margin: 20px 0 0 0;
 }
 
 .example-card {
-    max-width: 400px;
+  max-width: 400px;
 }
 
 .example-header-image {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-    background-size: cover;
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
 }
 
 .title-group {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .card-deck-container {
-    width: 100%;
-    max-width: 1200px;
-    position: relative;
-    border-radius: 2px;
-    padding: 10px 10px 30px;
-    margin: 10px 10px 10px 10px;
-    background-color: #f5f5f5;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  border-radius: 2px;
+  padding: 10px 10px 30px;
+  margin: 10px 10px 10px 10px;
+  background-color: #f5f5f5;
 }
 
 .card-item {
-    padding: 3px 3px 3px 3px;
+  padding: 3px 3px 3px 3px;
 }
 
 mat-grid-tile {
-    background: lightblue;
+  background: lightblue;
 }
 
 .my-alternate-theme button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 @media (max-width: 1024px) {
-    .inner-wrapper mat-card {
-        width: 100%;
-    }
+  .inner-wrapper mat-card {
+    width: 100%;
+  }
 
-    .misc-bottom-padding mat-label {
-        display: block;
-        padding-bottom: 10px;
-    }
+  .misc-bottom-padding mat-label {
+    display: block;
+    padding-bottom: 10px;
+  }
 
-    .mat-sidenav {
-        width: 230px;
-    }
+  .mat-sidenav {
+    width: 230px;
+  }
 
-    .mat-nav-list .mat-list-item {
-        font-size: 14px;
-    }
+  .mat-nav-list .mat-list-item {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 767px) {
-    .nav-tool-items {
-        margin-right: 0;
-    }
+  .nav-tool-items {
+    margin-right: 0;
+  }
 
-    .hamburger {
-        visibility: visible !important;
-    }
+  .hamburger {
+    visibility: visible !important;
+  }
 }
 
 .mosaic {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }

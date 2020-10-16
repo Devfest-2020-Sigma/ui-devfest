@@ -4,7 +4,7 @@ import { visualisationRoutes } from './visualisation/visualisation.route';
 
 const routes: Routes = [{
   path: '',
-  redirectTo: "/visualisation/prise-photo",
+  redirectTo: "/visualisation/accueil",
   pathMatch: 'full'
 }, ...visualisationRoutes];
 

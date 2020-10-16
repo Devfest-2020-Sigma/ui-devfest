@@ -1,12 +1,31 @@
 import { Route } from '@angular/router';
-import { PrisePhotoComponent } from '../01_prise-photo/prise-photo.component';
-import { SelectionPhotoMosaicComponent } from '../02_selection-photo-mosaic/selection-photo-mosaic.component';
-import { SelectionPseudoComponent } from '../03_selection-pseudo/selection-pseudo.component';
-import { ImpressionPhotoComponent } from '../05_impression-photo/impression-photo.component';
-import { ChoixRenduComponent } from '../04_choix-rendu/choix-rendu.component';
+import { AccueilComponent } from '../01_accueil/accueil.component';
+import { RgpdComponent } from '../02_rgpd/rgpd.component';
+import { InstructionsComponent } from '../03_instructions/instructions.component';
+import { PrisePhotoComponent } from '../04_prise-photo/prise-photo.component';
+import { ChoixRenduComponent } from '../05_choix-rendu/choix-rendu.component';
+import { ImpressionPhotoComponent } from '../06_impression-photo/impression-photo.component';
+import { SelectionPseudoComponent } from '../06_selection-pseudo/selection-pseudo.component';
+import { SelectionPhotoMosaicComponent } from '../99_selection-photo-mosaic/selection-photo-mosaic.component';
 
 
 export const visualisationMainRoute: Route[] = [
+  {
+    path : 'accueil',
+    component : AccueilComponent,
+    canActivate : []
+  },
+  {
+    path : 'rgpd',
+    component : RgpdComponent,
+    canActivate : []
+  },
+  {
+    path : 'instructions',
+    component : InstructionsComponent,
+    canActivate : []
+  },
+ 
   {
     path: 'prise-photo',
     component: PrisePhotoComponent,
