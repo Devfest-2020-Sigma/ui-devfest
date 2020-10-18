@@ -17,14 +17,10 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   private readonly subscriptions: Subscription[] = [];
 
   private id: string;
-  public imageSetJpgLite = false;
-  public imageSetTsp = false;
-  public imageSetSquiddle = false;
 
   constructor(private imagesService: ImagesService,
     private route: ActivatedRoute,
-    private router: Router,
-    private iconReg: SvgIconRegistryService) {
+    private router: Router){
   }
 
   ngOnDestroy(): void {
@@ -41,41 +37,8 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
         this.id = params.id;
       }
     });
-    const requete = this.imagesService.recupererImage(this.id).pipe(delay(3000));
-    //wait for first to complete before next is subscribed
-    const requetes = this.interval.pipe(concatMapTo(requete));
-    this.subscriptions.push(
-      requetes.pipe(
-        takeWhile(value => !this.imageSetJpgLite || !this.imageSetSquiddle || !this.imageSetTsp)
-      ).subscribe(image => {
-        // Si on a pas déja chargé l'image et qu'elle est disponible
-        if (!this.imageSetJpgLite && image.renduJpegLite) {
-          this.imagesService.recupererImagesSVG(this.id, ImageRenduEnum.JPGLITE).subscribe(value => {
-            this.iconReg.addSvg('svgJpgLite', value);
-            this.imageSetJpgLite = true;
-          });
-        }
-        // Si on a pas déja chargé l'image et qu'elle est disponible
-        if (!this.imageSetTsp && image.renduJpegTsp) {
-          this.imagesService.recupererImagesSVG(this.id, ImageRenduEnum.TSP).subscribe(value => {
-            this.iconReg.addSvg('svgTsp', value);
-            this.imageSetTsp = true;
-          });
-        }
-        // Si on a pas déja chargé l'image et qu'elle est disponible
-        if (!this.imageSetSquiddle && image.renduJpegSquiddle) {
-          this.imagesService.recupererImagesSVG(this.id, ImageRenduEnum.SQUIDDLE).subscribe(value => {
-            this.iconReg.addSvg('svgSquiddle', value);
-            this.imageSetSquiddle = true;
-          });
-        }
-      })
-    );
   }
 
-  imprimer(): void {
-    this.imagesService.impressionImage(this.id).subscribe(value => {
-      this.router.navigate(["visualisation/impression", this.id]);
-    });
+  onChoisir(): void {
   }
 }

@@ -9,10 +9,10 @@ import { SelectionPhotoMosaicComponent } from './99_selection-photo-mosaic/selec
 import { InstructionsComponent } from './03_instructions/instructions.component';
 import { PrisePhotoComponent } from './04_prise-photo/prise-photo.component';
 import { ChoixRenduComponent } from './05_choix-rendu/choix-rendu.component';
-import { ImpressionPhotoComponent } from './06_impression-photo/impression-photo.component';
+import { ImpressionPhotoComponent } from './07_impression-photo/impression-photo.component';
 import { SelectionPseudoComponent } from './06_selection-pseudo/selection-pseudo.component';
 import { visualisationRoutes } from './visualisation.route';
-import { PrisePhotoRetryComponent } from './04_1_prise-photo-retry/prise-photo-retry.component';
+import { PrisePhotoRetryComponent } from './04_prise-photo-retry/prise-photo-retry.component';
 
 
 

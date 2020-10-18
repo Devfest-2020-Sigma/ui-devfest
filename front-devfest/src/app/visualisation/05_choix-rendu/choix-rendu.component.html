@@ -1,14 +1,26 @@
-<mat-toolbar color="primary" class="header">
-  <div>4/4 : Choix du rendu</div>
-</mat-toolbar>
-<div class="col-12 form-inline">
-  <div class="col-4" *ngIf="imageSetJpgLite" (click)="imprimer()">
-    <svg-icon name="svgJpgLite"></svg-icon>
-  </div>
-  <div class="col-4" *ngIf="imageSetTsp" (click)="imprimer()">
-    <svg-icon name="svgTsp"></svg-icon>
-  </div>
-  <div class="col-4" *ngIf="imageSetSquiddle" (click)="imprimer()">
-    <svg-icon name="svgSquiddle"></svg-icon>
-  </div>
+<div class="header font-violet">
+  <img src="../../../assets/logo-header.svg" />
+</div>
+
+<p>Quel style de dessin veux-tu ?</p>
+<ul>
+  <li>
+    <img src="../../../assets/rendu_1.svg" />
+    <p>Style 1 : Esquisse</p>
+    <p>~ 2 min d'impression</p>
+  </li>
+  <li>
+    <img src="../../../assets/rendu_2.svg" />
+    <p>Style 2 : Tracé</p>
+    <p>~ 10 min d'impression</p>
+  </li>
+  <li>
+    <img src="../../../assets/rendu_3.svg" />
+    <p>Style 3 : Précision</p>
+    <p>~ 20 min d'impression</p>
+  </li>
+</ul>
+
+<div class="row justify-content-center align-middle">
+  <button class="bouton-noir" (click)="onChoisir()">Choisir</button>
 </div>
