@@ -12,6 +12,7 @@ import { ChoixRenduComponent } from './05_choix-rendu/choix-rendu.component';
 import { ImpressionPhotoComponent } from './06_impression-photo/impression-photo.component';
 import { SelectionPseudoComponent } from './06_selection-pseudo/selection-pseudo.component';
 import { visualisationRoutes } from './visualisation.route';
+import { PrisePhotoRetryComponent } from './04_1_prise-photo-retry/prise-photo-retry.component';
 
 
 
@@ -24,6 +25,7 @@ import { visualisationRoutes } from './visualisation.route';
     AccueilComponent, //
     RgpdComponent,
     InstructionsComponent,
+    PrisePhotoRetryComponent,
     ImpressionPhotoComponent],
   exports: [],
   imports: [

@@ -34,6 +34,7 @@
     "rxjs": "~6.5.4",
     "simple-keyboard": "^2.30.26",
     "tslib": "^1.10.0",
+    "typeface-muli": "^1.1.13",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
