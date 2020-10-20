@@ -1,12 +1,24 @@
 <div class="header font-violet">
   <img src="../../../assets/logo-header.svg" />
 </div>
-
+<br>
+<br>
 <br>
 <form [formGroup]="form" align="center">
-  <p>Un pseudo ?</p>
-  <p>Il sera inscrit sur votre dessin</p>
+  <div class="titre">
+    Un pseudo ?
+  </div>
+  <div class="rendu-text-description">
+    Il sera inscrit sur votre dessin
+  </div>
+  <br>
   <input formControlName="pseudoCtrl" class="pseudo" required>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <div>
     <button class="bouton-noir" (click)="validerPseudo()">Valider</button>
   </div>

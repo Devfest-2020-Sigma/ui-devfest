@@ -19,4 +19,15 @@ RAF
 -- NestJs 
 - Voir gestion des logs 
 
+
+FRONT
+
+- affichage rendu flou sous header et autour input
+- optimisation classe css
+- page choix image a faire
+- division page en trois zones verticales
+- animations compteur
+- refaire workflow 
+- animations router angular
+
 Voir pour transformer l'appli en projet ionic avec deploiement sur tablette
