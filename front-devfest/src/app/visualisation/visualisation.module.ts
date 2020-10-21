@@ -13,6 +13,7 @@ import { ImpressionPhotoComponent } from './07_impression-photo/impression-photo
 import { SelectionPseudoComponent } from './06_selection-pseudo/selection-pseudo.component';
 import { visualisationRoutes } from './visualisation.route';
 import { PrisePhotoRetryComponent } from './04_prise-photo-retry/prise-photo-retry.component';
+import { PrisePhotoValidationComponent } from './04_prise-photo-validation/prise-photo-validation.component';
 
 
 
@@ -26,6 +27,7 @@ import { PrisePhotoRetryComponent } from './04_prise-photo-retry/prise-photo-ret
     RgpdComponent,
     InstructionsComponent,
     PrisePhotoRetryComponent,
+    PrisePhotoValidationComponent,
     ImpressionPhotoComponent],
   exports: [],
   imports: [

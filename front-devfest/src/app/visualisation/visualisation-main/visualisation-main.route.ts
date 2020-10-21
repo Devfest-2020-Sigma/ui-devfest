@@ -8,6 +8,7 @@ import { ImpressionPhotoComponent } from '../07_impression-photo/impression-phot
 import { SelectionPseudoComponent } from '../06_selection-pseudo/selection-pseudo.component';
 import { SelectionPhotoMosaicComponent } from '../99_selection-photo-mosaic/selection-photo-mosaic.component';
 import { PrisePhotoRetryComponent } from '../04_prise-photo-retry/prise-photo-retry.component';
+import { PrisePhotoValidationComponent } from '../04_prise-photo-validation/prise-photo-validation.component';
 
 
 export const visualisationMainRoute: Route[] = [
@@ -34,6 +35,11 @@ export const visualisationMainRoute: Route[] = [
   {
     path: 'prise-photo-retry',
     component: PrisePhotoRetryComponent,
+    canActivate: []
+  },
+  {
+    path: 'prise-photo-validation',
+    component: PrisePhotoValidationComponent,
     canActivate: []
   },
   {
