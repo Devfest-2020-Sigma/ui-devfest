@@ -22,9 +22,7 @@ RAF
 
 FRONT
 
-- affichage rendu flou sous header et autour input
 - optimisation classe css
-- page choix image a faire
 - division page en trois zones verticales
 - animations compteur
 - refaire workflow 
