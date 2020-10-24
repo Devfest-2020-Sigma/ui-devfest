@@ -6,6 +6,7 @@
   <br>
   <div class="row justify-content-center align-middle">
     <div class="cadre-photo">
+      <img class='photo-capture' id='capture-img' [src]='imageUpload'/>
     </div>
   </div>
   <br>
@@ -21,7 +22,7 @@
   </div>
   <br>
   <div class="row justify-content-center align-middle">
-    <button class="bouton-gris" (click)="onValidation()">Je réessaye</button>
+    <button class="bouton-gris" (click)="onRetry()">Je réessaye</button>
   </div>
   <br>
   <br>

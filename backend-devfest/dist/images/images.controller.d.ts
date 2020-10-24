@@ -10,8 +10,9 @@ export declare class ImagesController {
     private readonly imageDao;
     constructor(imagesService: ImagesService, processService: ProcessService, imageDao: ImageDao);
     initialiserWorkflow(): Promise<IImage>;
+    prisePhoto(id: string): Promise<IImage>;
     recupererImagesSVG(id: string, rendu: ImageRenduEnum, res: any): Promise<any>;
-    recupererImagesMosaic(id: string, res: any): Promise<Blob>;
+    recupererImagesMosaic(id: string, essai: string, res: any): Promise<Blob>;
     streamingstart(): void;
     getImage(id: any): Promise<IImage>;
     imprimerGcode(id: any): Promise<void>;

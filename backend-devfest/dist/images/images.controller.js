@@ -29,7 +29,10 @@ let ImagesController = class ImagesController {
         this.imageDao = imageDao;
     }
     initialiserWorkflow() {
-        return this.imagesService.initialiserWorkflow().then(async (image) => {
+        return this.imagesService.initialiserWorkflow();
+    }
+    prisePhoto(id) {
+        return this.imageDao.getImage(id).then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             console.log('arret du streaming');
             await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP);
@@ -58,8 +61,8 @@ let ImagesController = class ImagesController {
                 console.error("Parametre rendu incorrect : " + rendu);
         }
     }
-    async recupererImagesMosaic(id, res) {
-        return res.sendFile('mosaic.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
+    async recupererImagesMosaic(id, essai, res) {
+        return res.sendFile('capture-' + essai + '.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
     }
     streamingstart() {
         console.log('Debut du streaming');
@@ -86,6 +89,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "initialiserWorkflow", null);
 __decorate([
+    common_1.Get('/prise-photo/:id'),
+    __param(0, common_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "prisePhoto", null);
+__decorate([
     common_1.Get('/getsvg/:id/:rendu'),
     __param(0, common_1.Param('id')), __param(1, common_1.Param('rendu')), __param(2, common_1.Res()),
     __metadata("design:type", Function),
@@ -93,10 +103,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesSVG", null);
 __decorate([
-    common_1.Get('/getmosaic/:id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
+    common_1.Get('/getphoto/:id/:essai'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Param('essai')), __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesMosaic", null);
 __decorate([

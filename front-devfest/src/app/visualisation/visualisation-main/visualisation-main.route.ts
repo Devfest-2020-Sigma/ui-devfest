@@ -28,17 +28,17 @@ export const visualisationMainRoute: Route[] = [
     canActivate : []
   },
   {
-    path: 'prise-photo',
+    path: 'prise-photo/:id/:essai',
     component: PrisePhotoComponent,
     canActivate: []
   },
   {
-    path: 'prise-photo-retry',
+    path: 'prise-photo-retry/:id',
     component: PrisePhotoRetryComponent,
     canActivate: []
   },
   {
-    path: 'prise-photo-validation',
+    path: 'prise-photo-validation/:id',
     component: PrisePhotoValidationComponent,
     canActivate: []
   },
@@ -48,7 +48,7 @@ export const visualisationMainRoute: Route[] = [
     canActivate: []
   },
   {
-    path: 'selection-pseudo/:id/:numero',
+    path: 'selection-pseudo/:id',
     component: SelectionPseudoComponent,
     canActivate: []
   },
@@ -58,7 +58,7 @@ export const visualisationMainRoute: Route[] = [
     canActivate: []
   },
   {
-    path: 'impression/:id',
+    path: 'impression-photo',
     component: ImpressionPhotoComponent,
     canActivate: []
   }];

@@ -40,5 +40,6 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   }
 
   onChoisir(): void {
+    this.router.navigate(["visualisation/selection-pseudo", this.id]);
   }
 }

@@ -32,25 +32,25 @@ export class ImagesService {
    * Fonction permettant la récupération des images générées
    * @param image Image contenant les informations permettant la récupération des images générées par le back
    */
-  recupererImagesSVG(id :string, rendu : ImageRenduEnum): Observable<any> {
+  recupererImagesSVG(id: string, rendu: ImageRenduEnum): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this.http.get<any>(`${url}/getsvg/${id}/${rendu}`, { headers, responseType: 'text' as 'json' });
   }
 
   /**
    * Fonction de récupération des images générées par le PNG
-   * @param image
+   * @param id
    */
-  recupererMosaic(id: string): Observable<Blob> {
+  recupererPhoto(id: string, essai : string): Observable<Blob> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get<any>(`${url}/getmosaic/${id}`, { headers, responseType: 'blob' as 'json' });
+    return this.http.get<any>(`${url}/getphoto/${id}/${essai}`, { headers, responseType: 'blob' as 'json' });
   }
 
   /**
    * Fonction permettant l'impression de l'image selectionnée
    * @param image Image contenant l'image selectionnée à imprimer
    */
-  impressionImage( id: string): Observable<string> {
+  impressionImage(id: string): Observable<string> {
     return this.http.get<string>(`${url}/imprimer/${id}`);
   }
 
@@ -63,9 +63,17 @@ export class ImagesService {
   }
 
   /**
+   * Fonction qui prend la photo
+   * @param id id du workflow lié à la prise de la photo
+   */
+  prisePhoto(id: string): Observable<Image> {
+    return this.http.get<Image>(`${url}/prise-photo/${id}`)
+  }
+
+  /**
    * Mise à jour du pseudo dans la BDD
    */
-  genererSVG(id: string, numero : number, pseudo : string): Observable<Image> {
+  genererSVG(id: string, numero: number, pseudo: string): Observable<Image> {
     let image = new Image;
     image._id = id;
     image.pseudo = pseudo;
@@ -76,7 +84,7 @@ export class ImagesService {
   /**
    * Controller permettant le démarrage du streaming (/ l'arrêt est géré en interne lors de l'action de la prise de la photo)
    */
-  demarrerStreaming() : Observable<any> {
+  demarrerStreaming(): Observable<any> {
     return this.http.get<any>(`${url}/streaming`);
   }
 }

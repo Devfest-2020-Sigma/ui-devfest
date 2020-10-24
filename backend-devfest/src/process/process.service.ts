@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { execFile } from 'child_process';
 import { ConfigurationEnum } from 'src/common/configuration.enum';
 import { processEnum } from './process.enum';
 const util = require('util');

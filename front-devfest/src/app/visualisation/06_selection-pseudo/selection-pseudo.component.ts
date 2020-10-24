@@ -19,7 +19,7 @@ export class SelectionPseudoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
     this.form = this.formBuilder.group({
-      pseudoCtrl: ['', Validators.required]
+      pseudoCtrl: ['', Validators.maxLength(10)]
     });
   }
 
@@ -34,13 +34,13 @@ export class SelectionPseudoComponent implements OnInit {
       }
       if (params.numero) {
         this.numero = params.numero;
-      }   
+      }
     });
   }
 
   validerPseudo() {
-    this.imagesService.genererSVG(this.id, this.numero, this.pseudo).subscribe(value => {
-      this.router.navigate(["visualisation/choix-rendu", this.id]);
+    this.imagesService.genererSVG(this.id, this.numero, this.pseudo).subscribe(() => {
+      this.router.navigate(["visualisation/impression-photo"]);
     });
   }
 }

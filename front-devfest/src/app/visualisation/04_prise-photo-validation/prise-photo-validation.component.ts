@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
@@ -8,14 +8,21 @@ import { ImagesService } from '../../core/service/images.service';
 })
 export class PrisePhotoValidationComponent implements OnInit {
 
+  private id: string;
+
   constructor(private imagesService: ImagesService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.imagesService.demarrerStreaming().subscribe();
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.id = params.id;
+      }
+    });
   }
   
   onValidation(): void {
-
+    this.router.navigate(["visualisation/choix-rendu", this.id]);
   }
 }

@@ -226,7 +226,7 @@ body {
   opacity: 1;
   color: #00b8ff;
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
@@ -339,9 +339,10 @@ svg {
   vertical-align: middle;
 }
 
-.mosaic {
-  width: 100%;
-  height: auto;
+.photo-capture {
+  width: 350px;
+  height: 350px;
+  border-radius: 18px;
 }
 
 .video {
@@ -349,4 +350,28 @@ svg {
   height: 100%;
 }
 
+@keyframes mymove {
+  0% {
+    right: 600px;
+    top: 0px;
+  }
+  50% {
+    right: 300px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    top: 0px;
+  }
+}
+
 // animations
+.decompte {
+  animation: mymove 5s ease infinite;
+}
+
+.up {
+  animation-duration: 5s;
+  animation-delay: 2s;
+  transform: translateY(-20px);
+}

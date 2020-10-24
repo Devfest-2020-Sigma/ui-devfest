@@ -19,11 +19,20 @@ export class ImagesController {
   ) { }
 
   /**
-   * Fonction d'initialisation d'une nouvelle image
+   * Fonction d'initialisation d'un nouveau workflow
    */
   @Get('/initialiser')
   initialiserWorkflow(): Promise<IImage> {
-    return this.imagesService.initialiserWorkflow().then(async image => {
+    return this.imagesService.initialiserWorkflow();
+  }
+
+  /**
+   * Fonction qui prend les photos
+   * @param id id du workflow en cours
+   */
+  @Get('/prise-photo/:id')
+  prisePhoto(@Param('id') id: string): Promise<IImage> {
+    return this.imageDao.getImage(id).then(async image => {
       let imageDto = new ImageDto();
       console.log('arret du streaming');
       await this.processService.execCommand(processEnum.STREAMING_STOP);
@@ -38,6 +47,7 @@ export class ImagesController {
       return image;
     });
   }
+
 
 
   /**
@@ -68,9 +78,9 @@ export class ImagesController {
    * @param pseudo Pseudo des images à récupérer
    * @param res permet de lire le fichier
    */
-  @Get('/getmosaic/:id')
-  async recupererImagesMosaic(@Param('id') id: string, @Res() res): Promise<Blob> {
-    return res.sendFile('mosaic.jpg', { root: ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
+  @Get('/getphoto/:id/:essai')
+  async recupererImagesMosaic(@Param('id') id: string, @Param('essai') essai: string, @Res() res): Promise<Blob> {
+    return res.sendFile('capture-' + essai + '.jpg', { root: ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
   }
 
   /**

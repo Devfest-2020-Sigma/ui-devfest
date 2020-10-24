@@ -1187,7 +1187,7 @@
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "1dd5cad578771e0fd8213bd4861ecbb39d989eeaf103c6ae7a2b9bc789c4b9c0",
+        "version": "7339c891f2b6f4fc4aa8e3f145e86aa247f40cce316905e3cdddc8f6132d598c",
         "signature": "4a0740c0e3ebc1b37a21fde4febeee25720760471724036be75e500d3c5a45bb",
         "affectsGlobalScope": false
       },
@@ -3437,8 +3437,8 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "8ee20e89286781925e010c3b9829ead2d6785434f65636d554fe40f075578aa4",
-        "signature": "4b7ef7ce898f8084e0e67ba80f781d084fd3c7a642b94e442b67b982494b4d0a",
+        "version": "67e02ce9f4538e698e0cae114539865416cff8d6984f8815a9c4ac559825e457",
+        "signature": "2aba901f7e919f195731854545e594d6803e7be401eb832229d441ce9151eeb1",
         "affectsGlobalScope": false
       },
       "../src/images/images.provider.ts": {
@@ -10599,7 +10599,6 @@
       "../src/process/process.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/child_process.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",

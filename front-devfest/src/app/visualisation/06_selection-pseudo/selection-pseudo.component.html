@@ -24,6 +24,6 @@
   <br>
   <br>
   <div>
-    <button class="bouton-noir" (click)="validerPseudo()">Valider</button>
+    <button class="bouton-noir" [disabled]="form.pristine || form.invalid" (click)="validerPseudo()">Valider</button>
   </div>
 </form>
