@@ -17,6 +17,14 @@ export class ImagesController {
     private readonly processService: ProcessService,
     private readonly imageDao: ImageDao,
   ) { }
+  
+  @Put()
+  async updateImage(@Body() image: ImageDto): Promise<void> {
+    // sauvegarde du pseudo dans la base 
+    const id = image._id;
+    this.imageDao.editImage(id, image, () =>{});
+  }
+
 
   /**
    * Fonction d'initialisation d'un nouveau workflow
@@ -29,9 +37,10 @@ export class ImagesController {
   /**
    * Fonction qui prend les photos
    * @param id id du workflow en cours
+   * @param essai numero de l'essai
    */
-  @Get('/prise-photo/:id')
-  prisePhoto(@Param('id') id: string): Promise<IImage> {
+  @Get('/prise-photo/:id/:essai')
+  prisePhoto(@Param('id') id: string, @Param('essai') essai: string): Promise<IImage> {
     return this.imageDao.getImage(id).then(async image => {
       let imageDto = new ImageDto();
       console.log('arret du streaming');
@@ -41,7 +50,7 @@ export class ImagesController {
       this.imageDao.editImage(image._id, imageDto, function () { });
       // génération des quatres images de départ
       const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
-      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, path);
+      await this.processService.execCommand(processEnum.CAPTURE_IMAGES, path, essai);
       imageDto.etat = ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
       this.imageDao.editImage(image._id, imageDto, function () { });
       return image;

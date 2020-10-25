@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Image } from 'src/app/core/model/image.model';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
@@ -32,14 +33,17 @@ export class SelectionPseudoComponent implements OnInit {
       if (params.id) {
         this.id = params.id;
       }
-      if (params.numero) {
-        this.numero = params.numero;
-      }
     });
   }
 
   validerPseudo() {
-    this.imagesService.genererSVG(this.id, this.numero, this.pseudo).subscribe(() => {
+    let image = new Image;
+    image._id = this.id;
+    image.pseudo =  this.pseudo;
+    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
+      this.imagesService.recupererImage(this.id).subscribe((value) => {
+        console.log(value);
+      });
       this.router.navigate(["visualisation/impression-photo"]);
     });
   }

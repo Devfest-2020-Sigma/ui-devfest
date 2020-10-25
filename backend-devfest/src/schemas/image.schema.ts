@@ -6,6 +6,7 @@ export const ImageSchema = new Schema({
   pseudo: String,
   imageSelectionnee: Number,
   etat: String,
+  renduSelectionne : Number,
   renduJpegLite : Boolean,
   renduJpegTsp : Boolean,
   renduJpegSquiddle : Boolean

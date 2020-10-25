@@ -5,6 +5,7 @@ export interface IImage extends Document {
    _id : string;
    pseudo: string;
    imageSelectionnee: number;
+   renduSelectionne : number;
    etat: ImageEtatEnum;
    tailleCalculee : number;
    renduJpegLite : boolean;

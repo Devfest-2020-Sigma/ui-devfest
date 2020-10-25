@@ -66,8 +66,16 @@ export class ImagesService {
    * Fonction qui prend la photo
    * @param id id du workflow lié à la prise de la photo
    */
-  prisePhoto(id: string): Observable<Image> {
-    return this.http.get<Image>(`${url}/prise-photo/${id}`)
+  prisePhoto(id: string, essai: string): Observable<Image> {
+    return this.http.get<Image>(`${url}/prise-photo/${id}/${essai}`)
+  }
+
+  /**
+   * Fonction de mise à jour de l'image en Bdd
+   * @param image 
+   */
+  miseAjourImageBdd(image: Image){
+    return this.http.put<Image>(`${url}`, image);
   }
 
   /**

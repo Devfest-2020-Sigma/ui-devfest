@@ -14,9 +14,9 @@ mkdir -p ${IMG_REJECT}
 
 # on prend un video de 5s pour être sur d'avoir assez d'image pour l'autocrop
 ffmpeg -loglevel quiet -hide_banner -y -f v4l2 -input_format mjpeg -framerate 30 -video_size 1920x1080 -i ${INPUT_VIDEO} -t 00:00:03 -c copy ${OUTPUT_VIDEO}
-ffmpeg -loglevel quiet -hide_banner -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/output-%3d.jpg
+ffmpeg -loglevel quiet -hide_banner -i ${OUTPUT_VIDEO} -r 1 -f image2 ${FolderToSave}/${Essai}/output-%3d.jpg
 
-LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 /usr/local/autocrop/bin/autocrop --input ${FolderToSave} --output ${IMG_CROP} --reject ${IMG_REJECT} --height 600 --width 500
+LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1 /usr/local/autocrop/bin/autocrop --input ${FolderToSave}/${Essai} --output ${IMG_CROP} --reject ${IMG_REJECT} --height 600 --width 500
 
 # on ne garde que la derniere
 rm -f $(ls ${IMG_CROP}/* |head -n-1)

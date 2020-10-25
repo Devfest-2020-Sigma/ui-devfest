@@ -46,7 +46,7 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     });
     setTimeout(() => {
       // Capture de la photo et passage à l'écran suivant
-      this.imagesService.prisePhoto(this.id).subscribe(image => {
+      this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
         if (this.essai === '1'){
           this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
         } else {

@@ -28,10 +28,14 @@ let ImagesController = class ImagesController {
         this.processService = processService;
         this.imageDao = imageDao;
     }
+    async updateImage(image) {
+        const id = image._id;
+        this.imageDao.editImage(id, image, () => { });
+    }
     initialiserWorkflow() {
         return this.imagesService.initialiserWorkflow();
     }
-    prisePhoto(id) {
+    prisePhoto(id, essai) {
         return this.imageDao.getImage(id).then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             console.log('arret du streaming');
@@ -39,7 +43,7 @@ let ImagesController = class ImagesController {
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imageDao.editImage(image._id, imageDto, function () { });
             const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
-            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path);
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path, essai);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
             this.imageDao.editImage(image._id, imageDto, function () { });
             return image;
@@ -83,16 +87,23 @@ let ImagesController = class ImagesController {
     }
 };
 __decorate([
+    common_1.Put(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [image_dto_1.ImageDto]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "updateImage", null);
+__decorate([
     common_1.Get('/initialiser'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "initialiserWorkflow", null);
 __decorate([
-    common_1.Get('/prise-photo/:id'),
-    __param(0, common_1.Param('id')),
+    common_1.Get('/prise-photo/:id/:essai'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Param('essai')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "prisePhoto", null);
 __decorate([

@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { interval } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { takeWhile, concatMapTo, filter } from 'rxjs/operators';
+import { ImageEtatEnum } from 'src/app/core/model/image.etat.enum';
+import { Image } from 'src/app/core/model/image.model';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
   selector: 'app-prise-photo-validation',
   templateUrl: './prise-photo-validation.component.html'
 })
-export class PrisePhotoValidationComponent implements OnInit {
+export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
 
   private id: string;
+  private readonly subscriptions: Subscription[] = [];
+  public imageUpload1: any;
+  public imageUpload2: any;
+  private imageChargee1 = false;
+  private imageChargee2 = false;
 
   constructor(private imagesService: ImagesService,
     private router: Router,
@@ -20,9 +30,50 @@ export class PrisePhotoValidationComponent implements OnInit {
         this.id = params.id;
       }
     });
+    const requete = this.imagesService.recupererImage(this.id);
+    const requetes = interval(1000).pipe(
+      takeWhile(() => this.imageChargee1 === false &&  this.imageChargee2 === false),
+      concatMapTo(requete));
+    this.subscriptions.push(
+      requetes.pipe(
+        filter(image => image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE)
+      ).subscribe(() => {
+        // on charge la première image capturée
+        this.imagesService.recupererPhoto(this.id, "1").subscribe(value => {
+          this.imageChargee1 = true;
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.imageUpload1 = reader.result as string;
+          }
+          reader.readAsDataURL(value);
+        }); 
+
+        this.imagesService.recupererPhoto(this.id, "2").subscribe(value => {
+          this.imageChargee2 = true;
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.imageUpload2 = reader.result as string;
+          }
+          reader.readAsDataURL(value);
+        }); 
+      })
+    );
   }
   
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    });
+  }
+
   onValidation(): void {
+    let image = new Image;
+    image._id = this.id;
+    image.imageSelectionnee =  2;
+    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
     this.router.navigate(["visualisation/choix-rendu", this.id]);
+    });
   }
 }

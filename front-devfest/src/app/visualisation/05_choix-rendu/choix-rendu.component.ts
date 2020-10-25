@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SvgIconRegistryService } from 'angular-svg-icon';
 import { interval, Subscription } from 'rxjs';
-import { concatMapTo, delay, take, takeUntil, takeWhile } from 'rxjs/operators';
-import { ImageEtatEnum } from 'src/app/core/model/image.etat.enum';
-import { ImageRenduEnum } from 'src/app/core/model/image.rendu.enum';
+import { take } from 'rxjs/operators';
+import { Image } from 'src/app/core/model/image.model';
 import { ImagesService } from 'src/app/core/service/images.service';
 
 @Component({
@@ -40,6 +38,11 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   }
 
   onChoisir(): void {
-    this.router.navigate(["visualisation/selection-pseudo", this.id]);
+    let image = new Image;
+    image._id = this.id;
+    image.renduSelectionne = 1;
+    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
+      this.router.navigate(["visualisation/selection-pseudo", this.id]);
+    });
   }
 }
