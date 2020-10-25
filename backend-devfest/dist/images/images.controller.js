@@ -28,15 +28,22 @@ let ImagesController = class ImagesController {
         this.processService = processService;
         this.imageDao = imageDao;
     }
+    async updateImage(image) {
+        const id = image._id;
+        this.imageDao.editImage(id, image, () => { });
+    }
     initialiserWorkflow() {
-        return this.imagesService.initialiserWorkflow().then(async (image) => {
+        return this.imagesService.initialiserWorkflow();
+    }
+    prisePhoto(id, essai) {
+        return this.imageDao.getImage(id).then(async (image) => {
             let imageDto = new image_dto_1.ImageDto();
             console.log('arret du streaming');
             await this.processService.execCommand(process_enum_1.processEnum.STREAMING_STOP);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EN_COURS;
             this.imageDao.editImage(image._id, imageDto, function () { });
             const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + image._id;
-            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path);
+            await this.processService.execCommand(process_enum_1.processEnum.CAPTURE_IMAGES, path, essai);
             imageDto.etat = image_etat_enum_1.ImageEtatEnum.PRISE_PHOTO_EFFECTUEE;
             this.imageDao.editImage(image._id, imageDto, function () { });
             return image;
@@ -58,8 +65,8 @@ let ImagesController = class ImagesController {
                 console.error("Parametre rendu incorrect : " + rendu);
         }
     }
-    async recupererImagesMosaic(id, res) {
-        return res.sendFile('mosaic.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
+    async recupererImagesMosaic(id, essai, res) {
+        return res.sendFile('capture-' + essai + '.jpg', { root: configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id });
     }
     streamingstart() {
         console.log('Debut du streaming');
@@ -80,11 +87,25 @@ let ImagesController = class ImagesController {
     }
 };
 __decorate([
+    common_1.Put(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [image_dto_1.ImageDto]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "updateImage", null);
+__decorate([
     common_1.Get('/initialiser'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "initialiserWorkflow", null);
+__decorate([
+    common_1.Get('/prise-photo/:id/:essai'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Param('essai')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "prisePhoto", null);
 __decorate([
     common_1.Get('/getsvg/:id/:rendu'),
     __param(0, common_1.Param('id')), __param(1, common_1.Param('rendu')), __param(2, common_1.Res()),
@@ -93,10 +114,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesSVG", null);
 __decorate([
-    common_1.Get('/getmosaic/:id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Res()),
+    common_1.Get('/getphoto/:id/:essai'),
+    __param(0, common_1.Param('id')), __param(1, common_1.Param('essai')), __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "recupererImagesMosaic", null);
 __decorate([

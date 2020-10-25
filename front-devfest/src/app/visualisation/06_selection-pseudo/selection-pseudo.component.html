@@ -1,19 +1,31 @@
-<mat-toolbar color="primary" class="header">
-  <div>3/4 : Choix du pseudo</div>
-</mat-toolbar>
+<div class="header-flou font-violet">
+  <img src="../../../assets/logo-header.svg" />
+</div>
+<br>
+<br>
 <br>
 <form [formGroup]="form" align="center">
-  <h3>Veuillez saisir votre pseudo : </h3>
-  <mat-form-field>
-    <input matInput formControlName="pseudoCtrl" placeholder="Pseudo" class="input" value={{pseudo}}
-           required>
-  </mat-form-field>
-  <div class="col-12 form-inline">
-    <div class="simple-keyboard"></div>
+  <div class="titre">
+    Un pseudo ?
   </div>
-  
+  <br>
+  <br>
+  <div class="rendu-text-description">
+    Il sera inscrit sur votre dessin
+  </div>
+  <br>
+  <div class="centrer">
+    <div class="pseudo-blur">
+      <input formControlName="pseudoCtrl" class="pseudo-input" required>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <div>
-    <br>
-    <button mat-button (click)="validerPseudo()">Valider</button>
+    <button class="bouton-noir" [disabled]="form.pristine || form.invalid" (click)="validerPseudo()">Valider</button>
   </div>
 </form>

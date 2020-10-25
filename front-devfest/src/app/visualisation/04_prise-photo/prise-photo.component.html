@@ -1,9 +1,7 @@
-<mat-toolbar color="primary" class="header">
-  <div>1/4 : Prise de la photo</div>
-</mat-toolbar>
-<div align="center">
-  <br>
-  <canvas id="video-canvas" #streaming width="600" height="400" style="display: block; width: 40%;"></canvas>
-  <br>
-  <button mat-button (click)="onCapturer()">Capturer</button>
+<canvas id="video-canvas" #streaming class="video"></canvas>
+<div class="centrer">
+  <div class="bouton-noir-decompte" [@itemAnim]>3</div>
+  <div class="bouton-noir-decompte">2</div>
+  <div class="bouton-noir-decompte">1</div>
+  <div class="bouton-noir-decompte decompte"><i class="far fa-smile-beam"></i></div>
 </div>

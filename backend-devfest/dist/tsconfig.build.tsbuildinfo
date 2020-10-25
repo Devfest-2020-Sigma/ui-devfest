@@ -1157,8 +1157,8 @@
         "affectsGlobalScope": false
       },
       "../src/images/image.dto.ts": {
-        "version": "2aa64c464e4f6176f38cf2ad6d29d7d8ac86513156df424eb59da8eb82b783f5",
-        "signature": "77a35cb23e5224a19547daaf456836d3f7d60f7ec67729538299f976a07919c4",
+        "version": "bfa45370093ef9ce70effa629b1714f962e4c21f5d8b4d0b7d597df41f5efb0f",
+        "signature": "30d4e4aacf74044aa571b1ff720f9b1f7266cee6b1083769c3f7f33f5419825d",
         "affectsGlobalScope": false
       },
       "../src/images/image.etat.enum.ts": {
@@ -1167,12 +1167,12 @@
         "affectsGlobalScope": false
       },
       "../src/images/image.interface.ts": {
-        "version": "8bea123b97a1c4ad8e12a9f808da9e54a3031688f74a556c65247276cdaf8773",
-        "signature": "16cc0d57e3f2ee07ecd4da42eab3ab874f784930de1ba673021dffdee1488c9a",
+        "version": "235d5ce6764b0c7fe5ef9872f7f1011a883f0da02578d2541723b43a6f2a30f7",
+        "signature": "d646275e50e28506dc3d5c67db363e2941842a6ee342a7b771c0abd147f83f97",
         "affectsGlobalScope": false
       },
       "../src/schemas/image.schema.ts": {
-        "version": "7ee3e8abfe07203cc56b29c5482ec9ff3212b9d0efb9e3f143dc4432128ab2f9",
+        "version": "daa29cbbfbb645ab40c48b82f01b7a72395631bf855c3b2b7b3cc48ec5cdb475",
         "signature": "5e8978ec1d8c762b71ab33834fa9b9d934aeac07f9bad730d0b617a87c0fd990",
         "affectsGlobalScope": false
       },
@@ -1187,7 +1187,7 @@
         "affectsGlobalScope": false
       },
       "../src/process/process.service.ts": {
-        "version": "1dd5cad578771e0fd8213bd4861ecbb39d989eeaf103c6ae7a2b9bc789c4b9c0",
+        "version": "7339c891f2b6f4fc4aa8e3f145e86aa247f40cce316905e3cdddc8f6132d598c",
         "signature": "4a0740c0e3ebc1b37a21fde4febeee25720760471724036be75e500d3c5a45bb",
         "affectsGlobalScope": false
       },
@@ -3437,8 +3437,8 @@
         "affectsGlobalScope": false
       },
       "../src/images/images.controller.ts": {
-        "version": "8ee20e89286781925e010c3b9829ead2d6785434f65636d554fe40f075578aa4",
-        "signature": "4b7ef7ce898f8084e0e67ba80f781d084fd3c7a642b94e442b67b982494b4d0a",
+        "version": "785a8da69c1abcbbf164af0c43f6c874086cf4196cc4d70e312cbfd4eca783d4",
+        "signature": "9969e9397d2e25529f8e4cbbbe09f4c4f5de8a04731581a288aa5a5c2b24544e",
         "affectsGlobalScope": false
       },
       "../src/images/images.provider.ts": {
@@ -10599,7 +10599,6 @@
       "../src/process/process.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/child_process.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",

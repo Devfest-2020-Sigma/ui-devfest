@@ -43,7 +43,7 @@ export class SelectionPhotoMosaicComponent implements OnInit, OnDestroy {
           takeWhile(image => this.mosaicChargee === false),
           filter(image => image.etat === ImageEtatEnum.PRISE_PHOTO_EFFECTUEE)
         ).subscribe(image => {
-          this.imagesService.recupererMosaic(this.id).subscribe(value => {
+         /* this.imagesService.recupererMosaic(this.id).subscribe(value => {
             const reader = new FileReader();
             reader.onload = () => {
               this.imageUpload = reader.result as string;
@@ -51,7 +51,7 @@ export class SelectionPhotoMosaicComponent implements OnInit, OnDestroy {
             reader.readAsDataURL(value);
             this.mosaicChargee = true;
             console.log(this.mosaicChargee);
-          });
+          }); */
         })
       );
     });

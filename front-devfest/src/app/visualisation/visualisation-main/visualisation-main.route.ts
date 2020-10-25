@@ -4,9 +4,11 @@ import { RgpdComponent } from '../02_rgpd/rgpd.component';
 import { InstructionsComponent } from '../03_instructions/instructions.component';
 import { PrisePhotoComponent } from '../04_prise-photo/prise-photo.component';
 import { ChoixRenduComponent } from '../05_choix-rendu/choix-rendu.component';
-import { ImpressionPhotoComponent } from '../06_impression-photo/impression-photo.component';
+import { ImpressionPhotoComponent } from '../07_impression-photo/impression-photo.component';
 import { SelectionPseudoComponent } from '../06_selection-pseudo/selection-pseudo.component';
 import { SelectionPhotoMosaicComponent } from '../99_selection-photo-mosaic/selection-photo-mosaic.component';
+import { PrisePhotoRetryComponent } from '../04_prise-photo-retry/prise-photo-retry.component';
+import { PrisePhotoValidationComponent } from '../04_prise-photo-validation/prise-photo-validation.component';
 
 
 export const visualisationMainRoute: Route[] = [
@@ -25,10 +27,19 @@ export const visualisationMainRoute: Route[] = [
     component : InstructionsComponent,
     canActivate : []
   },
- 
   {
-    path: 'prise-photo',
+    path: 'prise-photo/:id/:essai',
     component: PrisePhotoComponent,
+    canActivate: []
+  },
+  {
+    path: 'prise-photo-retry/:id',
+    component: PrisePhotoRetryComponent,
+    canActivate: []
+  },
+  {
+    path: 'prise-photo-validation/:id',
+    component: PrisePhotoValidationComponent,
     canActivate: []
   },
   {
@@ -37,7 +48,7 @@ export const visualisationMainRoute: Route[] = [
     canActivate: []
   },
   {
-    path: 'selection-pseudo/:id/:numero',
+    path: 'selection-pseudo/:id',
     component: SelectionPseudoComponent,
     canActivate: []
   },
@@ -47,7 +58,7 @@ export const visualisationMainRoute: Route[] = [
     canActivate: []
   },
   {
-    path: 'impression/:id',
+    path: 'impression-photo',
     component: ImpressionPhotoComponent,
     canActivate: []
   }];

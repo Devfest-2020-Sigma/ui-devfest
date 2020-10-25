@@ -1,9 +1,7 @@
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import Keyboard from 'simple-keyboard';
+import { Image } from 'src/app/core/model/image.model';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
@@ -16,16 +14,13 @@ export class SelectionPseudoComponent implements OnInit {
   public pseudo: string = "";
   private id: string;
   private numero: number;
-  private keyboard: Keyboard;
-
-
 
   constructor(private formBuilder: FormBuilder,
     private imagesService: ImagesService,
     private route: ActivatedRoute,
     private router: Router) {
     this.form = this.formBuilder.group({
-      pseudoCtrl: ['', Validators.required]
+      pseudoCtrl: ['', Validators.maxLength(10)]
     });
   }
 
@@ -38,43 +33,18 @@ export class SelectionPseudoComponent implements OnInit {
       if (params.id) {
         this.id = params.id;
       }
-      if (params.numero) {
-        this.numero = params.numero;
-      }   
     });
   }
 
   validerPseudo() {
-    this.imagesService.genererSVG(this.id, this.numero, this.pseudo).subscribe(value => {
-      this.router.navigate(["visualisation/choix-rendu", this.id]);
+    let image = new Image;
+    image._id = this.id;
+    image.pseudo =  this.pseudo;
+    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
+      this.imagesService.recupererImage(this.id).subscribe((value) => {
+        console.log(value);
+      });
+      this.router.navigate(["visualisation/impression-photo"]);
     });
   }
-
-  ngAfterViewInit() {
-    this.keyboard = new Keyboard({
-      onChange: input => this.onChange(input),
-      onKeyPress: button => this.onKeyPress(button)
-    });
-  }
-
-  onChange = (input: string) => {
-    this.pseudo = input;
-  };
-
-  onKeyPress = (button: string) => {
-    if (button === "{shift}" || button === "{lock}") this.handleShift();
-  };
-
-  onInputChange = (event: any) => {
-    this.keyboard.setInput(event.target.value);
-  };
-
-  handleShift = () => {
-    let currentLayout = this.keyboard.options.layoutName;
-    let shiftToggle = currentLayout === "default" ? "shift" : "default";
-
-    this.keyboard.setOptions({
-      layoutName: shiftToggle
-    });
-  };
 }

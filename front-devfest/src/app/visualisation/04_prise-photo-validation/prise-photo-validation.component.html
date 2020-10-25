@@ -1,0 +1,50 @@
+<div class="header-flou font-violet">
+  <img src="../../../assets/logo-header.svg" />
+</div>
+<div class="font-blanc">
+  <br>
+  <br>
+  <div class="centrer titre">
+    Choisis la photo que tu préfères
+  </div>
+  <br>
+  <br>
+  <swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <div class="cadre-photo">
+            <img class='photo-capture' id='capture-img-1' [src]='imageUpload1'/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <div class="cadre-photo">
+            <img class='photo-capture' id='capture-img-2' [src]='imageUpload2'/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </swiper>
+  <br>
+  <br>
+  <div class="centrer titre">
+    <span style="color: #00B8FF">W</span>
+    <span style="color: #f700f7">o</span>
+    <span style="color: rgb(255, 208, 0)">w.</span>
+  </div>
+  <div class="centrer titre">
+    Vous êtes splendide.
+  </div>
+  <br>
+  <div class="centrer titre">
+    <button class="bouton-noir" (click)="onValidation()">Merci, et ensuite ?</button>
+  </div>
+  <br>
+  <br>
+  <br>
+
+</div>

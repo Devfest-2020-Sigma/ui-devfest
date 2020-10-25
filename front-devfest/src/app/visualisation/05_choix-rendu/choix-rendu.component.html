@@ -1,14 +1,61 @@
-<mat-toolbar color="primary" class="header">
-  <div>4/4 : Choix du rendu</div>
-</mat-toolbar>
-<div class="col-12 form-inline">
-  <div class="col-4" *ngIf="imageSetJpgLite" (click)="imprimer()">
-    <svg-icon name="svgJpgLite"></svg-icon>
+<div class="header-flou font-violet">
+  <img src="../../../assets/logo-header.svg" />
+</div>
+<div class="font-blanc">
+  <br><br>
+  <div class="rendu-text">
+    Quel style de dessin veux-tu ?
   </div>
-  <div class="col-4" *ngIf="imageSetTsp" (click)="imprimer()">
-    <svg-icon name="svgTsp"></svg-icon>
-  </div>
-  <div class="col-4" *ngIf="imageSetSquiddle" (click)="imprimer()">
-    <svg-icon name="svgSquiddle"></svg-icon>
+  <br><br>
+  <swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="../../../assets/rendu_1.svg" />
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 1 : Esquisse
+        </div>
+        <div class="rendu-text-description">
+          ~ 2 min d'impression
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="../../../assets/rendu_2.svg" />
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 2 : Tracé
+        </div>
+        <div class="rendu-text-description">
+          ~ 10 min d'impression
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="../../../assets/rendu_3.svg" />
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 3 : Précision
+        </div>
+        <div class="rendu-text-description">
+          ~ 20 min d'impression
+        </div>
+      </div>
+    </div>
+  </swiper>
+  <br><br>
+  <br><br>
+  <br><br>
+
+  <div class="centrer">
+    <button class="bouton-noir" (click)="onChoisir()">Choisir</button>
   </div>
 </div>
