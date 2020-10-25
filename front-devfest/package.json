@@ -17,7 +17,6 @@
     "@angular/compiler": "~9.1.2",
     "@angular/core": "~9.1.2",
     "@angular/forms": "~9.1.2",
-    "@angular/material": "^9.2.1",
     "@angular/platform-browser": "~9.1.2",
     "@angular/platform-browser-dynamic": "~9.1.2",
     "@angular/platform-server": "~9.1.2",
@@ -31,6 +30,7 @@
     "angular-svg-icon": "^10.0.0",
     "bootstrap": "^4.5.2",
     "express": "^4.15.2",
+    "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~6.5.4",
     "simple-keyboard": "^2.30.26",
     "tslib": "^1.10.0",
@@ -38,7 +38,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1000.6",
+    "@angular-devkit/build-angular": "^0.1002.0",
     "@angular/cli": "~9.1.2",
     "@angular/compiler-cli": "~9.1.2",
     "@angular/language-service": "~9.1.2",
@@ -56,6 +56,7 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "^7.0.0",
+    "swiper": "^6.3.4",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"

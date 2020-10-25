@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Image } from 'src/app/core/model/image.model';
@@ -13,8 +14,18 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
 
   public interval = interval(500).pipe(take(15));
   private readonly subscriptions: Subscription[] = [];
-
   private id: string;
+  private renduSelectionne: number = 1;
+
+  public config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
+  };
 
   constructor(private imagesService: ImagesService,
     private route: ActivatedRoute,
@@ -40,9 +51,13 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   onChoisir(): void {
     let image = new Image;
     image._id = this.id;
-    image.renduSelectionne = 1;
+    image.renduSelectionne = this.renduSelectionne;
     this.imagesService.miseAjourImageBdd(image).subscribe(() => {
       this.router.navigate(["visualisation/selection-pseudo", this.id]);
     });
+  }
+  
+  public onIndexChange(index: number) {
+    this.renduSelectionne = index;
   }
 }

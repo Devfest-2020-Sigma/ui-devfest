@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper/public-api';
 import { interval } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { takeWhile, concatMapTo, filter } from 'rxjs/operators';
@@ -19,6 +20,19 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
   public imageUpload2: any;
   private imageChargee1 = false;
   private imageChargee2 = false;
+
+  private imageSelectionnee: number = 1;
+
+  public config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
+  };
+
 
   constructor(private imagesService: ImagesService,
     private router: Router,
@@ -71,9 +85,13 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
   onValidation(): void {
     let image = new Image;
     image._id = this.id;
-    image.imageSelectionnee =  2;
+    image.imageSelectionnee =  this.imageSelectionnee;
     this.imagesService.miseAjourImageBdd(image).subscribe(() => {
     this.router.navigate(["visualisation/choix-rendu", this.id]);
     });
+  }
+
+  public onIndexChange(index: number) {
+    this.imageSelectionnee = index;
   }
 }

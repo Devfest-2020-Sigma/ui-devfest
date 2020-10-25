@@ -375,3 +375,9 @@ svg {
   animation-delay: 2s;
   transform: translateY(-20px);
 }
+
+.centrer {
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+}
