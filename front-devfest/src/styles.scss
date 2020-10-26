@@ -30,7 +30,6 @@ body {
   height: 80px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 18px;
-  transform: translate(1.5rem, 1.5rem);
   text-align: center;
   font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
@@ -38,8 +37,6 @@ body {
   opacity: 1;
   transform-style: preserve-3d;
   border: none;
-  transform: translateY(200%);
-  transition: transform 330ms ease-in-out;
 
   &::before {
     content: "";
@@ -71,7 +68,6 @@ body {
   height: 80px;
   background: #000000 0% 0% no-repeat padding-box;
   border-radius: 18px;
-  transform: translate(1.5rem, 1.5rem);
   text-align: center;
   font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
@@ -110,7 +106,6 @@ body {
   height: 80px;
   background: #000000 0% 0% no-repeat padding-box;
   border-radius: 18px;
-  transform: translate(1.5rem, 1.5rem);
   text-align: center;
   font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
@@ -149,7 +144,6 @@ body {
   height: 80px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 18px;
-  transform: translate(1.5rem, 1.5rem);
   text-align: center;
   font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
@@ -163,7 +157,6 @@ body {
   width: 350px;
   height: 350px;
   border-radius: 18px;
-  transform: translate(1.5rem, 1.5rem);
   transform-style: preserve-3d;
   border: none;
 
@@ -380,4 +373,10 @@ svg {
   display: flex;
   vertical-align: middle;
   justify-content: center;
+}
+
+.footer {
+  position: fixed;
+  bottom: 100px;
+  left: 120px;
 }

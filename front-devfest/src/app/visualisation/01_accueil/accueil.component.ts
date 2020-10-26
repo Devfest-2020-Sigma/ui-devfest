@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   animations: [
     trigger('boutonAnimation', [
       transition(':enter', [
-        style({transform: 'translateY(100px)'}),
-        animate(500)
+        style({right: '-400%'}),
+        animate('.2s ease-in-out', style({ right: 0 }))
       ])
     ])
   ]
