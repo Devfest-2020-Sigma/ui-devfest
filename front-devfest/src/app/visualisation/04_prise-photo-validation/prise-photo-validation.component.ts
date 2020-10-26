@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/public-api';
@@ -10,7 +11,15 @@ import { ImagesService } from '../../core/service/images.service';
 
 @Component({
   selector: 'app-prise-photo-validation',
-  templateUrl: './prise-photo-validation.component.html'
+  templateUrl: './prise-photo-validation.component.html',
+  animations: [
+    trigger('boutonAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)' }),
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
 
@@ -46,7 +55,7 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
     });
     const requete = this.imagesService.recupererImage(this.id);
     const requetes = interval(1000).pipe(
-      takeWhile(() => this.imageChargee1 === false &&  this.imageChargee2 === false),
+      takeWhile(() => this.imageChargee1 === false && this.imageChargee2 === false),
       concatMapTo(requete));
     this.subscriptions.push(
       requetes.pipe(
@@ -60,7 +69,7 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
             this.imageUpload1 = reader.result as string;
           }
           reader.readAsDataURL(value);
-        }); 
+        });
 
         this.imagesService.recupererPhoto(this.id, "2").subscribe(value => {
           this.imageChargee2 = true;
@@ -69,11 +78,11 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
             this.imageUpload2 = reader.result as string;
           }
           reader.readAsDataURL(value);
-        }); 
+        });
       })
     );
   }
-  
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => {
       if (subscription) {
@@ -85,9 +94,9 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
   onValidation(): void {
     let image = new Image;
     image._id = this.id;
-    image.imageSelectionnee =  this.imageSelectionnee;
+    image.imageSelectionnee = this.imageSelectionnee;
     this.imagesService.miseAjourImageBdd(image).subscribe(() => {
-    this.router.navigate(["visualisation/choix-rendu", this.id]);
+      this.router.navigate(["visualisation/choix-rendu", this.id]);
     });
   }
 

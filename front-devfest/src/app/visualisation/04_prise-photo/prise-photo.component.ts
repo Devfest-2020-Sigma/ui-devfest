@@ -1,5 +1,4 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Route } from '@angular/compiler/src/core';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
@@ -11,7 +10,7 @@ import { ImagesService } from '../../core/service/images.service';
   animations: [
     trigger('itemAnim', [
       transition(':enter', [
-        style({ transform: 'translateX(400px)' }),
+        style({ transform: 'translateX(300px)' }),
         animate(350)
       ])
     ])
@@ -44,7 +43,7 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     let player = new JSMpeg.Player(url, {
       canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
     });
-    setTimeout(() => {
+  /*  setTimeout(() => {
       // Capture de la photo et passage à l'écran suivant
       this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
         if (this.essai === '1'){
@@ -54,6 +53,6 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
         }
         
       });
-    }, 3000);
+    }, 3000);*/
   }
 }
