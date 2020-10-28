@@ -1,0 +1,29 @@
+/** METROPOLIS */
+@font-face {
+  font-family: 'Metropolis';
+  src: url('/assets/fonts/metropolis/Metropolis-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  src: url('/assets/fonts/metropolis/Metropolis-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  src: url('/assets/fonts/metropolis/Metropolis-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** KUFAM */
+@font-face {
+  font-family: 'Kufam';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/kufam/Kufam-Regular.ttf') format('truetype');
+}
