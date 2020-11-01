@@ -18,6 +18,13 @@ body {
   height: 100%;
 }
 
+.font-violet-plus{
+  top: 520px;
+  width: 600px;
+  height: 480px;
+  background: transparent linear-gradient(180deg, #1B004200 0%, #1B0042AB 100%) 0% 0% no-repeat padding-box;
+}
+
 .font-blanc {
   background-color: white;
   width: 100%;
@@ -225,15 +232,6 @@ body {
   }
 }
 
-.premiere {
-  position: relative;
-}
-
-.superposition {
-  position: absolute;
-  z-index: 1;
-}
-
 .titre {
   font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
@@ -344,32 +342,6 @@ svg {
   height: 100%;
 }
 
-@keyframes mymove {
-  0% {
-    right: 600px;
-    top: 0px;
-  }
-  50% {
-    right: 300px;
-    top: 0px;
-  }
-  100% {
-    right: 0px;
-    top: 0px;
-  }
-}
-
-// animations
-.decompte {
-  animation: mymove 5s ease infinite;
-}
-
-.up {
-  animation-duration: 5s;
-  animation-delay: 2s;
-  transform: translateY(-20px);
-}
-
 .centrer {
   display: flex;
   vertical-align: middle;
@@ -380,4 +352,10 @@ svg {
   position: fixed;
   bottom: 80px;
   left: 120px;
+}
+
+.footer-decompte {
+  position: fixed;
+  bottom: 80px;
+  left: 250px;
 }

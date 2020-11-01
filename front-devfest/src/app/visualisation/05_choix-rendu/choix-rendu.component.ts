@@ -4,6 +4,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Image } from 'src/app/core/model/image.model';
+import { ImageRenduEnum } from 'src/app/core/model/image.rendu.enum';
 import { ImagesService } from 'src/app/core/service/images.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   public interval = interval(500).pipe(take(15));
   private readonly subscriptions: Subscription[] = [];
   private id: string;
-  private renduSelectionne: number = 1;
+  private renduSelectionne: ImageRenduEnum = ImageRenduEnum.JPGLITE;
 
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -58,6 +59,6 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   }
   
   public onIndexChange(index: number) {
-    this.renduSelectionne = index;
+    this.renduSelectionne = Object.keys(ImageRenduEnum).keys()[index];
   }
 }

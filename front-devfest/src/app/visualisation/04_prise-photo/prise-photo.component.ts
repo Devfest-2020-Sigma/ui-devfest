@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
@@ -10,8 +10,11 @@ import { ImagesService } from '../../core/service/images.service';
   animations: [
     trigger('itemAnim', [
       transition(':enter', [
-        style({ transform: 'translateX(300px)' }),
-        animate(350)
+        animate(2400, keyframes([ 
+          style({ transform: 'translateX(300px)' }),
+          style({ transform: 'translateX(0px)' }),
+          style({ transform: 'translateX(-300px)' })
+        ]))
       ])
     ])
   ]
