@@ -2,6 +2,8 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
+import { interval } from 'rxjs';
+import { concatMapTo, take } from 'rxjs/operators';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
@@ -10,11 +12,22 @@ import { ImagesService } from '../../core/service/images.service';
   animations: [
     trigger('itemAnim', [
       transition(':enter', [
-        animate(2400, keyframes([ 
-          style({ transform: 'translateX(300px)' }),
-          style({ transform: 'translateX(0px)' }),
-          style({ transform: 'translateX(-300px)' })
-        ]))
+        animate(
+          '1000ms 0ms',
+          keyframes([
+            style({ visibility: 'visible', transform: 'translate3d(300%, 0, 0)', easing: 'ease', offset: 0 }),
+            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 1 })
+          ])
+        )
+      ]),
+      transition(':leave', [
+        animate(
+          '1000ms 0ms',
+          keyframes([
+            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 0 }),
+            style({ transform: 'translate3d(-300%, 0, 0)', visibility: 'hidden', easing: 'ease', offset: 1 })
+          ])
+        )
       ])
     ])
   ]
@@ -24,6 +37,8 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   @ViewChild('streaming', { static: false }) streamingcanvas: ElementRef;
   private id: string;
   private essai: string;
+  public afficher = true;
+  public decompte = 3;
 
   constructor(private imagesService: ImagesService,
     private router: Router,
@@ -39,6 +54,14 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
         this.essai = params.essai;
       }
     });
+
+    setInterval(() => {
+      // Make your auth call and export this from Service
+      this.afficher = !this.afficher
+      this.decompte = this.decompte - 0.5;
+    }, 2000);
+    //const requetes = interval(1000).pipe(take(15)).pipe(concatMapTo(()=> {));
+    //requetes.subscribe();
   }
 
   ngAfterViewInit(): void {
@@ -46,16 +69,16 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     let player = new JSMpeg.Player(url, {
       canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
     });
-  /*  setTimeout(() => {
-      // Capture de la photo et passage à l'écran suivant
-      this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
-        if (this.essai === '1'){
-          this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
-        } else {
-          this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
-        }
-        
-      });
-    }, 3000);*/
+    /*  setTimeout(() => {
+        // Capture de la photo et passage à l'écran suivant
+        this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
+          if (this.essai === '1'){
+            this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
+          } else {
+            this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
+          }
+          
+        });
+      }, 3000);*/
   }
 }
