@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,8 +8,13 @@ import { Router } from '@angular/router';
   animations: [
     trigger('boutonAnimation', [
       transition(':enter', [
-        style({ transform: 'translateY(100%)' }),
-        animate(500)
+        animate(
+          '1000ms 0ms',
+          keyframes([
+            style({ visibility: 'visible', transform: 'translate3d(0, 100%, 0)', easing: 'ease', offset: 0 }),
+            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 1 })
+          ])
+        )
       ])
     ])
   ]
