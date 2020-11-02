@@ -5,7 +5,7 @@ import { RobotsModule } from './robots/robots.module';
 
 @Module({
   imports: [ImagesModule,
-    RobotsModule
+    RobotsModule,
   ],
   controllers: [],
   providers: [],

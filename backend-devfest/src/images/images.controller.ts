@@ -121,7 +121,7 @@ export class ImagesController {
     this.imagesService.sendImpressionGcodeRabbitEvent(path);
   }
 
-  @Put('/pseudo')
+  @Put('/generer-svg')
   async generationRendu(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;

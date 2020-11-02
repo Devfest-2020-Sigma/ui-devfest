@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { Image } from 'src/app/core/model/image.model';
 import { ImagesService } from '../../core/service/images.service';
 
@@ -13,7 +14,6 @@ export class SelectionPseudoComponent implements OnInit {
   public form: FormGroup;
   public pseudo: string = "";
   private id: string;
-  private numero: number;
 
   constructor(private formBuilder: FormBuilder,
     private imagesService: ImagesService,
@@ -39,12 +39,10 @@ export class SelectionPseudoComponent implements OnInit {
   validerPseudo() {
     let image = new Image;
     image._id = this.id;
-    image.pseudo =  this.pseudo;
-    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
-      this.imagesService.recupererImage(this.id).subscribe((value) => {
-        console.log(value);
-      });
-      this.router.navigate(["visualisation/impression-photo"]);
-    });
+    image.pseudo = this.pseudo;
+    this.imagesService.miseAjourImageBdd(image).pipe(
+      tap(image => this.imagesService.genererSVG(image)),
+      tap(() => this.router.navigate(["visualisation/impression-photo"]))
+    ).subscribe();
   }
 }
