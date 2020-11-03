@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigurationEnum } from 'src/common/configuration.enum';
+import { AppConfigService } from 'src/config/configuration.service';
 import { processEnum } from './process.enum';
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
@@ -8,6 +8,7 @@ const exec = util.promisify(require('child_process').exec);
 @Injectable()
 export class ProcessService {
   constructor(
+    private appConfigService: AppConfigService
   ) {
   }
 
@@ -18,7 +19,7 @@ export class ProcessService {
    */
   async execCommand(nomCommande: processEnum, ...args) : Promise<string>{
     const argument = args.join(" ");
-    const commande = ConfigurationEnum.REPERTOIRE_SCRIPTS + nomCommande + " " + argument;
+    const commande = this.appConfigService.repertoire_scripts + nomCommande + " " + argument;
     // Log de la commande qui va être executée
     console.log(commande);
     return new Promise<string>((resolve, reject) => {
