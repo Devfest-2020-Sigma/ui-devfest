@@ -13,7 +13,6 @@ import { ChargementIntercepteurDebutService } from './core/interceptor/loader-in
 import { ChargementIntercepteurFinService } from './core/interceptor/loader-intercepteur-fin.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
   declarations: [
     AppComponent

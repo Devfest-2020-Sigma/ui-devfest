@@ -1,22 +1,12 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {slideInUpOnEnterAnimation} from 'angular-animations';
 
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   animations: [
-    trigger('boutonAnimation', [
-      transition(':enter', [
-        animate(
-          '1000ms 0ms',
-          keyframes([
-            style({ visibility: 'visible', transform: 'translate3d(0, 100%, 0)', easing: 'ease', offset: 0 }),
-            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 1 })
-          ])
-        )
-      ])
-    ])
+    slideInUpOnEnterAnimation()
   ]
 })
 export class AccueilComponent implements OnInit {
@@ -27,6 +17,6 @@ export class AccueilComponent implements OnInit {
   }
 
   onCommencer(): void {
-    this.router.navigate(["visualisation/rgpd"]);
+    this.router.navigate(['visualisation/rgpd']);
   }
 }
