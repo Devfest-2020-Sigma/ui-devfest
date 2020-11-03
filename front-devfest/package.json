@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.0",
-    "@angular/cdk": "^10.2.0",
+    "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.1.0",
     "@angular/compiler": "~10.1.0",
     "@angular/core": "~10.1.0",
@@ -32,7 +32,7 @@
     "express": "^4.15.2",
     "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~6.5.4",
-    "simple-keyboard": "^2.30.26",
+    "simple-keyboard": "^2.32.26",
     "tslib": "^2.0.0",
     "typeface-muli": "^1.1.13",
     "zone.js": "~0.10.3"
