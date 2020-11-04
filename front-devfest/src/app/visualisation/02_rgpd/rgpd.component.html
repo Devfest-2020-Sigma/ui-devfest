@@ -1,22 +1,37 @@
 <div class="font-violet">
-  <div class="header">
-    <img src="../../../assets/logo-header.svg" />
+  <div class="px-3">
+    <div class="py-3 px-5">
+      <div class="row">
+        <div class="col-4 p-0 m-auto">
+          <img src="assets/devfest-seul.png" class="img-fluid" [@devFestAnimation] />
+        </div>
+        <div class="col-4 p-0 m-auto">
+          <img src="assets/x.png" class="img-fluid" [@xAnimation]/>
+        </div>
+        <div class="col-4 p-0 m-auto">
+          <img src="assets/sigma.png" class="img-fluid" [@sigmaAnimation] />
+        </div>
+      </div>
+    </div>
   </div>
+  <br>
   <br>
   <br>
   <br>
   <div class="centrer">
-    <img src="../../../assets/rgpd_photo.svg" [@textAnimation]/>
+    <img src="assets/rgpd_photo.svg" [@slideInRightOnEnter]/>
   </div>
   <br>
   <br>
   <br>
-  <p class="rgpd-text" [@textAnimation]>
+  <p class="rgpd-text" [@slideInRightOnEnter]>
     Nous stockerons la photo que vous choisirez le temps de son impression. Elle sera ensuite supprimée, ainsi que la
     photo "dessinée" par notre algorithme.
   </p>
 
   <div class="footer">
-    <button class="bouton-blanc" (click)="onValidation()" ><div [@boutonAnimation]>J'ai compris</div></button>
+    <button class="bouton-blanc" (click)="onValidation()">
+      <div [@fadeInOnEnter]>J'ai compris</div>
+    </button>
   </div>
 </div>
