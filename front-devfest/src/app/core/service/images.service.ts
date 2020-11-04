@@ -81,12 +81,8 @@ export class ImagesService {
   /**
    * Mise à jour du pseudo dans la BDD
    */
-  genererSVG(id: string, numero: number, pseudo: string): Observable<Image> {
-    let image = new Image;
-    image._id = id;
-    image.pseudo = pseudo;
-    image.imageSelectionnee = numero;
-    return this.http.put<Image>(`${url}/pseudo`, image);
+  genererSVG(image : Image): Observable<Image> {
+    return this.http.put<Image>(`${url}/generer-svg`, image);
   }
 
   /**

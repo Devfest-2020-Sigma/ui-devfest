@@ -6,7 +6,7 @@ exports.ImageSchema = new mongoose_1.Schema({
     pseudo: String,
     imageSelectionnee: Number,
     etat: String,
-    renduSelectionne: Number,
+    renduSelectionne: String,
     renduJpegLite: Boolean,
     renduJpegTsp: Boolean,
     renduJpegSquiddle: Boolean

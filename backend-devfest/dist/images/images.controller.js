@@ -141,7 +141,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "imprimerGcode", null);
 __decorate([
-    common_1.Put('/pseudo'),
+    common_1.Put('/generer-svg'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [image_dto_1.ImageDto]),

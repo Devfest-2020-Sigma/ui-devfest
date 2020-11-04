@@ -15,7 +15,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     common_1.Module({
         imports: [images_module_1.ImagesModule,
-            robots_module_1.RobotsModule
+            robots_module_1.RobotsModule,
         ],
         controllers: [],
         providers: [],
