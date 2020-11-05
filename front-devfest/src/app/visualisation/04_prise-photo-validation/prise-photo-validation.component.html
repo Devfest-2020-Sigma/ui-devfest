@@ -1,5 +1,5 @@
 <div class="header-flou font-violet">
-  <img src="../../../assets/logo-header.svg" />
+  <img src="assets/logo-header.svg" />
 </div>
 <div class="font-blanc">
   <br>
@@ -14,7 +14,7 @@
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
         <div class="centrer">
           <div class="cadre-photo">
-            <img class='photo-capture' id='capture-img-1' [src]='imageUpload1'/>
+            <img class='photo-capture' id='capture-img-1' [src]='imageUpload1' />
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
         <div class="centrer">
           <div class="cadre-photo">
-            <img class='photo-capture' id='capture-img-2' [src]='imageUpload2'/>
+            <img class='photo-capture' id='capture-img-2' [src]='imageUpload2' />
           </div>
         </div>
       </div>
@@ -31,16 +31,16 @@
   </swiper>
   <br>
   <br>
-  <div class="centrer titre">
-    <span style="color: #00B8FF">W</span>
-    <span style="color: #f700f7">o</span>
-    <span style="color: rgb(255, 208, 0)">w.</span>
+  <div class="centrer wow">
+    <span style="color: #00B8FF" [@fadeInOnEnter]="{value: '', params: { delay:1000} }">W</span>
+    <span style="color: #f700f7" [@fadeInOnEnter]="{value: '', params: { delay:2000} }">o</span>
+    <span style="color: rgb(255, 208, 0)" [@fadeInOnEnter]="{value: '', params: { delay:3000} }">w.</span>
   </div>
   <div class="centrer titre">
     Vous êtes splendide.
   </div>
   <br>
   <div class="footer">
-    <button class="bouton-noir" (click)="onValidation()" [@boutonAnimation]>Merci, et ensuite ?</button>
+    <button class="bouton-noir-validation" (click)="onValidation()" [@slideInUpOnEnter]>Merci, et ensuite ?</button>
   </div>
 </div>

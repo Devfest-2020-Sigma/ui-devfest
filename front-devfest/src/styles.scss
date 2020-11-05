@@ -109,6 +109,44 @@ body {
   }
 }
 
+.bouton-noir-validation{
+  width: 400px;
+  height: 80px;
+  background: #000000 0% 0% no-repeat padding-box;
+  border-radius: 18px;
+  text-align: center;
+  font: normal normal bold 40px/48px Metropolis;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  transform-style: preserve-3d;
+  border: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    width: 410px;
+    height: 80px;
+    background: #00f7f7 0% 0% no-repeat padding-box;
+    border-radius: 18px 0px 18px 18px;
+    transform: translateZ(-1px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 410px;
+    height: 80px;
+    background: #f700f7 0% 0% no-repeat padding-box;
+    border-radius: 18px 18px 18px 0px;
+    transform: translateZ(-1px);
+  }
+}
+
 .bouton-noir-decompte {
   width: 80px;
   height: 80px;
