@@ -4,7 +4,7 @@
 <div class="font-blanc">
   <br>
   <br>
-  <div class="centrer titre">
+  <div class="rendu-text">
     Choisis la photo que tu préfères
   </div>
   <br>
@@ -12,6 +12,10 @@
   <swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="rendu-text-description">
+          Photo n°1
+        </div>
+        <br>
         <div class="centrer">
           <div class="cadre-photo">
             <img class='photo-capture' id='capture-img-1' [src]='imageUpload1' />
@@ -21,6 +25,10 @@
     </div>
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="rendu-text-description">
+          Photo n°2
+        </div>
+        <br>
         <div class="centrer">
           <div class="cadre-photo">
             <img class='photo-capture' id='capture-img-2' [src]='imageUpload2' />
