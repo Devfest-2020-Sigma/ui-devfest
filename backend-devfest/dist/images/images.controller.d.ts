@@ -2,6 +2,7 @@ import { ImageDao } from 'src/images/image.dao';
 import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { IImage } from './image.interface';
+import { ImageRabbit } from './image.rabbit';
 import { ImageRenduEnum } from './image.rendu.enum';
 import { ImagesService } from './images.service';
 export declare class ImagesController {
@@ -16,6 +17,6 @@ export declare class ImagesController {
     recupererImagesMosaic(id: string, essai: string, res: any): Promise<Blob>;
     streamingstart(): void;
     getImage(id: any): Promise<IImage>;
-    imprimerGcode(id: any): Promise<void>;
     generationRendu(image: ImageDto): Promise<void>;
+    handleIntegrationRobot(data: Record<string, ImageRabbit>): Promise<void>;
 }

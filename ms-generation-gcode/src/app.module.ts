@@ -1,13 +1,23 @@
 import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
-import { DatabaseModule } from './database/database.module';
-import { DatabaseService } from './database/database.service';
-import { imagesProviders } from './images/images.provider';
 import { ProcessService } from './process/process.service';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://admin:admin@localhost:5672'],
+          queue: 'integration-robots',
+          queueOptions: {
+            durable: true,
+          }
+        }
+      }
+    ])],
   controllers: [AppController],
-  providers: [ ProcessService, DatabaseService,...imagesProviders]
+  providers: [ ProcessService]
 })
 export class AppModule {}

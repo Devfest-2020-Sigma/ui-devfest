@@ -4,7 +4,6 @@ import { EventPattern } from '@nestjs/microservices';
 import { processEnum } from 'src/process/process.enum';
 import { ProcessService } from 'src/process/process.service';
 import { RobotCommandEnum } from './robot.command.enum';
-import { RobotDao } from './robot.dao';
 import { IRobot } from './robot.interface';
 import { RobotRabbit } from './robot.rabbit';
 import { RobotsService } from './robots.service';

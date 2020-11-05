@@ -1,10 +1,10 @@
 IMG_OUT=${1:-/tmp/out}
 NUM=$2
 PSEUDO=$3
-IMAGE_SVG="${IMG_OUT}/jpg2lite"
+IMAGE_SVG="${IMG_OUT}/impression"
 
 # getting file name
-IMAGE=$(ls ${IMG_OUT}/output-00*.jpg |tail -n 4|sed "${NUM}q;d")
+IMAGE="${IMG_OUT}/capture-${NUM}.jpg"
 IMAGE="${IMG_OUT}/$(basename $IMAGE .jpg)"
 
 if [ ! -f "${IMAGE}.jpg" ]; then
@@ -26,8 +26,6 @@ convert ${IMAGE}.png -flatten -colorspace Gray -negate -edge 2 -negate -threshol
 # on insert le pseudo
 convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 ${IMG_OUT}/text.ppm
 convert ${IMAGE}.ppm -gravity center ${IMG_OUT}/text.ppm -append ${IMAGE}_text.ppm
-
-potrace -s ${IMAGE}_text.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMAGE_SVG}-front.svg
 
 convert -rotate -90 ${IMAGE}_text.ppm ${IMAGE}_text_rotated.ppm
 potrace -s ${IMAGE}_text_rotated.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMAGE_SVG}.svg

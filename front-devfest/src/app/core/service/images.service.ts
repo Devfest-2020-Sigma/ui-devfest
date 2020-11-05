@@ -47,14 +47,6 @@ export class ImagesService {
   }
 
   /**
-   * Fonction permettant l'impression de l'image selectionnée
-   * @param image Image contenant l'image selectionnée à imprimer
-   */
-  impressionImage(id: string): Observable<string> {
-    return this.http.get<string>(`${url}/imprimer/${id}`);
-  }
-
-  /**
    * Fonction d'initilisation du workflow
    * Retourne une entité vide avec l'id de l'image qui sera utilisé pour le workflow
    */

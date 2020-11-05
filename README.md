@@ -2,11 +2,10 @@
 
 RAF
 
-- ajout loader entre prise photo
-- envoi vers file rabbitmq
 - creation websocket nestjs
-- rendre asynchrone la generation de la mosaique
-- creation microservice pour génération des rendus
+- correction choix rendu
+- correctien envoi message unique generer rendu
+- Ajout GCode + Svg dans envoi msg rabbit
 
 -- Admin
 - gestion statut robots

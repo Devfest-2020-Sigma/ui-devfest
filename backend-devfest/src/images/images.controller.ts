@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Put, Res } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
 import { ConfigurationEnum } from 'src/common/configuration.enum';
 import { ImageDao } from 'src/images/image.dao';
 import { processEnum } from 'src/process/process.enum';
@@ -6,6 +7,7 @@ import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
 import { IImage } from './image.interface';
+import { ImageRabbit } from './image.rabbit';
 import { ImageRenduEnum } from './image.rendu.enum';
 import { ImagesService } from './images.service';
 
@@ -110,24 +112,22 @@ export class ImagesController {
     return this.imageDao.getImage(id);
   }
 
-
-  /**
-   * Permet l'impression d'une image selectionnée
-   * @param file Fichier à imprimer
-   */
-  @Get('/imprimer/:id')
-  async imprimerGcode(@Param('id') id): Promise<void> {
-    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
-    this.imagesService.sendImpressionGcodeRabbitEvent(path);
-  }
-
   @Put('/generer-svg')
   async generationRendu(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
     this.imageDao.editImage(id, image, () => {
+      this.imageDao.getImage(id).then(async iimage => {
       // envoi de la demande de génération dans les files rabbit
-      this.imagesService.sendGenerationGcodeRabbitEvent(id);
-    })
+      this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
+      });
+    });
+  }
+
+    // Mise à jour de l'etat de generation des svgs et demande d'impression
+  @EventPattern('impression-gcode')
+  async handleIntegrationRobot(data: Record<string, ImageRabbit>) {
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + data.message.id + '/impression';
+    this.imagesService.sendImpressionGcodeRabbitEvent(path);
   }
 }

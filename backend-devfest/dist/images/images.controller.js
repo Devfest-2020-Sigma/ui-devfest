@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
+const microservices_1 = require("@nestjs/microservices");
 const configuration_enum_1 = require("../common/configuration.enum");
 const image_dao_1 = require("./image.dao");
 const process_enum_1 = require("../process/process.enum");
@@ -75,15 +76,17 @@ let ImagesController = class ImagesController {
     async getImage(id) {
         return this.imageDao.getImage(id);
     }
-    async imprimerGcode(id) {
-        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
-        this.imagesService.sendImpressionGcodeRabbitEvent(path);
-    }
     async generationRendu(image) {
         const id = image._id;
         this.imageDao.editImage(id, image, () => {
-            this.imagesService.sendGenerationGcodeRabbitEvent(id);
+            this.imageDao.getImage(id).then(async (iimage) => {
+                this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
+            });
         });
+    }
+    async handleIntegrationRobot(data) {
+        const path = configuration_enum_1.ConfigurationEnum.IMPRESSION_REPERTOIRE + data.message.id + '/impression';
+        this.imagesService.sendImpressionGcodeRabbitEvent(path);
     }
 };
 __decorate([
@@ -134,19 +137,18 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "getImage", null);
 __decorate([
-    common_1.Get('/imprimer/:id'),
-    __param(0, common_1.Param('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], ImagesController.prototype, "imprimerGcode", null);
-__decorate([
     common_1.Put('/generer-svg'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [image_dto_1.ImageDto]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "generationRendu", null);
+__decorate([
+    microservices_1.EventPattern('impression-gcode'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ImagesController.prototype, "handleIntegrationRobot", null);
 ImagesController = __decorate([
     common_1.Controller('api/images'),
     __metadata("design:paramtypes", [images_service_1.ImagesService,

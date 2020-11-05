@@ -36,9 +36,12 @@ let ImagesService = class ImagesService {
         });
         return image.save();
     }
-    sendGenerationGcodeRabbitEvent(id) {
+    sendGenerationGcodeRabbitEvent(image) {
         let imageRabbit = new image_rabbit_1.ImageRabbit;
-        imageRabbit.id = id;
+        imageRabbit.id = image._id;
+        imageRabbit.imageSelectionnee = image.imageSelectionnee;
+        imageRabbit.pseudo = image.pseudo;
+        console.log(imageRabbit);
         Object.keys(image_rendu_enum_1.ImageRenduEnum).forEach(key => {
             this.clientGenerationGCode.emit(image_rendu_enum_1.ImageRenduEnum[key], (new rabbit_event_1.RabbitEvent(imageRabbit)));
         });
