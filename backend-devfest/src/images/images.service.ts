@@ -43,8 +43,7 @@ export class ImagesService {
     imageRabbit.imageSelectionnee = image.imageSelectionnee;
     imageRabbit.pseudo = image.pseudo;
     // On envoi un message dans la file pour chaque type de rendu à générer
-    console.log(imageRabbit);
-    Object.keys(ImageRenduEnum).forEach(key => {
+    Object.keys(ImageRenduEnum).filter(key => image.renduSelectionne === key).forEach(key => {
       this.clientGenerationGCode.emit<any>(ImageRenduEnum[key], (new RabbitEvent(imageRabbit)));
     });
   }

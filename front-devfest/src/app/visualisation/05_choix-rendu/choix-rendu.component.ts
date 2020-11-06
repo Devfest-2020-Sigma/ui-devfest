@@ -19,7 +19,7 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
 
   private readonly subscriptions: Subscription[] = [];
   private id: string;
-  private renduSelectionne: ImageRenduEnum = ImageRenduEnum.JPGLITE;
+  private renduSelectionne: string = ImageRenduEnum.JPGLITE;
   public afficher = true;
 
   public config: SwiperConfigInterface = {
@@ -63,6 +63,6 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   }
   
   public onIndexChange(index: number) {
-    this.renduSelectionne = Object.keys(ImageRenduEnum).keys()[index];
+    this.renduSelectionne = Object.keys(ImageRenduEnum)[index];
   }
 }

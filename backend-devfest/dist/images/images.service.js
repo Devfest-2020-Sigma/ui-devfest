@@ -41,8 +41,9 @@ let ImagesService = class ImagesService {
         imageRabbit.id = image._id;
         imageRabbit.imageSelectionnee = image.imageSelectionnee;
         imageRabbit.pseudo = image.pseudo;
-        console.log(imageRabbit);
-        Object.keys(image_rendu_enum_1.ImageRenduEnum).forEach(key => {
+        Object.keys(image_rendu_enum_1.ImageRenduEnum).filter(key => image.renduSelectionne === key).forEach(key => {
+            console.log(key);
+            console.log(image_rendu_enum_1.ImageRenduEnum[key]);
             this.clientGenerationGCode.emit(image_rendu_enum_1.ImageRenduEnum[key], (new rabbit_event_1.RabbitEvent(imageRabbit)));
         });
     }
