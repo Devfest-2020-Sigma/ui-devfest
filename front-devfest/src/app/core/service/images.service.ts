@@ -29,15 +29,6 @@ export class ImagesService {
   }
 
   /**
-   * Fonction permettant la récupération des images générées
-   * @param image Image contenant les informations permettant la récupération des images générées par le back
-   */
-  recupererImagesSVG(id: string, rendu: ImageRenduEnum): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get<any>(`${url}/getsvg/${id}/${rendu}`, { headers, responseType: 'text' as 'json' });
-  }
-
-  /**
    * Fonction de récupération des images générées par le PNG
    * @param id
    */

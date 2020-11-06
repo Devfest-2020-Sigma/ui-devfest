@@ -8,7 +8,6 @@ import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
 import { IImage } from './image.interface';
 import { ImageRabbit } from './image.rabbit';
-import { ImageRenduEnum } from './image.rendu.enum';
 import { ImagesService } from './images.service';
 
 @Controller('api/images')
@@ -19,12 +18,12 @@ export class ImagesController {
     private readonly processService: ProcessService,
     private readonly imageDao: ImageDao,
   ) { }
-  
+
   @Put()
   async updateImage(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
-    this.imageDao.editImage(id, image, () =>{});
+    this.imageDao.editImage(id, image, () => { });
   }
 
 
@@ -66,22 +65,10 @@ export class ImagesController {
    * @param pseudo Pseudo des images à récupérer
    * @param res permet de lire le fichier
    */
-  @Get('/getsvg/:id/:rendu')
-  async recupererImagesSVG(@Param('id') id: string, @Param('rendu') rendu: ImageRenduEnum, @Res() res): Promise<any> {
-    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-    switch (rendu) {
-      case ImageRenduEnum.JPGLITE:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      case ImageRenduEnum.TSP:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      case ImageRenduEnum.SQUIDDLE:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      default:
-        console.error("Parametre rendu incorrect : " + rendu);
-    }
+  @Get('/getsvg/:id')
+  async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id;
+    res.sendFile('impression.svg', { root: path });
   }
 
   /**
@@ -118,13 +105,13 @@ export class ImagesController {
     const id = image._id;
     this.imageDao.editImage(id, image, () => {
       this.imageDao.getImage(id).then(async iimage => {
-      // envoi de la demande de génération dans les files rabbit
-      this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
+        // envoi de la demande de génération dans les files rabbit
+        this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
       });
     });
   }
 
-    // Mise à jour de l'etat de generation des svgs et demande d'impression
+  // Mise à jour de l'etat de generation des svgs et demande d'impression
   @EventPattern('impression-gcode')
   async handleIntegrationRobot(data: Record<string, ImageRabbit>) {
     const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + data.message.id + '/impression';
