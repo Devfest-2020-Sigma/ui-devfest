@@ -1,5 +1,8 @@
-import { Body, Controller, Get, Param, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
+import {diskStorage} from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express/multer/interceptors/file.interceptor';
+import { existsSync, mkdirSync } from 'fs';
 import { ConfigurationEnum } from 'src/common/configuration.enum';
 import { ImageDao } from 'src/images/image.dao';
 import { processEnum } from 'src/process/process.enum';
@@ -111,10 +114,35 @@ export class ImagesController {
     });
   }
 
+  
+  @Post('/upload-svg/:id')
+  @UseInterceptors(FileInterceptor('file',
+    {
+      storage: diskStorage({
+        // Destination storage path details
+        destination: (req: any, file: any, cb: any) => {
+          const uploadPath = ConfigurationEnum.IMPRESSION_REPERTOIRE + req.params.id;
+          // Create folder if doesn't exist
+          if (!existsSync(uploadPath)) {
+            mkdirSync(uploadPath);
+          }
+          cb(null, uploadPath);
+        },
+        filename: (req, file, cb) => {
+          return cb(null, 'impression.svg');
+        }
+      })
+    }
+    )
+  )
+  async uploadSvg(@Param('id') id: string, @UploadedFile() file): Promise<void> {
+    console.log('Upload du svg pour l\'id ' + id);
+  }
+
   // Mise à jour de l'etat de generation des svgs et demande d'impression
   @EventPattern('impression-gcode')
   async handleIntegrationRobot(data: Record<string, ImageRabbit>) {
-    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + data.message.id + '/impression';
-    this.imagesService.sendImpressionGcodeRabbitEvent(path);
+    console.log("Reception d'une demande d'impression pour l'id " + data.message.id);
+    this.imagesService.sendImpressionGcodeRabbitEvent(data.message.id);
   }
 }
