@@ -18,11 +18,11 @@ body {
   height: 100%;
 }
 
-.font-violet-plus{
+.font-violet-plus {
   top: 520px;
   width: 600px;
   height: 480px;
-  background: transparent linear-gradient(180deg, #1B004200 0%, #1B0042AB 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(180deg, #1b004200 0%, #1b0042ab 100%) 0% 0% no-repeat padding-box;
 }
 
 .font-blanc {
@@ -109,7 +109,7 @@ body {
   }
 }
 
-.bouton-noir-validation{
+.bouton-noir-validation {
   width: 400px;
   height: 80px;
   background: #000000 0% 0% no-repeat padding-box;
@@ -148,12 +148,12 @@ body {
 }
 
 .bouton-noir-decompte {
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 130px;
   background: #000000 0% 0% no-repeat padding-box;
   border-radius: 18px;
   text-align: center;
-  font: normal normal bold 40px/48px Metropolis;
+  font: normal normal bold 67px/80px Metropolis;
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
@@ -165,8 +165,8 @@ body {
     position: absolute;
     top: -10px;
     left: 0px;
-    width: 90px;
-    height: 80px;
+    width: 210px;
+    height: 130px;
     background: #00f7f7 0% 0% no-repeat padding-box;
     border-radius: 18px 0px 18px 18px;
     transform: translateZ(-1px);
@@ -177,8 +177,8 @@ body {
     position: absolute;
     top: 10px;
     left: -10px;
-    width: 90px;
-    height: 80px;
+    width: 210px;
+    height: 130px;
     background: #f700f7 0% 0% no-repeat padding-box;
     border-radius: 18px 18px 18px 0px;
     transform: translateZ(-1px);
@@ -394,6 +394,12 @@ svg {
 
 .footer-decompte {
   position: fixed;
+  vertical-align: middle;
+  justify-content: center;
   bottom: 80px;
-  left: 250px;
+  left: 210px;
+}
+
+.fond-decompte {
+  opacity: 0.50;
 }

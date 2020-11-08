@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
 import { interval } from 'rxjs';
-import { concatMapTo, take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { ImagesService } from '../../core/service/images.service';
 
 @Component({
@@ -37,7 +37,9 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   @ViewChild('streaming', { static: false }) streamingcanvas: ElementRef;
   private id: string;
   private essai: string;
-  public afficher = true;
+  public afficherDecompte = true;
+  public afficherSmile = false;
+  public afficherFlash = false;
   public decompte = 3;
 
   constructor(private imagesService: ImagesService,
@@ -55,13 +57,23 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
       }
     });
 
-    setInterval(() => {
-      // Make your auth call and export this from Service
-      this.afficher = !this.afficher
-      this.decompte = this.decompte - 0.5;
-    }, 2000);
-    //const requetes = interval(1000).pipe(take(15)).pipe(concatMapTo(()=> {));
-    //requetes.subscribe();
+    interval(1000).pipe(take(7)).pipe(
+      tap(()=>{
+        if(this.decompte >= 1) {
+          this.afficherDecompte = !this.afficherDecompte
+          this.decompte = this.decompte - 0.5;
+        } else{
+          this.afficherSmile =true;
+          if (this.decompte === 0.5){
+            this.afficherFlash = true;
+          } else{
+            this.afficherFlash = false;
+            this.capture();
+          }
+          this.decompte = this.decompte - 0.5;
+        }
+      })
+    ).subscribe();
   }
 
   ngAfterViewInit(): void {
@@ -69,16 +81,15 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     let player = new JSMpeg.Player(url, {
       canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
     });
-    /*  setTimeout(() => {
-        // Capture de la photo et passage à l'écran suivant
-        this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
-          if (this.essai === '1'){
-            this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
-          } else {
-            this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
-          }
-          
-        });
-      }, 3000);*/
+  }
+
+  public capture() : void {
+    this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
+      if (this.essai === '1'){
+        this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
+      } else {
+        this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
+      }
+    });
   }
 }
