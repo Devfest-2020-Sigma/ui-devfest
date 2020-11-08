@@ -14,51 +14,42 @@ import { PrisePhotoValidationComponent } from '../04_prise-photo-validation/pris
 export const visualisationMainRoute: Route[] = [
   {
     path : 'accueil',
-    component : AccueilComponent,
-    canActivate : []
+    component : AccueilComponent
   },
   {
     path : 'rgpd',
-    component : RgpdComponent,
-    canActivate : []
+    component : RgpdComponent
   },
   {
     path : 'instructions',
-    component : InstructionsComponent,
-    canActivate : []
+    component : InstructionsComponent
   },
   {
     path: 'prise-photo/:id/:essai',
     component: PrisePhotoComponent,
-    canActivate: []
+    data: {animation: 'PrisePhotoPage'}
   },
   {
     path: 'prise-photo-retry/:id',
-    component: PrisePhotoRetryComponent,
-    canActivate: []
+    component: PrisePhotoRetryComponent
   },
   {
     path: 'prise-photo-validation/:id',
-    component: PrisePhotoValidationComponent,
-    canActivate: []
+    component: PrisePhotoValidationComponent
   },
   {
     path: 'selection-photo/:id',
-    component: SelectionPhotoMosaicComponent,
-    canActivate: []
+    component: SelectionPhotoMosaicComponent
   },
   {
     path: 'selection-pseudo/:id',
-    component: SelectionPseudoComponent,
-    canActivate: []
+    component: SelectionPseudoComponent
   },
   {
     path: 'choix-rendu/:id',
-    component: ChoixRenduComponent,
-    canActivate: []
+    component: ChoixRenduComponent
   },
   {
     path: 'impression-photo',
-    component: ImpressionPhotoComponent,
-    canActivate: []
+    component: ImpressionPhotoComponent
   }];

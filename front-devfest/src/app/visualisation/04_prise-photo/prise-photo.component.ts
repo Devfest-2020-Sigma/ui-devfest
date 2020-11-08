@@ -60,18 +60,19 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     interval(1000).pipe(take(7)).pipe(
       tap(()=>{
         if(this.decompte >= 1) {
-          this.afficherDecompte = !this.afficherDecompte
-          this.decompte = this.decompte - 0.5;
+          this.afficherDecompte = !this.afficherDecompte;
         } else{
           this.afficherSmile =true;
           if (this.decompte === 0.5){
             this.afficherFlash = true;
           } else{
             this.afficherFlash = false;
+          }
+          if (this.decompte < 0){
             this.capture();
           }
-          this.decompte = this.decompte - 0.5;
         }
+        this.decompte = this.decompte - 0.5;
       })
     ).subscribe();
   }
