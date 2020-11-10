@@ -1,11 +1,11 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { ChargementIndicateurService } from '../service/loading-indicateur.service';
+import {Observable} from 'rxjs';
+import {ChargementIndicateurService} from '../service/loading-indicateur.service';
 
 // tslint:disable:no-any
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ChargementIntercepteurDebutService implements HttpInterceptor {
   constructor(private readonly chargementIndicateurService: ChargementIndicateurService) {
   }

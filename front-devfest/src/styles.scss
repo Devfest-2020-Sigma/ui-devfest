@@ -18,11 +18,18 @@ body {
   height: 100%;
 }
 
-.font-violet-plus {
+.font-violet-accueil {
   top: 520px;
   width: 600px;
   height: 480px;
   background: transparent linear-gradient(180deg, #1b004200 0%, #1b0042ab 100%) 0% 0% no-repeat padding-box;
+}
+
+.font-violet-instructions {
+  position: absolute;
+  width: 600px;
+  height: 100%;
+  background: transparent linear-gradient(282deg, #6678FF 0%, #D600FF 100%) 0% 0% no-repeat padding-box;
 }
 
 .font-blanc {
@@ -159,6 +166,10 @@ body {
   opacity: 1;
   transform-style: preserve-3d;
   border: none;
+
+  span {
+    line-height: 130px;
+  }
 
   &::before {
     content: "";

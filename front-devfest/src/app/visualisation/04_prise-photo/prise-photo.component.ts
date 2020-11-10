@@ -1,40 +1,37 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {animate, AnimationEvent, keyframes, style, transition, trigger} from '@angular/animations';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ImagesService} from '../../core/service/images.service';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
-import { interval } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
-import { ImagesService } from '../../core/service/images.service';
 
 @Component({
   selector: 'app-prise-photo',
   templateUrl: './prise-photo.component.html',
   animations: [
-    trigger('itemAnim', [
-      transition(':enter', [
-        animate(
-          '1000ms 0ms',
-          keyframes([
-            style({ visibility: 'visible', transform: 'translate3d(300%, 0, 0)', easing: 'ease', offset: 0 }),
-            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 1 })
-          ])
-        )
-      ]),
-      transition(':leave', [
-        animate(
-          '1000ms 0ms',
-          keyframes([
-            style({ transform: 'translate3d(0, 0, 0)', easing: 'ease', offset: 0 }),
-            style({ transform: 'translate3d(-300%, 0, 0)', visibility: 'hidden', easing: 'ease', offset: 1 })
-          ])
-        )
-      ])
+    trigger('decompteAnim', [
+      transition(':enter',
+        animate('2s 0ms', keyframes([
+          style({transform: 'translateX(300%)', easing: 'ease', opacity: 0, offset: 0}),
+          style({transform: 'translateX(0)', easing: 'ease', opacity: 1, offset: 0.2}),
+          style({transform: 'translateX(0)', easing: 'ease', opacity: 1, offset: 0.8}),
+          style({transform: 'translateX(-300%)', easing: 'ease', opacity: 0, offset: 1})
+        ]))
+      )
+    ]),
+    trigger('decompteAnim3', [
+      transition(':leave',
+        animate('2s 0ms', keyframes([
+          style({transform: 'translateX(0)', easing: 'ease', opacity: 1, offset: 0}),
+          style({transform: 'translateX(0)', easing: 'ease', opacity: 1, offset: 0.8}),
+          style({transform: 'translateX(-300%)', easing: 'ease', opacity: 0, offset: 1})
+        ]))
+      )
     ])
   ]
 })
 export class PrisePhotoComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('streaming', { static: false }) streamingcanvas: ElementRef;
+  @ViewChild('streaming', {static: false}) streamingcanvas: ElementRef;
   private id: string;
   private essai: string;
   public afficherDecompte = true;
@@ -43,8 +40,9 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   public decompte = 3;
 
   constructor(private imagesService: ImagesService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.imagesService.demarrerStreaming().subscribe();
@@ -57,24 +55,26 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
       }
     });
 
-    interval(1000).pipe(take(7)).pipe(
-      tap(()=>{
-        if(this.decompte >= 1) {
-          this.afficherDecompte = !this.afficherDecompte;
-        } else{
-          this.afficherSmile =true;
-          if (this.decompte === 0.5){
-            this.afficherFlash = true;
-          } else{
-            this.afficherFlash = false;
-          }
-          if (this.decompte < 0){
-            this.capture();
-          }
-        }
-        this.decompte = this.decompte - 0.5;
-      })
-    ).subscribe();
+
+    // const requetes = interval(1000).pipe(take(15)).pipe(concatMapTo(()=> {));
+    // requetes.subscribe();
+  }
+
+  onDecompteEnterDoneEvent(event: AnimationEvent) {
+    if (this.decompte === 0) {
+      this.afficherDecompte = true;
+      this.afficherFlash = true;
+      this.afficherSmile = true;
+      this.capture();
+      return;
+    }
+
+    if (event.toState === null) {
+      this.decompte--;
+      this.afficherDecompte = false;
+    } else {
+      this.afficherDecompte = true;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -84,12 +84,12 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public capture() : void {
+  public capture(): void {
     this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
-      if (this.essai === '1'){
-        this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
+      if (+this.essai === 1) {
+        this.router.navigate(["visualisation/prise-photo-retry", image._id]);
       } else {
-        this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
+        this.router.navigate(["visualisation/prise-photo-validation", image._id]);
       }
     });
   }

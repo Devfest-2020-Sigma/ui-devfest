@@ -1,12 +1,14 @@
+<div class="font-violet-instructions" *ngIf="fondVioletAffiche" [@fadeOutUpBigOnLeave]>
+</div>
 <div class="header-flou font-violet">
-  <img src="assets/logo-header.svg" />
+  <img src="assets/logo-header.svg" alt="logo header" />
 </div>
 <div class="font-blanc">
   <br>
   <br>
   <br>
   <div class="centrer">
-    <img src="assets/instructions_illustration.svg" />
+    <img src="assets/instructions_illustration.svg"  alt="image illustration" />
   </div>
   <br>
   <br>
@@ -17,7 +19,7 @@
   <br>
   <p class="instructions-text">Faîtes votre plus beau sourire, car vous allez être pris en photo ! Vous avez deux essais pour faire la photo parfaite. Elle sera ensuite directement envoyée en impression.</p>
 
-  <div class="footer">
+  <div class="footer" [@fadeInRightBigOnEnter]>
     <button class="bouton-noir" (click)="onValidation()">Je suis prêt(e) !</button>
   </div>
 </div>
