@@ -40,8 +40,7 @@ export class SelectionPseudoComponent implements OnInit {
     let image = new Image;
     image._id = this.id;
     image.pseudo = this.pseudo;
-    this.imagesService.miseAjourImageBdd(image).pipe(
-      tap(image => this.imagesService.genererSVG(image)),
+    this.imagesService.genererSVG(image).pipe(
       tap(() => this.router.navigate(["visualisation/impression-photo"]))
     ).subscribe();
   }

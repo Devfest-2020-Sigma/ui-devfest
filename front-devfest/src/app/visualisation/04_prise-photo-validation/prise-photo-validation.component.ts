@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { fadeInOnEnterAnimation, slideInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/public-api';
 import { interval } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -12,13 +13,9 @@ import { ImagesService } from '../../core/service/images.service';
 @Component({
   selector: 'app-prise-photo-validation',
   templateUrl: './prise-photo-validation.component.html',
-  animations: [
-    trigger('boutonAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateY(100%)' }),
-        animate(500)
-      ])
-    ])
+  animations: [ 
+    fadeInOnEnterAnimation(),
+    slideInUpOnEnterAnimation()
   ]
 })
 export class PrisePhotoValidationComponent implements OnInit, OnDestroy {

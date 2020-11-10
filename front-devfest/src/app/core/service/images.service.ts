@@ -29,29 +29,12 @@ export class ImagesService {
   }
 
   /**
-   * Fonction permettant la récupération des images générées
-   * @param image Image contenant les informations permettant la récupération des images générées par le back
-   */
-  recupererImagesSVG(id: string, rendu: ImageRenduEnum): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get<any>(`${url}/getsvg/${id}/${rendu}`, { headers, responseType: 'text' as 'json' });
-  }
-
-  /**
    * Fonction de récupération des images générées par le PNG
    * @param id
    */
   recupererPhoto(id: string, essai : string): Observable<Blob> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this.http.get<any>(`${url}/getphoto/${id}/${essai}`, { headers, responseType: 'blob' as 'json' });
-  }
-
-  /**
-   * Fonction permettant l'impression de l'image selectionnée
-   * @param image Image contenant l'image selectionnée à imprimer
-   */
-  impressionImage(id: string): Observable<string> {
-    return this.http.get<string>(`${url}/imprimer/${id}`);
   }
 
   /**

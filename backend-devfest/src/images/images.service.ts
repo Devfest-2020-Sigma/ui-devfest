@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { RabbitEvent } from 'src/events/rabbit.event';
 import { imageModel } from '../schemas/image.schema';
+import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
 import { IImage } from './image.interface';
 import { ImageRabbit } from './image.rabbit';
@@ -36,11 +37,13 @@ export class ImagesService {
    * Envoi des demandes de génération des gcodes dans la file rabbit
    * @param id 
    */
-  sendGenerationGcodeRabbitEvent(id: string): void | PromiseLike<void> {
+  sendGenerationGcodeRabbitEvent(image: ImageDto): void | PromiseLike<void> {
     let imageRabbit = new ImageRabbit;
-    imageRabbit.id = id;
+    imageRabbit.id = image._id;
+    imageRabbit.imageSelectionnee = image.imageSelectionnee;
+    imageRabbit.pseudo = image.pseudo;
     // On envoi un message dans la file pour chaque type de rendu à générer
-    Object.keys(ImageRenduEnum).forEach(key => {
+    Object.keys(ImageRenduEnum).filter(key => image.renduSelectionne === key).forEach(key => {
       this.clientGenerationGCode.emit<any>(ImageRenduEnum[key], (new RabbitEvent(imageRabbit)));
     });
   }

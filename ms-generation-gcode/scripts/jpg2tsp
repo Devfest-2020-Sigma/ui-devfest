@@ -4,7 +4,7 @@ PSEUDO=$3
 IMAGE_SVG="${IMG_OUT}/jpg2tsp"
 
 # getting file name
-IMAGE=$(ls ${IMG_OUT}/output-00*.jpg |tail -n 4|sed "${NUM}q;d")
+IMAGE="${IMG_OUT}/capture-${NUM}.jpg"
 IMAGE="${IMG_OUT}/$(basename $IMAGE .jpg)"
 
 if [ ! -f "${IMAGE}.jpg" ]; then

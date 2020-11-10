@@ -1,33 +1,25 @@
-IMG_OUT=${1:-/tmp/out}
-NUM=$2
-PSEUDO=$3
-IMAGE_SVG="${IMG_OUT}/jpg2lite"
+#!/bin/sh
+URL=$1
+ID=$2
+FOLDER="$3/${ID}"
+NUM=$4
+PSEUDO=$5
 
-# getting file name
-IMAGE=$(ls ${IMG_OUT}/output-00*.jpg |tail -n 4|sed "${NUM}q;d")
-IMAGE="${IMG_OUT}/$(basename $IMAGE .jpg)"
+FICHIER="impression"
+IMAGE="${FOLDER}/${FICHIER}"
 
-if [ ! -f "${IMAGE}.jpg" ]; then
-  echo "$IMAGE does not exist."
-  exit 3
-fi
+mkdir -p "${FOLDER}"
 
-if [ -f "${IMAGE_SVG}.svg" ]; then
-  rm "${IMAGE_SVG}.svg"
-fi
-
-if [ -f "${IMAGE_SVG}-front.svg" ]; then
-  rm "${IMAGE_SVG}-front.svg"
-fi
+curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 
 cartoon -p 30 -n 40 -e 6 -m 1 ${IMAGE}.jpg ${IMAGE}.png
 convert ${IMAGE}.png -flatten -colorspace Gray -negate -edge 2 -negate -threshold 50% ${IMAGE}.ppm
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 ${IMG_OUT}/text.ppm
-convert ${IMAGE}.ppm -gravity center ${IMG_OUT}/text.ppm -append ${IMAGE}_text.ppm
-
-potrace -s ${IMAGE}_text.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMAGE_SVG}-front.svg
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 ${FOLDER}/text.ppm
+convert ${IMAGE}.ppm -gravity center ${FOLDER}/text.ppm -append ${IMAGE}_text.ppm
 
 convert -rotate -90 ${IMAGE}_text.ppm ${IMAGE}_text_rotated.ppm
-potrace -s ${IMAGE}_text_rotated.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMAGE_SVG}.svg
+potrace -s ${IMAGE}_text_rotated.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMAGE}.svg
+
+curl -s -X POST  "${URL}/upload-svg/${ID}" --form "file=@${IMAGE}.svg"

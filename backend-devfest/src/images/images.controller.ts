@@ -1,4 +1,8 @@
-import { Body, Controller, Get, Param, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
+import {diskStorage} from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express/multer/interceptors/file.interceptor';
+import { existsSync, mkdirSync } from 'fs';
 import { ConfigurationEnum } from 'src/common/configuration.enum';
 import { ImageDao } from 'src/images/image.dao';
 import { processEnum } from 'src/process/process.enum';
@@ -6,7 +10,7 @@ import { ProcessService } from 'src/process/process.service';
 import { ImageDto } from './image.dto';
 import { ImageEtatEnum } from './image.etat.enum';
 import { IImage } from './image.interface';
-import { ImageRenduEnum } from './image.rendu.enum';
+import { ImageRabbit } from './image.rabbit';
 import { ImagesService } from './images.service';
 
 @Controller('api/images')
@@ -17,12 +21,12 @@ export class ImagesController {
     private readonly processService: ProcessService,
     private readonly imageDao: ImageDao,
   ) { }
-  
+
   @Put()
   async updateImage(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
-    this.imageDao.editImage(id, image, () =>{});
+    this.imageDao.editImage(id, image, () => { });
   }
 
 
@@ -64,22 +68,10 @@ export class ImagesController {
    * @param pseudo Pseudo des images à récupérer
    * @param res permet de lire le fichier
    */
-  @Get('/getsvg/:id/:rendu')
-  async recupererImagesSVG(@Param('id') id: string, @Param('rendu') rendu: ImageRenduEnum, @Res() res): Promise<any> {
-    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop';
-    switch (rendu) {
-      case ImageRenduEnum.JPGLITE:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      case ImageRenduEnum.TSP:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      case ImageRenduEnum.SQUIDDLE:
-        res.sendFile('jpg2lite-front.svg', { root: path });
-        break;
-      default:
-        console.error("Parametre rendu incorrect : " + rendu);
-    }
+  @Get('/getsvg/:id')
+  async recupererImagesSVG(@Param('id') id: string, @Res() res): Promise<any> {
+    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id;
+    res.sendFile('impression.svg', { root: path });
   }
 
   /**
@@ -110,24 +102,47 @@ export class ImagesController {
     return this.imageDao.getImage(id);
   }
 
-
-  /**
-   * Permet l'impression d'une image selectionnée
-   * @param file Fichier à imprimer
-   */
-  @Get('/imprimer/:id')
-  async imprimerGcode(@Param('id') id): Promise<void> {
-    const path = ConfigurationEnum.IMPRESSION_REPERTOIRE + id + '/crop/jpg2lite';
-    this.imagesService.sendImpressionGcodeRabbitEvent(path);
-  }
-
   @Put('/generer-svg')
   async generationRendu(@Body() image: ImageDto): Promise<void> {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
     this.imageDao.editImage(id, image, () => {
-      // envoi de la demande de génération dans les files rabbit
-      this.imagesService.sendGenerationGcodeRabbitEvent(id);
-    })
+      this.imageDao.getImage(id).then(async iimage => {
+        // envoi de la demande de génération dans les files rabbit
+        this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
+      });
+    });
+  }
+
+  
+  @Post('/upload-svg/:id')
+  @UseInterceptors(FileInterceptor('file',
+    {
+      storage: diskStorage({
+        // Destination storage path details
+        destination: (req: any, file: any, cb: any) => {
+          const uploadPath = ConfigurationEnum.IMPRESSION_REPERTOIRE + req.params.id;
+          // Create folder if doesn't exist
+          if (!existsSync(uploadPath)) {
+            mkdirSync(uploadPath);
+          }
+          cb(null, uploadPath);
+        },
+        filename: (req, file, cb) => {
+          return cb(null, 'impression.svg');
+        }
+      })
+    }
+    )
+  )
+  async uploadSvg(@Param('id') id: string, @UploadedFile() file): Promise<void> {
+    console.log('Upload du svg pour l\'id ' + id);
+  }
+
+  // Mise à jour de l'etat de generation des svgs et demande d'impression
+  @EventPattern('impression-gcode')
+  async handleIntegrationRobot(data: Record<string, ImageRabbit>) {
+    console.log("Reception d'une demande d'impression pour l'id " + data.message.id);
+    this.imagesService.sendImpressionGcodeRabbitEvent(data.message.id);
   }
 }

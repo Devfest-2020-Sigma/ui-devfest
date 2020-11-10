@@ -24,6 +24,7 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   @ViewChild('streaming', {static: false}) streamingcanvas: ElementRef;
   private id: string;
   private essai: string;
+
   public afficher = true;
   public decompte = '3';
 
@@ -41,7 +42,6 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
         this.essai = params.essai;
       }
     });
-
 
     // const requetes = interval(1000).pipe(take(15)).pipe(concatMapTo(()=> {));
     // requetes.subscribe();
@@ -82,5 +82,22 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
 
         });
       }, 3000);*/
+  }
+
+  ngAfterViewInit(): void {
+    var url = 'ws://' + document.location.hostname + ':8082/';
+    let player = new JSMpeg.Player(url, {
+      canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
+    });
+  }
+
+  public capture() : void {
+    this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
+      if (this.essai === '1'){
+        this.router.navigate(["visualisation/prise-photo-retry", image._id]);  
+      } else {
+        this.router.navigate(["visualisation/prise-photo-validation", image._id]);  
+      }
+    });
   }
 }

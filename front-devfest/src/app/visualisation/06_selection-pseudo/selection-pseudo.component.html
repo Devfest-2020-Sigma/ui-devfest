@@ -1,9 +1,10 @@
 <div class="header-flou font-violet">
-  <img src="../../../assets/logo-header.svg" />
+  <img src="assets/logo-header.svg" />
 </div>
-<br>
-<br>
-<br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 <form [formGroup]="form" align="center">
   <div class="titre">
     Un pseudo ?
@@ -25,7 +26,7 @@
   <br>
   <br>
   <br>
-  <div class="footer">
+  <div *ngIf="form.valid" class="footer">
     <button class="bouton-noir" [disabled]="form.pristine || form.invalid" (click)="validerPseudo()">Valider</button>
   </div>
 </form>

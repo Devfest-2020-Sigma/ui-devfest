@@ -1,22 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { slideInDownOnEnterAnimation, slideOutDownOnLeaveAnimation } from 'angular-animations';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-import { interval, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { Image } from 'src/app/core/model/image.model';
 import { ImageRenduEnum } from 'src/app/core/model/image.rendu.enum';
 import { ImagesService } from 'src/app/core/service/images.service';
 
 @Component({
   selector: 'app-choix-rendu',
-  templateUrl: './choix-rendu.component.html'
+  templateUrl: './choix-rendu.component.html',
+  animations: [
+    slideInDownOnEnterAnimation(),
+    slideOutDownOnLeaveAnimation()
+  ]
 })
 export class ChoixRenduComponent implements OnInit, OnDestroy {
 
-  public interval = interval(500).pipe(take(15));
   private readonly subscriptions: Subscription[] = [];
   private id: string;
-  private renduSelectionne: ImageRenduEnum = ImageRenduEnum.JPGLITE;
+  private renduSelectionne: string = ImageRenduEnum.JPGLITE;
+  public afficher = true;
 
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -59,6 +63,6 @@ export class ChoixRenduComponent implements OnInit, OnDestroy {
   }
   
   public onIndexChange(index: number) {
-    this.renduSelectionne = Object.keys(ImageRenduEnum).keys()[index];
+    this.renduSelectionne = Object.keys(ImageRenduEnum)[index];
   }
 }

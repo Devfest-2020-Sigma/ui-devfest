@@ -1,9 +1,6 @@
-<canvas id="video-canvas" #streaming class="video"></canvas>
+<canvas id="video-canvas" #streaming class="video" [ngClass]="{'fond-decompte' : afficherFlash}"></canvas>
 <div *ngIf="afficher" class="footer-decompte" [@decompteAnim] (@decompteAnim.done)="onDecompteDoneEvent($event)">
   <div class="bouton-noir-decompte">
     <span>{{decompte}}</span>
   </div>
-<!-- <div class="bouton-noir-decompte">2</div>
-  <div class="bouton-noir-decompte">1</div>
-  <div class="bouton-noir-decompte decompte"><i class="far fa-smile-beam"></i></div>-->
 </div>
