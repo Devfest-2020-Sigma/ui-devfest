@@ -10,7 +10,7 @@ import { bounceIn } from './route-animations';
   ]
 })
 export class AppComponent {
-  title = 'front-devfest';
+  title = 'DevFest 2021';
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;

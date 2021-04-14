@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { visualisationRoutes } from './visualisation/visualisation.route';
+import { visualisationRoutes } from './workflow/visualisation.route';
 
 const routes: Routes = [{
   path: '',

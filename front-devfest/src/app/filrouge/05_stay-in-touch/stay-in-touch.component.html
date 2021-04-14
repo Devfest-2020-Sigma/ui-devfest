@@ -1,0 +1,19 @@
+<div class="header-flou font-violet">
+  <img src="assets/logo-header.svg" alt="logo header" />
+</div>
+<div class="font-blanc">
+  <p>Stay un touch</p>
+  <p class="rgpd-text" [@slideInRightOnEnter]>
+    Acceptez-vous de recevoir des offres d'emploi de la part de Sigma ?
+  </p>
+  <p>
+    Votre adresse mail sera conservée pour vous contacter afin de vous transmettre des offres d'emplois.
+  </p>
+  <p>
+    Pour exercer vos droits vous pouvez vous référer à notre politique de confidentialité disponible sur notre site internet www.sigma.fr
+  </p>
+  <div class="footer">
+    <button class="bouton-noir" (click)="onCestParti()" [@slideInUpOnEnter]>C'est parti !</button>
+    <button class="bouton-noir" (click)="onNonMerci()" [@slideInUpOnEnter]>Non merci</button>
+  </div>
+</div>
