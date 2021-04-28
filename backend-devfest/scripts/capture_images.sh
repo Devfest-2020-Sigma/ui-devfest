@@ -4,7 +4,7 @@
 
 FolderToSave=${1:-/tmp/TakePhoto}
 Essai=${2:-1}
-INPUT_VIDEO=/dev/video0
+INPUT_VIDEO=/dev/video1
 OUTPUT_VIDEO=${FolderToSave}/${Essai}/output.mkv
 IMG_REJECT=${FolderToSave}/${Essai}/reject
 IMG_CROP=${FolderToSave}/${Essai}/crop

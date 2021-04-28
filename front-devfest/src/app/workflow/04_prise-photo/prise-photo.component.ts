@@ -61,19 +61,22 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   }
 
   onDecompteEnterDoneEvent(event: AnimationEvent) {
-    if (this.decompte === 0) {
-      this.afficherDecompte = true;
-      this.afficherFlash = true;
-      this.afficherSmile = true;
-      this.capture();
-      return;
-    }
+    // Si le décompte n'est pas déjà terminé
+    if (!this.afficherSmile){
+      if (this.decompte === 0) {
+        this.afficherDecompte = true;
+        this.afficherFlash = true;
+        this.afficherSmile = true;
+        this.capture();
+        return;
+      }
 
-    if (event.toState === null) {
-      this.decompte--;
-      this.afficherDecompte = false;
-    } else {
-      this.afficherDecompte = true;
+      if (event.toState === null) {
+        this.decompte--;
+        this.afficherDecompte = false;
+      } else {
+        this.afficherDecompte = true;
+      }
     }
   }
 
@@ -85,6 +88,7 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
   }
 
   public capture(): void {
+    console.log('capture');
     this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
       if (+this.essai === 1) {
         this.router.navigate(["visualisation/prise-photo-retry", image._id]);

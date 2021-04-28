@@ -98,6 +98,6 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy {
   }
 
   public onIndexChange(index: number) {
-    this.imageSelectionnee = index;
+    this.imageSelectionnee = index + 1;
   }
 }
