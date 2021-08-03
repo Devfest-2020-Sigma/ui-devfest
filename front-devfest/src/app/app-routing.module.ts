@@ -4,12 +4,12 @@ import {visualisationRoutes} from './workflow/visualisation.route';
 
 const routes: Routes = [{
   path: '',
-  redirectTo: "/visualisation/accueil",
+  redirectTo: '/visualisation/accueil',
   pathMatch: 'full'
 }, ...visualisationRoutes];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'corrected'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
