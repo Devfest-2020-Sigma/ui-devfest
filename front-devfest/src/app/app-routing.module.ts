@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { visualisationRoutes } from './workflow/visualisation.route';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {visualisationRoutes} from './workflow/visualisation.route';
 
 const routes: Routes = [{
   path: '',
@@ -9,7 +9,7 @@ const routes: Routes = [{
 }, ...visualisationRoutes];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
