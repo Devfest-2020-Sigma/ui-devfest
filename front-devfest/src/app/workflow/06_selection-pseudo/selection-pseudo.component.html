@@ -21,12 +21,13 @@
     </div>
   </div>
   <br>
+  <div class="simple-keyboard keyboard-blur"></div>
   <br>
   <br>
   <br>
   <br>
   <br>
-  <div *ngIf="form.valid" class="footer">
-    <button class="bouton-noir" [disabled]="form.pristine || form.invalid" (click)="validerPseudo()">Valider</button>
+  <div *ngIf="form.valid && false" class="footer">
+    <button class="bouton-noir" [disabled]="!form.touched || form.dirty || form.invalid" (click)="validerPseudo()">Valider</button>
   </div>
 </form>
