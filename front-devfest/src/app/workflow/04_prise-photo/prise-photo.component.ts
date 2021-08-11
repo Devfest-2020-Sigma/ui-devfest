@@ -1,7 +1,7 @@
 import {animate, AnimationEvent, keyframes, style, transition, trigger} from '@angular/animations';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ImagesService} from '../../core/service/images.service';
+import {ImagesService} from '@service/images.service';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
 
 @Component({
@@ -80,9 +80,10 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    var url = 'ws://' + document.location.hostname + ':8082/';
-    let player = new JSMpeg.Player(url, {
+  ngAfterViewInit(): void
+  {
+    const url = 'ws://' + document.location.hostname + ':8082/';
+    const player = new JSMpeg.Player(url, {
       canvas: this.streamingcanvas.nativeElement, autoplay: true, audio: false, loop: true
     });
   }
@@ -91,9 +92,9 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
     console.log('capture');
     this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
       if (+this.essai === 1) {
-        this.router.navigate(["visualisation/prise-photo-retry", image._id]);
+        this.router.navigate(['visualisation/prise-photo-retry', image._id]);
       } else {
-        this.router.navigate(["visualisation/prise-photo-validation", image._id]);
+        this.router.navigate(['visualisation/prise-photo-validation', image._id]);
       }
     });
   }

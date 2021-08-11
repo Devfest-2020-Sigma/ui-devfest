@@ -2,7 +2,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs';
-import {ChargementIndicateurService} from '../service/loading-indicateur.service';
+import {ChargementIndicateurService} from '@service/loading-indicateur.service';
 
 // tslint:disable:no-any
 @Injectable({providedIn: 'root'})

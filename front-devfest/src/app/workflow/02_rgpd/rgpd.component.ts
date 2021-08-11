@@ -34,6 +34,7 @@ export class RgpdComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
   }
 
   onValidation(): void {

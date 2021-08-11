@@ -14,6 +14,7 @@ export class AccueilComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Nothing
   }
 
   onCommencer(): void {

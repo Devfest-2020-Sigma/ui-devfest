@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { SharedLibModule } from '../shared/shared-lib.module';
-import { administrationRoutes } from './administration.route';
-import { ListeRobotsComponent } from './liste-robots/liste-robots.component';
-import { RobotsService } from '../core/service/robots.service';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {SharedLibModule} from '../shared/shared-lib.module';
+import {administrationRoutes} from './administration.route';
+import {ListeRobotsComponent} from './liste-robots/liste-robots.component';
+import {RobotsService} from '@service/robots.service';
 
 
 @NgModule({

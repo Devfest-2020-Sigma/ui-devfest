@@ -1,4 +1,4 @@
-import { animate, animation, group, keyframes, query, style, transition, trigger } from "@angular/animations";
+import {animate, query, style, transition, trigger} from '@angular/animations';
 
 export const bounceIn =
   trigger('routeAnimations', [
