@@ -14,6 +14,7 @@ export class MailComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Nothing
   }
 
   onContinuer(): void {

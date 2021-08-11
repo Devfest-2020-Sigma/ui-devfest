@@ -14,5 +14,6 @@ export class MerciComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Nothing
   }
 }

@@ -3,4 +3,4 @@ export const RobotEtatEnum = {
     RUN: 'En cours d\'impression',
     HOLD: 'Pause',
     IDLE: 'Prêt'
-}
+};

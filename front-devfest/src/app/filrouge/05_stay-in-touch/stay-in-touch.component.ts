@@ -14,13 +14,15 @@ export class StayInTouchComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Nothing
   }
 
   onCestParti(): void {
     this.router.navigate(['filrouge/merci']);
   }
 
-  onNonMerci() : void{
+  onNonMerci(): void
+  {
     this.router.navigate(['filrouge/merci']);
   }
 }

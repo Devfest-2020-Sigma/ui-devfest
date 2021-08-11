@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { SwiperConfigInterface, SWIPER_CONFIG } from 'ngx-swiper-wrapper';
-import { ImagesService } from '../core/service/images.service';
-import { SharedLibModule } from '../shared/shared-lib.module';
-import { AccueilComponent } from './01_accueil/accueil.component';
-import { RgpdComponent } from './02_rgpd/rgpd.component';
-import { InstructionsComponent } from './03_instructions/instructions.component';
-import { PrisePhotoRetryComponent } from './04_prise-photo-retry/prise-photo-retry.component';
-import { PrisePhotoValidationComponent } from './04_prise-photo-validation/prise-photo-validation.component';
-import { PrisePhotoComponent } from './04_prise-photo/prise-photo.component';
-import { ChoixRenduComponent } from './05_choix-rendu/choix-rendu.component';
-import { SelectionPseudoComponent } from './06_selection-pseudo/selection-pseudo.component';
-import { ImpressionPhotoComponent } from './07_impression-photo/impression-photo.component';
-import { SelectionPhotoMosaicComponent } from './99_selection-photo-mosaic/selection-photo-mosaic.component';
-import { visualisationRoutes } from './visualisation.route';
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {SWIPER_CONFIG, SwiperConfigInterface} from 'ngx-swiper-wrapper';
+import {ImagesService} from '@service/images.service';
+import {SharedLibModule} from '../shared/shared-lib.module';
+import {AccueilComponent} from './01_accueil/accueil.component';
+import {RgpdComponent} from './02_rgpd/rgpd.component';
+import {InstructionsComponent} from './03_instructions/instructions.component';
+import {PrisePhotoRetryComponent} from './04_prise-photo-retry/prise-photo-retry.component';
+import {PrisePhotoValidationComponent} from './04_prise-photo-validation/prise-photo-validation.component';
+import {PrisePhotoComponent} from './04_prise-photo/prise-photo.component';
+import {ChoixRenduComponent} from './05_choix-rendu/choix-rendu.component';
+import {SelectionPseudoComponent} from './06_selection-pseudo/selection-pseudo.component';
+import {ImpressionPhotoComponent} from './07_impression-photo/impression-photo.component';
+import {SelectionPhotoMosaicComponent} from './99_selection-photo-mosaic/selection-photo-mosaic.component';
+import {visualisationRoutes} from './visualisation.route';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
