@@ -414,3 +414,18 @@ svg {
 .fond-decompte {
   opacity: 0.50;
 }
+
+.hg-theme-default .btn-success {
+  background: #28a745 !important;
+}
+
+.hg-theme-default .btn-danger {
+  background: #dc3545 !important;
+}
+
+.keyboard-blur {
+  background: transparent linear-gradient(281deg, #6678ff 0%, #d600ff 100%) 0% 0% no-repeat padding-box;
+  opacity: 0.81;
+  transform: translateZ(-1px);
+  filter: blur(0.5px);
+}
