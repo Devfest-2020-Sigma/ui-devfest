@@ -23,3 +23,9 @@ rm -f $(ls ${IMG_CROP}/* |head -n-1)
 
 # on copie l'image restante à la racine du repertoire
 cp ${IMG_CROP}/output-*.jpg ${FolderToSave}/capture-${Essai}.jpg
+
+if [ ! -f ${FolderToSave}/capture-${Essai}.jpg ]; then 
+  convert -pointsize 70 -font "From-Street-Art" label:"Face detection\failed :(" -threshold 50% -trim +repage -bordercolor red -border 10x10 ${FolderToSave}/capture-${Essai}.jpg
+fi
+
+
