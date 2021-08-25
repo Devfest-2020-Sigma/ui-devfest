@@ -7,6 +7,8 @@ FOLDER=$4
 mkdir -p "${FOLDER}/${ID}"
 
 curl -s "${URL}/${ID}" --output "${FOLDER}/${ID}/${FICHIER}.svg"
-svg2gcode -B -F -w 145 "${FOLDER}/${ID}/${FICHIER}.svg" "${FOLDER}/${ID}/${FICHIER}.gcode"
+svg2gcode -B -F -w 280 "${FOLDER}/${ID}/${FICHIER}.svg" "${FOLDER}/${ID}/${FICHIER}.tmp.gcode"
+cat "${FOLDER}/${ID}/${FICHIER}.tmp.gcode" | uniq > "${FOLDER}/${ID}/${FICHIER}.gcode"
+
 curl -X POST 'http://localhost:8080/api/v1/files/uploadAndOpen' --form "file=@${FOLDER}/${ID}/${FICHIER}.gcode"
 curl -X POST 'http://localhost:8080/api/v1/files/send'
