@@ -1,3 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+//@import '~@fortawesome/angular-fontawesome';
+//@import '~@fortawesome/fontawesome-common-types';
+@import '~@fortawesome/fontawesome-svg-core/styles.css';
+//@import '~@fortawesome/free-solid-svg-icons';
+/*@import '~bootstrap/dist/css/bootstrap.css';*/
+@import '~bootstrap/scss/bootstrap.scss';
+
 @import "~@swimlane/ngx-datatable/index.css";
 @import "~@swimlane/ngx-datatable/themes/material.scss";
 @import "~@swimlane/ngx-datatable/assets/icons.css";

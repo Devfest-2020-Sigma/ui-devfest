@@ -30,6 +30,7 @@
     "angular-svg-icon": "^10.0.0",
     "bootstrap": "^4.5.2",
     "express": "^4.15.2",
+    "jquery": "^1.9.1",
     "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~6.5.4",
     "simple-keyboard": "^2.32.131",
