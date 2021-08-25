@@ -41,4 +41,9 @@ export class RobotsService
   {
     return this.http.get<any>(`${url}/statut/${robot.ip}`);
   }
+
+  returnToZero(robot: Robot)
+  {
+    return this.http.get<any>(`${url}/returnToZero/${robot.ip}`);
+  }
 }
