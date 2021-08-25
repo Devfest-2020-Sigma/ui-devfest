@@ -13,8 +13,21 @@
       <div class="form-row align-items-start">
         <button type="button" (click)="annulerImpression(row)">Annuler</button>
         <button type="button" (click)="pauseImpression(row)">Pause</button>
-        <button type="button" (click)="reScheduleImpression(row)">ReLancer</button>
+        <button type="button" (click)="reScheduleImpression(row)">Continuer/Recommencer</button>
+        <button type="button" (click)="returnToZero(row)">Retour Zero</button>
       </div>
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
+
+<!--
+Pour mettre en pause, puis relancer :
+  Pause
+  Continuer/Recommencer
+
+Pour relancer de zéro :
+  Pause
+  Annuler
+  Return to zero
+  Continuer/Recommencer
+-->

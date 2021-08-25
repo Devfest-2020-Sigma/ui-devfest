@@ -59,6 +59,14 @@ export class ListeRobotsComponent implements OnInit
         });
     }
 
+    returnToZero(robot: Robot): void
+    {
+        this.robotsService.returnToZero(robot).subscribe(() =>
+        {
+            this.recupererEtat(robot);
+        });
+    }
+
     recupererEtat(robot: Robot): void
     {
         this.robotsService.recupererEtatRobot(robot).subscribe(etat =>
