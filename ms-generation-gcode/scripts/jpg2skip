@@ -1,0 +1,25 @@
+#!/bin/sh
+URL=$1
+ID=$2
+FOLDER="$3/${ID}"
+NUM=$4
+PSEUDO=$5
+
+FICHIER="impression"
+IMAGE="${FOLDER}/${FICHIER}"
+
+mkdir -p "${FOLDER}"
+
+curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
+
+
+(cd ~/github/tspart && ./tspart_devfest "${IMAGE}.jpg" 2 "${IMAGE}_tmp.svg" 2>/dev/null)
+
+# on insert le pseudo
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
+potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMAGE}_text.svg"
+/usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMAGE}_tmp.svg" "${IMAGE}_text.svg" > "${IMAGE}_stack.svg"
+
+/usr/local/bin/svg_rotate.py --input "${IMAGE}_stack.svg" --output "${IMAGE}.svg"
+
+curl -s -X POST  "${URL}/upload-svg/${ID}" --form "file=@${IMAGE}.svg"

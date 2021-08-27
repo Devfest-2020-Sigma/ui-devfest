@@ -1,23 +1,29 @@
-IMG_OUT=${1:-/tmp/out}
-NUM=$2
-PSEUDO=$3
-IMAGE_SVG="${IMG_OUT}/jpg2squiggle"
+#!/bin/sh
+URL=$1
+ID=$2
+FOLDER="$3/${ID}"
+NUM=$4
+PSEUDO=$5
 
-# getting file name
-IMAGE="${IMG_OUT}/capture-${NUM}.jpg"
-IMAGE="${IMG_OUT}/$(basename $IMAGE .jpg)"
+FICHIER="impression"
+IMAGE="${FOLDER}/${FICHIER}"
 
-if [ ! -f "${IMAGE}.jpg" ]; then
-  echo "$IMAGE does not exist."
-  exit 3
-fi
+mkdir -p "${FOLDER}"
 
-if [ -f "${IMAGE_SVG}.svg" ]; then
-  rm "${IMAGE_SVG}.svg"
-fi
+curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 
-if [ -f "${IMAGE_SVG}-front.svg" ]; then
-  rm "${IMAGE_SVG}-front.svg"
-fi
+convert ${IMAGE}.jpg ${IMAGE}.png
+xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMAGE}.png
 
-sudo xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMAGE}.jpg
+/usr/local/bin/svg_rotate.py --input "${IMAGE}.svg" --output "${IMAGE}_rotate.svg"
+
+
+# on insert le pseudo
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 -rotate 90 "${FOLDER}/text.ppm"
+potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${FOLDER}/text.svg"
+/usr/local/svg_stack/bin/svg_stack.py --direction=h --margin=0 "${IMAGE}_rotate.svg" ${FOLDER}/text.svg > "${IMAGE}.svg"
+
+
+
+curl -s -X POST  "${URL}/upload-svg/${ID}" --form "file=@${IMAGE}.svg"
+
