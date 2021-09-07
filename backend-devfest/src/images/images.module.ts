@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { ImagesController } from './images.controller';
-import { ImagesService } from './images.service';
-import { ProcessService } from 'src/process/process.service';
-import { imagesProviders } from './images.provider';
-import { DatabaseModule } from 'src/database/database.module';
-import { ClientsModule } from '@nestjs/microservices/module/clients.module';
-import { Transport } from '@nestjs/microservices/enums/transport.enum';
-import { ImageDao } from 'src/images/image.dao';
+import {Module} from '@nestjs/common';
+import {ImagesController} from './images.controller';
+import {ImagesService} from './images.service';
+import {ProcessService} from 'src/process/process.service';
+import {imagesProviders} from './images.provider';
+import {DatabaseModule} from 'src/database/database.module';
+import {ClientsModule} from '@nestjs/microservices/module/clients.module';
+import {Transport} from '@nestjs/microservices/enums/transport.enum';
+import {ImageDao} from 'src/images/image.dao';
 
 
 @Module({
@@ -15,8 +15,8 @@ import { ImageDao } from 'src/images/image.dao';
       {
         name: 'GENERATION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://admin:admin@localhost:5672'],
-          queue: 'generation-gcode',
+          urls: ['amqp://' + process.env.RABBIT_USER + ':' + process.env.RABBIT_PWD + '@' + process.env.RABBIT_HOST + ':' + process.env.RABBIT_PORT],
+          queue: process.env.RABBIT_QUEUE_GENERATION,
           queueOptions: {
             durable: true,
           },
@@ -25,8 +25,8 @@ import { ImageDao } from 'src/images/image.dao';
       {
         name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://admin:admin@localhost:5672'],
-          queue: 'impression-gcode',
+          urls: ['amqp://' + process.env.RABBIT_USER + ':' + process.env.RABBIT_PWD + '@' + process.env.RABBIT_HOST + ':' + process.env.RABBIT_PORT],
+          queue: process.env.RABBIT_QUEUE_IMPRESSION,
           queueOptions: {
             durable: true,
           },
