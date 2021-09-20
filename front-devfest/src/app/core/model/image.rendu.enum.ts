@@ -1,7 +1,10 @@
 // Enum listant l'ensenmble des rendus à générer pour une image
 export enum ImageRenduEnum
 {
-    JPGLITE = 'JPGLITE',
+    LITE = 'LITE',
     TSP = 'TSP',
-    SQUIDDLE = 'SQUIDDLE'
+    HILBERT = 'HILBERT',
+    MST = 'MST',
+    SKIP = 'SKIP',
+    SQUIGGLEDRAW = 'SQUIGGLEDRAW'
 }

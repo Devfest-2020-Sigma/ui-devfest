@@ -1,32 +1,40 @@
-import { Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { EventPattern } from '@nestjs/microservices';
+import {Body, Controller, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors} from '@nestjs/common';
+import {EventPattern} from '@nestjs/microservices';
 import {diskStorage} from 'multer';
-import { FileInterceptor } from '@nestjs/platform-express/multer/interceptors/file.interceptor';
-import { existsSync, mkdirSync } from 'fs';
-import { ConfigurationEnum } from 'src/common/configuration.enum';
-import { ImageDao } from 'src/images/image.dao';
-import { processEnum } from 'src/process/process.enum';
-import { ProcessService } from 'src/process/process.service';
-import { ImageDto } from './image.dto';
-import { ImageEtatEnum } from './image.etat.enum';
-import { IImage } from './image.interface';
-import { ImageRabbit } from './image.rabbit';
-import { ImagesService } from './images.service';
+import {FileInterceptor} from '@nestjs/platform-express/multer/interceptors/file.interceptor';
+import {existsSync, mkdirSync} from 'fs';
+import {ConfigurationEnum} from 'src/common/configuration.enum';
+import {ImageDao} from 'src/images/image.dao';
+import {processEnum} from 'src/process/process.enum';
+import {ProcessService} from 'src/process/process.service';
+import {ImageDto} from './image.dto';
+import {ImageEtatEnum} from './image.etat.enum';
+import {IImage} from './image.interface';
+import {ImageRabbit} from './image.rabbit';
+import {ImagesService} from './images.service';
 
 @Controller('api/images')
-export class ImagesController {
+export class ImagesController
+{
 
   constructor(
-    private readonly imagesService: ImagesService,
-    private readonly processService: ProcessService,
-    private readonly imageDao: ImageDao,
-  ) { }
+      private readonly imagesService: ImagesService,
+      private readonly processService: ProcessService,
+      private readonly imageDao: ImageDao,
+  )
+  {
+  }
 
   @Put()
-  async updateImage(@Body() image: ImageDto): Promise<void> {
+  async updateImage(@Body() image: ImageDto): Promise<void>
+  {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
-    this.imageDao.editImage(id, image, () => { });
+    console.log('Update image : ', image);
+    this.imageDao.editImage(id, image, () =>
+    {
+      // Empty
+    });
   }
 
 
@@ -103,11 +111,15 @@ export class ImagesController {
   }
 
   @Put('/generer-svg')
-  async generationRendu(@Body() image: ImageDto): Promise<void> {
+  async generationRendu(@Body() image: ImageDto): Promise<void>
+  {
     // sauvegarde du pseudo dans la base 
     const id = image._id;
-    this.imageDao.editImage(id, image, () => {
-      this.imageDao.getImage(id).then(async iimage => {
+    console.log('Rendering for image : ', image);
+    this.imageDao.editImage(id, image, () =>
+    {
+      this.imageDao.getImage(id).then(async iimage =>
+      {
         // envoi de la demande de génération dans les files rabbit
         this.imagesService.sendGenerationGcodeRabbitEvent(iimage);
       });
