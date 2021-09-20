@@ -7,6 +7,16 @@
     Quel style de dessin veux-tu ?
   </div>
   <br><br>
+
+  <!--
+    Rendu 1 = Lite
+    Rendu 2 = Squiggle (long)
+    Rendu 3 = TSP (moyen)
+    Rendu 4 = Hilbert (moyen-long)
+    Rendu 5 = MST (moyen-long)
+    Rendu 6 = Skip (moyen-long)
+  -->
+  <!-- Lite -->
   <swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
@@ -22,10 +32,11 @@
         </div>
       </div>
     </div>
+    <!-- TSP -->
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
         <div class="centrer">
-          <img src="assets/rendu_2.svg" />
+          <img src="assets/rendu_3.svg"/>
         </div>
         <br><br>
         <div class="rendu-text">
@@ -36,14 +47,60 @@
         </div>
       </div>
     </div>
+    <!-- Hilbert -->
     <div class="swiper-slide">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
         <div class="centrer">
-          <img src="assets/rendu_3.svg" />
+          <img src="assets/rendu_4.svg"/>
         </div>
         <br><br>
         <div class="rendu-text">
-          Style 3 : Précision
+          Style 3 : Tracé précis
+        </div>
+        <div class="rendu-text-description">
+          ~ 15 min d'impression
+        </div>
+      </div>
+    </div>
+    <!-- MST -->
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="assets/rendu_5.svg"/>
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 4 : Tracé précis
+        </div>
+        <div class="rendu-text-description">
+          ~ 15 min d'impression
+        </div>
+      </div>
+    </div>
+    <!-- Skip -->
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="assets/rendu_6.svg"/>
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 5 : Tracé précis
+        </div>
+        <div class="rendu-text-description">
+          ~ 15 min d'impression
+        </div>
+      </div>
+    </div>
+    <!-- Squiggle -->
+    <div class="swiper-slide">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <div class="centrer">
+          <img src="assets/rendu_2.svg"/>
+        </div>
+        <br><br>
+        <div class="rendu-text">
+          Style 6 : Précision
         </div>
         <div class="rendu-text-description">
           ~ 20 min d'impression

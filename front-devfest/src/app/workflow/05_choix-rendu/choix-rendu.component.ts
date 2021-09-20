@@ -20,7 +20,7 @@ export class ChoixRenduComponent implements OnInit, OnDestroy
 
   private readonly subscriptions: Subscription[] = [];
   private id: string;
-  private renduSelectionne: string = ImageRenduEnum.JPGLITE;
+  private renduSelectionne: string = ImageRenduEnum.LITE;
   public afficher = true;
 
   public config: SwiperConfigInterface = {
@@ -39,32 +39,41 @@ export class ChoixRenduComponent implements OnInit, OnDestroy
   {
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => {
-      if (subscription) {
+  ngOnDestroy(): void
+  {
+    this.subscriptions.forEach(subscription =>
+    {
+      if (subscription)
+      {
         subscription.unsubscribe();
       }
     });
   }
 
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
-      if (!!params.id) {
+  ngOnInit()
+  {
+    this.route.params.subscribe((params) =>
+    {
+      if (!!params.id)
+      {
         this.id = params.id;
       }
     });
   }
 
-  onChoisir(): void {
+  onChoisir(): void
+  {
     const image = new Image();
     image._id = this.id;
     image.renduSelectionne = this.renduSelectionne;
-    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
+    this.imagesService.miseAjourImageBdd(image).subscribe(() =>
+    {
       this.router.navigate(['visualisation/selection-pseudo', this.id]);
     });
   }
 
-  public onIndexChange(index: number) {
+  public onIndexChange(index: number)
+  {
     this.renduSelectionne = Object.keys(ImageRenduEnum)[index];
   }
 }

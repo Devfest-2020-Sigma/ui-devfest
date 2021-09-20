@@ -1,20 +1,22 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { RabbitEvent } from 'src/events/rabbit.event';
-import { imageModel } from '../schemas/image.schema';
-import { ImageDto } from './image.dto';
-import { ImageEtatEnum } from './image.etat.enum';
-import { IImage } from './image.interface';
-import { ImageRabbit } from './image.rabbit';
-import { ImageRenduEnum } from './image.rendu.enum';
+import {Inject, Injectable} from '@nestjs/common';
+import {ClientProxy} from '@nestjs/microservices';
+import {RabbitEvent} from 'src/events/rabbit.event';
+import {imageModel} from '../schemas/image.schema';
+import {ImageDto} from './image.dto';
+import {ImageEtatEnum} from './image.etat.enum';
+import {IImage} from './image.interface';
+import {ImageRabbit} from './image.rabbit';
+import {ImageRenduEnum} from './image.rendu.enum';
 
 @Injectable()
-export class ImagesService {
+export class ImagesService
+{
 
   constructor(
-    @Inject('GENERATION_GCODE') private readonly clientGenerationGCode: ClientProxy,
-    @Inject('IMPRESSION_GCODE') private readonly clientImpressionGCode: ClientProxy
-  ) {
+      @Inject('GENERATION_GCODE') private readonly clientGenerationGCode: ClientProxy,
+      @Inject('IMPRESSION_GCODE') private readonly clientImpressionGCode: ClientProxy
+  )
+  {
   }
 
   /**
@@ -26,9 +28,12 @@ export class ImagesService {
       pseudo: "",
       imageSelectionnee: "",
       etat: ImageEtatEnum.DEBUT_WORKFLOW,
-      renduJpegLite : false,
-      renduJpegTsp : false,
-      renduJpegSquiddle : false
+      renduJpegLite: false,
+      renduJpegTsp: false,
+      renduJpegSquiggle: false,
+      renduJpegMst: false,
+      renduJpegSkip: false,
+      renduJpegHilbert: false
     });
     return image.save();
   }
@@ -38,7 +43,7 @@ export class ImagesService {
    * @param id 
    */
   sendGenerationGcodeRabbitEvent(image: ImageDto): void | PromiseLike<void> {
-    let imageRabbit = new ImageRabbit;
+    const imageRabbit = new ImageRabbit;
     imageRabbit.id = image._id;
     imageRabbit.imageSelectionnee = image.imageSelectionnee;
     imageRabbit.pseudo = image.pseudo;
@@ -53,7 +58,7 @@ export class ImagesService {
  * @param id 
  */
   sendImpressionGcodeRabbitEvent(id: string): void | PromiseLike<void> {
-    let imageRabbit = new ImageRabbit;
+    const imageRabbit = new ImageRabbit;
     imageRabbit.id = id;
     // On envoi un message dans la file pour lancer la demande d'impression
     this.clientImpressionGCode.emit<any>('impression-gcode', (new RabbitEvent(imageRabbit)));
