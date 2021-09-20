@@ -14,7 +14,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "assets/scss/fonts.scss";
 
 body {
-  width: 600px;
+  width: 900px;
   height: 1024px;
 }
 
@@ -29,14 +29,14 @@ body {
 
 .font-violet-accueil {
   top: 520px;
-  width: 600px;
+  width: 900px;
   height: 480px;
   background: transparent linear-gradient(180deg, #1b004200 0%, #1b0042ab 100%) 0% 0% no-repeat padding-box;
 }
 
 .font-violet-instructions {
   position: absolute;
-  width: 600px;
+  width: 900px;
   height: 100%;
   background: transparent linear-gradient(282deg, #6678FF 0%, #D600FF 100%) 0% 0% no-repeat padding-box;
 }
@@ -396,7 +396,7 @@ svg {
 }
 
 .video {
-  width: 600px;
+  width: 900px;
   height: 1024px;
 }
 
@@ -409,12 +409,12 @@ svg {
 .footer {
   position: fixed;
   bottom: 80px;
-  left: 120px;
+  left: 270px;
 }
 
 .footer-validation {
   position: absolute;
-  left: 120px;
+  left: 270px;
 }
 
 .footer-decompte {
