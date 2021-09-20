@@ -98,12 +98,20 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
     const image = new Image();
     image._id = this.id;
     image.imageSelectionnee = this.imageSelectionnee;
-    this.imagesService.miseAjourImageBdd(image).subscribe(() => {
+    this.imagesService.miseAjourImageBdd(image).subscribe(() =>
+    {
       this.router.navigate(['visualisation/choix-rendu', this.id]);
     });
   }
 
-  public onIndexChange(index: number) {
+  public onIndexChange(index: number)
+  {
     this.imageSelectionnee = index + 1;
+  }
+
+  public onAnnuler(): void
+  {
+    // on retourne à l'accueil
+    this.router.navigate(['']);
   }
 }
