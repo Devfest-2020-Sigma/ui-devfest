@@ -14,8 +14,8 @@ import {ProcessService} from './process/process.service';
       {
         name: 'INTEGRATION_ROBOT', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + process.env.RABBIT_USER + ':' + process.env.RABBIT_PWD + '@' + process.env.RABBIT_HOST + ':' + process.env.RABBIT_PORT],
-          queue: process.env.RABBIT_QUEUE,
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + '192.168.88.201' + ':' + '5672'],
+          queue: 'integration-robots',
           queueOptions: {
             durable: true,
           }
