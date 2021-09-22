@@ -41,6 +41,14 @@ body {
   background: transparent linear-gradient(282deg, #6678FF 0%, #D600FF 100%) 0% 0% no-repeat padding-box;
 }
 
+.annulation-workflow {
+  position: absolute;
+  margin-left: 316.5px;
+  width: 267px;
+  height: 100px;
+  z-index: 9999999999;
+}
+
 .font-blanc {
   background-color: white;
   width: 100%;
