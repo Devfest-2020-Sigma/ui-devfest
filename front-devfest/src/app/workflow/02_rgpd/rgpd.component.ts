@@ -33,12 +33,19 @@ export class RgpdComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     // Nothing
   }
 
-  onValidation(): void {
+  onValidation(): void
+  {
     this.router.navigate(['visualisation/instructions']);
   }
 
+  public onAnnuler(): void
+  {
+    // on retourne à l'accueil
+    this.router.navigate(['']);
+  }
 }
