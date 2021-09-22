@@ -228,7 +228,7 @@ body {
 // Cadre photo
 
 .cadre-photo {
-  width: 350px;
+  width: 300px;
   height: 350px;
   border-radius: 18px;
   transform-style: preserve-3d;
@@ -239,7 +239,7 @@ body {
     position: absolute;
     top: -10px;
     left: 0px;
-    width: 360px;
+    width: 300px;
     height: 350px;
     background: #00f7f7 0% 0% no-repeat padding-box;
     border-radius: 18px 0px 18px 18px;
@@ -251,7 +251,7 @@ body {
     position: absolute;
     top: 10px;
     left: -10px;
-    width: 360px;
+    width: 300px;
     height: 350px;
     background: #f700f7 0% 0% no-repeat padding-box;
     border-radius: 18px 18px 18px 0px;
@@ -398,7 +398,7 @@ svg {
 }
 
 .photo-capture {
-  width: 350px;
+  width: 290px;
   height: 340px;
   border-radius: 18px;
 }
