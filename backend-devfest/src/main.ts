@@ -9,8 +9,8 @@ async function bootstrap()
   const microservice = app.connectMicroservice({
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://' + process.env.RABBIT_USER + ':' + process.env.RABBIT_PWD + '@' + process.env.RABBIT_HOST + ':' + process.env.RABBIT_PORT],
-      queue: process.env.RABBIT_QUEUE_INTEGRATION,
+      urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + 'localhost' + ':' + '5672'],
+      queue: 'integration-robots',
       queueOptions: {
         durable: true,
       },
