@@ -55,6 +55,10 @@ export class RobotsController
   @Get('/returnToZero/:ip')
   async returnToZero(@Param('ip') ip: string)
   {
+    return this.processService.execCommand(processEnum.CRAYON_CONTROLLER, ip).catch(error =>
+    {
+      console.log('caught', error.message);
+    });
     return this.processService.execCommand(processEnum.ROBOT_CONTROLLER, ip, RobotCommandEnum.RETURN2ZERO.join(" ")).catch(error =>
     {
       console.log('caught', error.message);
@@ -64,6 +68,10 @@ export class RobotsController
   @Get('/resetToZero/:ip')
   async resetToZero(@Param('ip') ip: string)
   {
+    return this.processService.execCommand(processEnum.CRAYON_CONTROLLER, ip).catch(error =>
+    {
+      console.log('caught', error.message);
+    });
     return this.processService.execCommand(processEnum.ROBOT_CONTROLLER, ip, RobotCommandEnum.RESETTOZERO.join(" ")).catch(error =>
     {
       console.log('caught', error.message);

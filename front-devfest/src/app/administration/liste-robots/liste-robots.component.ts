@@ -14,7 +14,7 @@ export class ListeRobotsComponent implements OnInit
     rows: Robot[] = [];
     reorderable = true;
 
-    columns = [{name: 'Ip du robot'}, {name: 'Statut'}, {name: 'Actions', sortable: false}];
+    columns = [{name: 'Ip du robot'}, {name: 'Statut'}, {name: 'Durée'}, {name: 'Actions', sortable: false}];
 
     ColumnMode = ColumnMode;
 
@@ -32,6 +32,11 @@ export class ListeRobotsComponent implements OnInit
                 this.recupererEtat(robot);
             });
         });
+        setTimeout(
+            () =>
+            {
+                location.reload();
+            }, 60000);
     }
 
 
@@ -79,11 +84,29 @@ export class ListeRobotsComponent implements OnInit
     {
         this.robotsService.recupererEtatRobot(robot).subscribe(etat =>
         {
-            const finalRow = this.rows.find(row => row.ip === robot.ip);
+            this.rows.forEach(row =>
+            {
+                if (row.ip === robot.ip && etat)
+                {
+                    row.etat = RobotEtatEnum[etat.state];
+                    const duration = Number(etat.sendRemainingDuration) / 60000;
+                    row.duree = duration;
+                }
+            });
+            /*const finalRow = this.rows.find(row => row.ip === robot.ip);
             if (etat)
             {
                 finalRow.etat = RobotEtatEnum[etat.state];
-            }
+            }*/
         });
+    }
+
+    calculateDuration(row: any, value: string)
+    {
+        if (RobotEtatEnum[row.etat] === RobotEtatEnum.RUN)
+        {
+            return value + 'min. restante(s)';
+        }
+        return '';
     }
 }

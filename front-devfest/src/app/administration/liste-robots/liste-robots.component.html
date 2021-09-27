@@ -1,12 +1,19 @@
 <ngx-datatable class="material" [rows]="rows" [columnMode]="ColumnMode.force" [headerHeight]="50" rowHeight="auto"
-  [reorderable]="reorderable">
-  
+               [reorderable]="reorderable">
+
   <!-- Ip du robot -->
   <ngx-datatable-column [draggable]="false" [flexGrow]="2" [sortable]="false" name="Ip du robot" prop="ip">
   </ngx-datatable-column>
   <!-- Statut -->
   <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Statut" prop="etat">
   </ngx-datatable-column>
+  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Durée" prop="duree" [cellTemplate]="duration">
+  </ngx-datatable-column>
+  <ng-template #duration let-row="row" let-value="value">
+    <div class="duree-container">
+      <span class="chip-content">{{ calculateDuration(row, value) }}</span>
+    </div>
+  </ng-template>
   <!-- Actions -->
   <ngx-datatable-column [draggable]="false" [flexGrow]="2" [sortable]="false" name="Actions" prop="">
     <ng-template let-row="row" ngx-datatable-cell-template>
