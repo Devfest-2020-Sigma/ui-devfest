@@ -22,7 +22,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2LITE, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2LITE, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
@@ -37,7 +37,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2TSP, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2TSP, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
@@ -52,7 +52,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2SQUIGGLE, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2SQUIGGLE, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
@@ -67,7 +67,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2MST, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2MST, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
@@ -82,7 +82,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2SKIP, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2SKIP, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
@@ -97,7 +97,7 @@ export class AppController
         // récupération de l'objet en base
         const image = data.message;
         // execution de la commande
-        await this.processService.execCommand(processEnum.JPG2HILBERT, "http://localhost:3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
+        await this.processService.execCommand(processEnum.JPG2HILBERT, "http://" + process.env.RABBIT_HOST + ":3000/api/images", image.id, ConfigurationEnum.IMPRESSION_REPERTOIRE, image.imageSelectionnee, '"' + image.pseudo + '"')
             .catch(error =>
             {
                 console.log('caught', error.message);
