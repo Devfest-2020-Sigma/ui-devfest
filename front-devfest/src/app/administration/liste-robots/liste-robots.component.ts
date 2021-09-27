@@ -93,19 +93,14 @@ export class ListeRobotsComponent implements OnInit
                     row.duree = duration;
                 }
             });
-            /*const finalRow = this.rows.find(row => row.ip === robot.ip);
-            if (etat)
-            {
-                finalRow.etat = RobotEtatEnum[etat.state];
-            }*/
         });
     }
 
-    calculateDuration(row: any, value: string)
+    calculateDuration(row: any): string
     {
-        if (RobotEtatEnum[row.etat] === RobotEtatEnum.RUN)
+        if (row.etat === RobotEtatEnum.RUN)
         {
-            return value + 'min. restante(s)';
+            return row.duree + 'min. restante(s)';
         }
         return '';
     }
