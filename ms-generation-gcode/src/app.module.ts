@@ -3,7 +3,6 @@ import {ConfigModule} from '@nestjs/config';
 import {ClientsModule, Transport} from '@nestjs/microservices';
 import {AppController} from './app.controller';
 import {ProcessService} from './process/process.service';
-import process from 'process';
 
 @Module({
   imports: [

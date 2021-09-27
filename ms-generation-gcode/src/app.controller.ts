@@ -5,7 +5,6 @@ import {ImageRabbit} from './images/image.rabbit';
 import {ImageRabbitEvent} from './images/image.rabbit.event';
 import {processEnum} from './process/process.enum';
 import {ProcessService} from './process/process.service';
-import * as process from 'process';
 
 @Controller()
 export class AppController
