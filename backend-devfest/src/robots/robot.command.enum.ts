@@ -4,5 +4,6 @@ export const RobotCommandEnum  = {
     ANNULER: ['GET', 'files/cancel'],
     RESUME: ['POST', 'files/send'],
     STATUT: ['GET', 'status/getStatus'],
-    RETURN2ZERO: ['GET', 'machine/returnToZero']
+    RETURN2ZERO: ['GET', 'machine/returnToZero'],
+    RESETTOZERO: ['GET', 'machine/resetToZero']
 }
