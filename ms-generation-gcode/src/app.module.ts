@@ -3,6 +3,7 @@ import {ConfigModule} from '@nestjs/config';
 import {ClientsModule, Transport} from '@nestjs/microservices';
 import {AppController} from './app.controller';
 import {ProcessService} from './process/process.service';
+import process from 'process';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import {ProcessService} from './process/process.service';
       {
         name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + '192.168.88.201' + ':' + '5672'],
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + process.env.RABBIT_HOST + ':' + '5672'],
           queue: 'integration-robots',
           queueOptions: {
             durable: true,
