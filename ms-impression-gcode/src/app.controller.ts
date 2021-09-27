@@ -20,7 +20,7 @@ export class AppController
     console.log("impression en cours");
     const id = data.message.id;
     const fichier = 'impression';
-    const url = 'http://' + process.env.RABBIT_HOST + ':3000/api/images/getsvg/'
+    const url = 'http://' + process.env.RABBIT_HOST + ':3000/api/images/getsvg'
     const folder = ConfigurationEnum.IMPRESSION_REPERTOIRE;
     await this.processService.execCommand(processEnum.SENDSVG2GCODE, url, id, fichier, folder).catch(error => { console.log('caught', error.message); });;
   }
