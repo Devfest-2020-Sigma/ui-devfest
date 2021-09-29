@@ -90,10 +90,15 @@ export class PrisePhotoComponent implements OnInit, AfterViewInit {
 
   public capture(): void {
     console.log('capture');
-    this.imagesService.prisePhoto(this.id, this.essai).subscribe(image => {
-      if (+this.essai === 1) {
+    setTimeout(() => this.afficherFlash = false, 1000);
+    this.imagesService.prisePhoto(this.id, this.essai).subscribe(image =>
+    {
+      if (+this.essai === 1)
+      {
         this.router.navigate(['visualisation/prise-photo-retry', image._id]);
-      } else {
+      }
+      else
+      {
         this.router.navigate(['visualisation/prise-photo-validation', image._id]);
       }
     });

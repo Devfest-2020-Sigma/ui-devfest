@@ -52,28 +52,38 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
             theme: 'keyboard-blur hg-theme-default hg-layout',
             layout: {
                 sigma: [
-                    '{bksp} a z e r t y u i o p',
-                    '{lock} q s d f g h j k l m',
-                    '{shift} w x c v b n , . ;',
-                    '{space} {enter}'
+                    'a z e r t y',
+                    'u i o p q s',
+                    'd f g h j k',
+                    'l m w x c v',
+                    'b n , . ;',
+                    '{bksp} {lock} {shift} {space}',
+                    '{enter}'
                 ],
                 'sigma-shift': [
-                    '{bksp} A Z E R T Y U I O P',
-                    '{lock} Q S D F G H J K L M',
-                    '{shift} W X C V B N , . ;',
-                    '{space} {enter}'
+                    'A Z E R T Y',
+                    'U I O P Q S',
+                    'D F G H J K ',
+                    'L M W X C V',
+                    ' B N , . ;',
+                    '{bksp} {lock} {shift} {space}',
+                    '{enter}'
                 ],
                 'sigma-no': [
-                    '{bksp} a z e r t y u i o p',
-                    '{lock} q s d f g h j k l m',
-                    '{shift} w x c v b n , . ;',
-                    '{space}'
+                    'a z e r t y',
+                    'u i o p q s',
+                    'd f g h j k',
+                    'l m w x c v',
+                    'b n , . ;',
+                    '{bksp} {lock} {shift} {space}'
                 ],
                 'sigma-shift-no': [
-                    '{bksp} A Z E R T Y U I O P',
-                    '{lock} Q S D F G H J K L M',
-                    '{shift} W X C V B N , . ;',
-                    '{space}'
+                    'A Z E R T Y',
+                    'U I O P Q S',
+                    'D F G H J K ',
+                    'L M W X C V',
+                    ' B N , . ;',
+                    '{bksp} {lock} {shift} {space}'
                 ]
             },
             display: {
