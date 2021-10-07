@@ -93,12 +93,26 @@ export class ImagesController
   }
 
   /**
- * Controller qui permet de démarrer le streaming de la caméra
- */
+   * Controller qui permet de démarrer le streaming de la caméra
+   */
   @Get('/streaming')
-  streamingstart() {
+  streamingstart()
+  {
     console.log('Debut du streaming');
-    this.processService.execCommand(processEnum.STREAMING_START).catch(error => { console.log('caught', error.message); });
+    this.processService.execCommand(processEnum.STREAMING_START).catch(error =>
+    {
+      console.log('caught', error.message);
+    });
+  }
+
+  @Get('/stopStreaming')
+  streamingStop()
+  {
+    console.log('Fin du streaming');
+    this.processService.execCommand(processEnum.STREAMING_STOP).catch(error =>
+    {
+      console.log('caught', error.message);
+    });
   }
 
   /**
@@ -106,7 +120,8 @@ export class ImagesController
    * @param id id de l'image a récupérer
    */
   @Get(':id')
-  async getImage(@Param('id') id): Promise<IImage> {
+  async getImage(@Param('id') id): Promise<IImage>
+  {
     return this.imageDao.getImage(id);
   }
 

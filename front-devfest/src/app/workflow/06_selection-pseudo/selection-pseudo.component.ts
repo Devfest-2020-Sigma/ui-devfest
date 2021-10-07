@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-selection-pseudo',
+    styleUrls: ['./selection-pseudo.component.scss'],
     templateUrl: './selection-pseudo.component.html'
 })
 export class SelectionPseudoComponent implements OnInit, AfterViewInit
@@ -52,37 +53,49 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
             theme: 'keyboard-blur hg-theme-default hg-layout',
             layout: {
                 sigma: [
-                    'a z e r t y',
-                    'u i o p q s',
-                    'd f g h j k',
-                    'l m w x c v',
-                    'b n , . ;',
+                    '0 1 2 3 4',
+                    '5 6 7 8 9',
+                    'a z e r t',
+                    'y u i o p',
+                    'q s d f g',
+                    'h j k l m',
+                    'w x c v b',
+                    'n , . ;',
                     '{bksp} {lock} {shift} {space}',
                     '{enter}'
                 ],
                 'sigma-shift': [
-                    'A Z E R T Y',
-                    'U I O P Q S',
-                    'D F G H J K ',
-                    'L M W X C V',
-                    ' B N , . ;',
+                    '0 1 2 3 4',
+                    '5 6 7 8 9',
+                    'A Z E R T',
+                    'Y U I O P',
+                    'Q S D F G',
+                    'H J K L M',
+                    'W X C V B',
+                    'N , . ;',
                     '{bksp} {lock} {shift} {space}',
                     '{enter}'
                 ],
                 'sigma-no': [
-                    'a z e r t y',
-                    'u i o p q s',
-                    'd f g h j k',
-                    'l m w x c v',
-                    'b n , . ;',
+                    '0 1 2 3 4',
+                    '5 6 7 8 9',
+                    'a z e r t',
+                    'y u i o p',
+                    'q s d f g',
+                    'h j k l m',
+                    'w x c v b',
+                    'n , . ;',
                     '{bksp} {lock} {shift} {space}'
                 ],
                 'sigma-shift-no': [
-                    'A Z E R T Y',
-                    'U I O P Q S',
-                    'D F G H J K ',
-                    'L M W X C V',
-                    ' B N , . ;',
+                    '0 1 2 3 4',
+                    '5 6 7 8 9',
+                    'A Z E R T',
+                    'Y U I O P',
+                    'Q S D F G',
+                    'H J K L M',
+                    'W X C V B',
+                    'N , . ;',
                     '{bksp} {lock} {shift} {space}'
                 ]
             },

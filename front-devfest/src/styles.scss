@@ -335,7 +335,8 @@ body {
 
 .rendu-text {
   text-align: center;
-  font: normal normal bold 30px/36px Metropolis;
+  //font: normal normal bold 30px/36px Metropolis;
+  font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
@@ -343,17 +344,21 @@ body {
 
 .rendu-text-description {
   text-align: center;
-  font: normal normal bold 30px/36px Metropolis;
+  //font: normal normal bold 30px/36px Metropolis;
+  font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
-  color: #c6c6c6;
+  //color: #c6c6c6;
+  color: #000000;
   opacity: 1;
 }
 
 .impression-text-description {
-  font: normal normal bold 30px/36px Metropolis;
+  //font: normal normal bold 30px/36px Metropolis;
+  font: normal normal bold 40px/48px Metropolis;
   letter-spacing: 0px;
   margin: 0 30px 0 30px;
-  color: #c6c6c6;
+  //color: #c6c6c6;
+  color: #000000;
   opacity: 1;
 }
 
@@ -454,4 +459,20 @@ svg {
   opacity: 0.81;
   transform: translateZ(-1px);
   filter: blur(0.5px);
+}
+
+.simple-keyboard {
+  .hg-button {
+    font: normal normal 500 40px/48px Metropolis;
+  }
+}
+
+.swiper-button-next {
+  margin-right: 5rem !important;
+  color: #000000 !important;
+}
+
+.swiper-button-prev {
+  margin-left: 5rem !important;
+  color: #000000 !important;
 }

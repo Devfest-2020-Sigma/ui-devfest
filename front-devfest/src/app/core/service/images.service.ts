@@ -80,7 +80,16 @@ export class ImagesService
   /**
    * Controller permettant le démarrage du streaming (/ l'arrêt est géré en interne lors de l'action de la prise de la photo)
    */
-  demarrerStreaming(): Observable<any> {
+  demarrerStreaming(): Observable<any>
+  {
     return this.http.get<any>(`${url}/streaming`);
+  }
+
+  /**
+   * Controller permettant l'arrêt du streaming
+   */
+  arreterStreaming(): Observable<any>
+  {
+    return this.http.get<any>(`${url}/stopStreaming`);
   }
 }
