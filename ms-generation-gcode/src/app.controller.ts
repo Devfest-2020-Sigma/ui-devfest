@@ -91,7 +91,7 @@ export class AppController
         this.clientImpressionGCode.emit<any>('impression-gcode', new ImageRabbitEvent(image));
     }
 
-    @EventPattern('generation-mst')
+    @EventPattern('generation-hilbert')
     async handleGenerationHilbert(data: Record<string, ImageRabbit>)
     {
         // récupération de l'objet en base
