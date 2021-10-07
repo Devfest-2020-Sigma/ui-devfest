@@ -13,7 +13,7 @@ mkdir -p "${FOLDER}"
 curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 
 
-(cd ~/github/tspart && ./tsparxvfb-run t_devfest "${IMAGE}.jpg" 4 1500 "${IMAGE}_tmp.svg" 2>/dev/null)
+(cd ~/github/tspart && xvfb-run ./tspart_devfest "${IMAGE}.jpg" 4 1500 "${IMAGE}_tmp.svg" 2>/dev/null)
 
 # on insert le pseudo
 convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"

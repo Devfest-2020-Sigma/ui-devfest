@@ -15,7 +15,7 @@ curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 convert ${IMAGE}.jpg ${IMAGE}.png
 xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMAGE}.png
 
-/usr/local/bin/svg_rotate.py --input "${IMAGE}.svg" --output "${IMAGE}_rotate.svg"
+/usr/local/svg/bin/svg_rotate.py --input "${IMAGE}.svg" --output "${IMAGE}_rotate.svg"
 
 
 # on insert le pseudo

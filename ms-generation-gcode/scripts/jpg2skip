@@ -20,6 +20,6 @@ convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -tr
 potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMAGE}_text.svg"
 /usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMAGE}_tmp.svg" "${IMAGE}_text.svg" > "${IMAGE}_stack.svg"
 
-/usr/local/skip/bin/svg_rotate.py --input "${IMAGE}_stack.svg" --output "${IMAGE}.svg"
+/usr/local/svg/bin/svg_rotate.py --input "${IMAGE}_stack.svg" --output "${IMAGE}.svg"
 
 curl -s -X POST  "${URL}/upload-svg/${ID}" --form "file=@${IMAGE}.svg"
