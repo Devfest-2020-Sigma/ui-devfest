@@ -15,7 +15,7 @@ import {ImageDao} from 'src/images/image.dao';
       {
         name: 'GENERATION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + process.env.RABBIT_HOST + ':' + '5672'],
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@localhost:' + '5672'],
           queue: 'generation-gcode',
           queueOptions: {
             durable: true,
@@ -25,7 +25,7 @@ import {ImageDao} from 'src/images/image.dao';
       {
         name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + process.env.RABBIT_HOST + ':' + '5672'],
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@localhost:' + '5672'],
           queue: 'impression-gcode',
           queueOptions: {
             durable: true,
