@@ -7,7 +7,7 @@
   <!-- Statut -->
   <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Statut" prop="etat">
   </ngx-datatable-column>
-  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Durée" prop="duree" [cellTemplate]="duration">
+  <ngx-datatable-column [draggable]="false" [flexGrow]="4" [sortable]="false" name="Durée" prop="dureeMin" [cellTemplate]="duration">
   </ngx-datatable-column>
   <ng-template #duration let-row="row" let-value="value">
     <div class="duree-container">

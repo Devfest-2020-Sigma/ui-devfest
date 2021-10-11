@@ -89,8 +89,24 @@ export class ListeRobotsComponent implements OnInit
                 if (row.ip === robot.ip && etat)
                 {
                     row.etat = RobotEtatEnum[etat.state];
-                    const duration = Number(etat.sendRemainingDuration) / 60000;
-                    row.duree = duration;
+                    if (etat.state === 'IDLE' && etat.sendRemainingDuration > 0)
+                    {
+                        row.etat = RobotEtatEnum.RUN;
+                    }
+
+                    const nombreSecondes = Number(etat.sendRemainingDuration) / 1000;
+                    row.dureeMin = Number((nombreSecondes / 60).toFixed(0));
+                    const nbDecimal = (nombreSecondes / 60).toPrecision(3);
+                    if (nbDecimal.split('.').length > 1)
+                    {
+                        // row.dureeSec = Number(nbDecimal.split('.')[1]) * 60 / 100;
+
+                        row.dureeSec = Number((Number(nbDecimal.split('.')[0]) * 60 / 100).toPrecision(2));
+                    }
+                    else
+                    {
+                        row.dureeSec = 0;
+                    }
                 }
             });
         });
@@ -100,7 +116,7 @@ export class ListeRobotsComponent implements OnInit
     {
         if (row.etat === RobotEtatEnum.RUN)
         {
-            return row.duree + 'min. restante(s)';
+            return row.dureeMin + ' min. et ' + row.dureeSec + ' sec. restante(s)';
         }
         return '';
     }
