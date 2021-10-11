@@ -12,7 +12,6 @@ import {ChargementIndicateurService} from '@service/loading-indicateur.service';
 import {ChargementIntercepteurDebutService} from '@core/interceptor/loader-intercepteur-debut.service';
 import {ChargementIntercepteurFinService} from '@core/interceptor/loader-intercepteur-fin.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {FilRougeModule} from './filrouge/filrouge.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import {FilRougeModule} from './filrouge/filrouge.module';
     VisualisationModule,
     AdministrationModule,
     BrowserAnimationsModule,
-    FilRougeModule,
     SharedLibModule,
     FontAwesomeModule
   ],

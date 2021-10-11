@@ -1,24 +1,23 @@
-import { Route } from '@angular/router';
-import { AccueilComponent } from '../01_accueil/accueil.component';
-import { RgpdComponent } from '../02_rgpd/rgpd.component';
-import { InstructionsComponent } from '../03_instructions/instructions.component';
-import { PrisePhotoComponent } from '../04_prise-photo/prise-photo.component';
-import { ChoixRenduComponent } from '../05_choix-rendu/choix-rendu.component';
-import { ImpressionPhotoComponent } from '../07_impression-photo/impression-photo.component';
-import { SelectionPseudoComponent } from '../06_selection-pseudo/selection-pseudo.component';
-import { SelectionPhotoMosaicComponent } from '../99_selection-photo-mosaic/selection-photo-mosaic.component';
-import { PrisePhotoRetryComponent } from '../04_prise-photo-retry/prise-photo-retry.component';
-import { PrisePhotoValidationComponent } from '../04_prise-photo-validation/prise-photo-validation.component';
+import {Route} from '@angular/router';
+import {AccueilComponent} from '../01_accueil/accueil.component';
+import {RgpdComponent} from '../02_rgpd/rgpd.component';
+import {InstructionsComponent} from '../03_instructions/instructions.component';
+import {PrisePhotoComponent} from '../04_prise-photo/prise-photo.component';
+import {ChoixRenduComponent} from '../05_choix-rendu/choix-rendu.component';
+import {ImpressionPhotoComponent} from '../07_impression-photo/impression-photo.component';
+import {SelectionPseudoComponent} from '../06_selection-pseudo/selection-pseudo.component';
+import {PrisePhotoRetryComponent} from '../04_prise-photo-retry/prise-photo-retry.component';
+import {PrisePhotoValidationComponent} from '../04_prise-photo-validation/prise-photo-validation.component';
 
 
 export const visualisationMainRoute: Route[] = [
   {
-    path : 'accueil',
-    component : AccueilComponent
+    path: 'accueil',
+    component: AccueilComponent
   },
   {
-    path : 'rgpd',
-    component : RgpdComponent
+    path: 'rgpd',
+    component: RgpdComponent
   },
   {
     path : 'instructions',
@@ -36,10 +35,6 @@ export const visualisationMainRoute: Route[] = [
   {
     path: 'prise-photo-validation/:id',
     component: PrisePhotoValidationComponent
-  },
-  {
-    path: 'selection-photo/:id',
-    component: SelectionPhotoMosaicComponent
   },
   {
     path: 'selection-pseudo/:id',

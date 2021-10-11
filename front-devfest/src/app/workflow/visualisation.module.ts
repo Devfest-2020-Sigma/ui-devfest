@@ -13,7 +13,6 @@ import {PrisePhotoComponent} from './04_prise-photo/prise-photo.component';
 import {ChoixRenduComponent} from './05_choix-rendu/choix-rendu.component';
 import {SelectionPseudoComponent} from './06_selection-pseudo/selection-pseudo.component';
 import {ImpressionPhotoComponent} from './07_impression-photo/impression-photo.component';
-import {SelectionPhotoMosaicComponent} from './99_selection-photo-mosaic/selection-photo-mosaic.component';
 import {visualisationRoutes} from './visualisation.route';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -23,7 +22,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 
 @NgModule({
   declarations: [SelectionPseudoComponent, //
-    SelectionPhotoMosaicComponent, //
     PrisePhotoComponent, //
     ChoixRenduComponent, //
     AccueilComponent, //
