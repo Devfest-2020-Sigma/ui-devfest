@@ -7,15 +7,20 @@ import {DatabaseModule} from 'src/database/database.module';
 import {ClientsModule} from '@nestjs/microservices/module/clients.module';
 import {Transport} from '@nestjs/microservices/enums/transport.enum';
 import {ImageDao} from 'src/images/image.dao';
+import {ConfigModule} from '@nestjs/config';
 
 
 @Module({
-  imports: [DatabaseModule,
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    DatabaseModule,
     ClientsModule.register([
       {
         name: 'GENERATION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@localhost:' + '5672'],
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + process.env.RABBIT_HOST + ':' + '5672'],
           queue: 'generation-gcode',
           queueOptions: {
             durable: true,
@@ -25,7 +30,7 @@ import {ImageDao} from 'src/images/image.dao';
       {
         name: 'IMPRESSION_GCODE', transport: Transport.RMQ,
         options: {
-          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@localhost:' + '5672'],
+          urls: ['amqp://' + 'admin' + ':' + 'admin' + '@' + process.env.RABBIT_HOST + ':' + '5672'],
           queue: 'impression-gcode',
           queueOptions: {
             durable: true,
