@@ -22,7 +22,9 @@ export class ImpressionPhotoComponent implements OnInit
   onCompris(): void
   {
     // on retourne à l'accueil
-    this.router.navigate(['']);
+    // this.router.navigate(['']);
+    // On utilise le location directement pour "corriger" un problème de conso CPU
+    location.replace('/');
   }
 
 }
