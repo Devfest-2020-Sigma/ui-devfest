@@ -47,7 +47,6 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.imagesService.arreterStreaming().subscribe();
     this.route.params.subscribe((params) =>
     {
       if (params.id)

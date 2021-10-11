@@ -52,6 +52,7 @@ export class ChoixRenduComponent implements OnInit, OnDestroy
 
   ngOnInit()
   {
+    this.imagesService.arreterStreaming().subscribe();
     this.route.params.subscribe((params) =>
     {
       if (!!params.id)
