@@ -61,7 +61,8 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
                     'h j k l m',
                     'w x c v b',
                     'n , . ;',
-                    '{bksp} {lock} {shift} {space}',
+                    '{bksp} {lock} {shift}',
+                    '{space}',
                     '{enter}'
                 ],
                 'sigma-shift': [
@@ -73,7 +74,8 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
                     'H J K L M',
                     'W X C V B',
                     'N , . ;',
-                    '{bksp} {lock} {shift} {space}',
+                    '{bksp} {lock} {shift}',
+                    '{space}',
                     '{enter}'
                 ],
                 'sigma-no': [
@@ -85,7 +87,8 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
                     'h j k l m',
                     'w x c v b',
                     'n , . ;',
-                    '{bksp} {lock} {shift} {space}'
+                    '{bksp} {lock} {shift}',
+                    '{space}'
                 ],
                 'sigma-shift-no': [
                     '0 1 2 3 4',
@@ -96,7 +99,8 @@ export class SelectionPseudoComponent implements OnInit, AfterViewInit
                     'H J K L M',
                     'W X C V B',
                     'N , . ;',
-                    '{bksp} {lock} {shift} {space}'
+                    '{bksp} {lock} {shift}',
+                    '{space}'
                 ]
             },
             display: {
