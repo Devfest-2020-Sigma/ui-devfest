@@ -111,11 +111,11 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
   {
     if (index === 1)
     {
-      this.imageSelectionnee = 2;
+      this.imageSelectionnee = 1;
     }
     else
     {
-      this.imageSelectionnee = 1;
+      this.imageSelectionnee = 2;
     }
   }
 
