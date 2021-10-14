@@ -95,16 +95,25 @@ export class ListeRobotsComponent implements OnInit
                     }
 
                     const nombreSecondes = Number(etat.sendRemainingDuration) / 1000;
-                    row.dureeMin = Number((nombreSecondes / 60).toFixed(0));
-                    const nbDecimal = (nombreSecondes / 60).toPrecision(3);
-                    if (nbDecimal.split('.').length > 1)
+                    if (nombreSecondes > 60)
                     {
-                        // row.dureeSec = Number(nbDecimal.split('.')[1]) * 60 / 100;
+                        row.dureeMin = Number((nombreSecondes / 60).toFixed(0));
 
-                        row.dureeSec = Number((Number(nbDecimal.split('.')[0]) * 60 / 100).toPrecision(2));
+                        const nbDecimal = (nombreSecondes / 60).toPrecision(3);
+                        if (nbDecimal.split('.').length > 1)
+                        {
+                            // row.dureeSec = Number(nbDecimal.split('.')[1]) * 60 / 100;
+
+                            row.dureeSec = Number((Number(nbDecimal.split('.')[0]) * 60 / 100).toPrecision(2));
+                        }
+                        else
+                        {
+                            row.dureeSec = 0;
+                        }
                     }
                     else
                     {
+                        row.dureeMin = 1;
                         row.dureeSec = 0;
                     }
                 }

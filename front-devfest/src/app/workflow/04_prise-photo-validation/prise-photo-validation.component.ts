@@ -27,7 +27,7 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
   private imageChargee1 = false;
   private imageChargee2 = false;
 
-  private imageSelectionnee = 1;
+  private imageSelectionnee = 2;
 
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -74,6 +74,7 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
           reader.readAsDataURL(value);
         });
 
+        // on charge la deuxième image capturée
         this.imagesService.recupererPhoto(this.id, '2').subscribe(value =>
         {
           this.imageChargee2 = true;
@@ -108,7 +109,14 @@ export class PrisePhotoValidationComponent implements OnInit, OnDestroy
 
   public onIndexChange(index: number)
   {
-    this.imageSelectionnee = index + 1;
+    if (this.imageSelectionnee === 2)
+    {
+      this.imageSelectionnee = index - 1;
+    }
+    else if (this.imageSelectionnee === 1)
+    {
+      this.imageSelectionnee = index + 1;
+    }
   }
 
   public onAnnuler(): void
