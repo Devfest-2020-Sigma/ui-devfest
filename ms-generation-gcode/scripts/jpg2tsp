@@ -19,7 +19,7 @@ python /usr/local/bin/tspart.py --max-segments=5000 --runs=1 ${IMAGE}.pbm
 mv "${IMAGE}.svg" "${IMAGE}_tmp.svg"
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
+convert -pointsize 70 -font "From-Street-Art" label:"${PSEUDO}" -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
 potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${FOLDER}/text.svg"
 /usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMAGE}_tmp.svg" ${FOLDER}/text.svg > "${IMAGE}_text.svg"
 
