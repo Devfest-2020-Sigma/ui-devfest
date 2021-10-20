@@ -14,16 +14,16 @@ curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 
 convert ${IMAGE}.jpg ${IMAGE}.png
 xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMAGE}.png
+mv "${IMAGE}.svg" "${IMAGE}_tmp.svg"
 
-/usr/local/svg/bin/svg_rotate.py --input "${IMAGE}.svg" --output "${IMAGE}_rotate.svg"
+#/usr/local/svg/bin/svg_rotate.py --input "${IMAGE}.svg" --output "${IMAGE}_rotate.svg"
 
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:"${PSEUDO}" -threshold 50% -trim +repage -bordercolor white -border 5x5 -rotate 90 "${FOLDER}/text.ppm"
-potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${FOLDER}/text.svg"
-/usr/local/svg_stack/bin/svg_stack.py --direction=h --margin=0 "${IMAGE}_rotate.svg" ${FOLDER}/text.svg > "${IMAGE}.svg"
+convert -pointsize 70 -font "From-Street-Art" label:"${PSEUDO}" -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
+potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMAGE}_text.svg"
+/usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMAGE}_tmp.svg" "${IMAGE}_text.svg" > "${IMAGE}_stack.svg"
 
-
+/usr/local/svg/bin/svg_rotate.py --input "${IMAGE}_stack.svg" --output "${IMAGE}.svg"
 
 curl -s -X POST  "${URL}/upload-svg/${ID}" --form "file=@${IMAGE}.svg"
-
