@@ -16,7 +16,7 @@ curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 (cd ~/github/tspart && xvfb-run ./tspart_devfest "${IMAGE}.jpg" 4 1500 "${IMAGE}_tmp.svg" 2>/dev/null)
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
+convert -pointsize 70 -font "From-Street-Art" label:"${PSEUDO}" -threshold 50% -trim +repage -bordercolor white -border 5x5 "${FOLDER}/text.ppm"
 potrace -s "${FOLDER}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMAGE}_text.svg"
 /usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMAGE}_tmp.svg" "${IMAGE}_text.svg" > "${IMAGE}_stack.svg"
 

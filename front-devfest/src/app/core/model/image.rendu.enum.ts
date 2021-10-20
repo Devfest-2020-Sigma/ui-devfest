@@ -3,8 +3,8 @@ export enum ImageRenduEnum
 {
     LITE = 'LITE',
     TSP = 'TSP',
-    HILBERT = 'HILBERT',
     MST = 'MST',
     SKIP = 'SKIP',
-    SQUIGGLEDRAW = 'SQUIGGLEDRAW'
+    SQUIGGLEDRAW = 'SQUIGGLEDRAW',
+    HILBERT = 'HILBERT'
 }
