@@ -13,7 +13,7 @@ mkdir -p "${FOLDER}"
 curl -s "${URL}/getphoto/${ID}/${NUM}" --output "${IMAGE}.jpg"
 
 
-convert ${IMAGE}.jpg -noise 5 -resize 300 ${IMAGE}.pbm
+convert ${IMAGE}.jpg -level 0,60% -noise 5 -resize 300 ${IMAGE}.pbm
 # calcul du svg
 python /usr/local/bin/tspart.py --max-segments=5000 --runs=1 ${IMAGE}.pbm
 mv "${IMAGE}.svg" "${IMAGE}_tmp.svg"
